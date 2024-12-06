@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bundles", "bundles", "{299DD86D-A3EF-4FAB-922A-6F6FB32AA813}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-core", "modules-core", "{F4CAE397-0E79-4F73-802B-08A756C4828B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-studio", "modules-studio", "{86E5194D-0D55-47D3-958F-F41E983BFC41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web", "src\bundles\ZyphCare.Web\ZyphCare.Web.csproj", "{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Server", "src\bundles\ZyphCare.Server\ZyphCare.Server.csproj", "{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{375E6BE2-F0A3-460B-9B12-90433833A7C5}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{68FFE4C0-8FE1-404D-9AF2-2E49DA2ACE1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C84C5CEA-469F-420E-B3FA-B103402A0C74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4} = {299DD86D-A3EF-4FAB-922A-6F6FB32AA813}
+		{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC} = {299DD86D-A3EF-4FAB-922A-6F6FB32AA813}
+		{F4CAE397-0E79-4F73-802B-08A756C4828B} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
+		{86E5194D-0D55-47D3-958F-F41E983BFC41} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
+		{299DD86D-A3EF-4FAB-922A-6F6FB32AA813} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B514DBC-DFA7-4123-8186-5C1B0B67EEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
