@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-    <PropertyGroup>
-        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-        <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
-    </PropertyGroup>
-    <ItemGroup>
-    </ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>false</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="MudBlazor" Version="7.15.0" />
+  </ItemGroup>
 </Project>
