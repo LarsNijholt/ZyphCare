@@ -46,6 +46,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Auth0.AspNetCore.Authentication" />
     <PackageReference Include="MudBlazor" />
   </ItemGroup>
 </Project>
