@@ -3,16 +3,21 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
+var license = builder.Configuration.GetSection("syncfusion")["license"];
 
-// Add services to the container.
+services.AddSyncfusionBlazor();
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(license);
 
 services
     .AddRazorComponents()
     .AddInteractiveServerComponents();
+
+services.AddServerSideBlazor();
 
 services
     .AddMudServices()
@@ -57,7 +62,6 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
 app.Run();

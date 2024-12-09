@@ -1,36 +1,38 @@
 ﻿@inherits LayoutComponentBase
-@using MudBlazor;
-@using ZyphCare.Web.Components.Pages
+@using Syncfusion.Blazor.Navigations
+@using Syncfusion.Blazor.Buttons
+@using ZyphCare.Web.Models
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <Login/>
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+    <div class="control-container">
+        <div>
+            <SfAppBar>
+                <SfButton CssClass="e-inherit" IconCss="e-icons e-menu" OnClick="@Toggle"></SfButton>
+                <div class="e-folder">
+                    <div class="e-folder-name">Navigation Pane</div>
+                </div>
+            </SfAppBar>
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        <SfSidebar @attributes="@_htmlAttribute" Width="210px" Target=".main-content" MediaQuery="(min-width:600px)"
+                   @bind-IsOpen="_sidebarToggle">
+            <ChildContent>
+                <div class="main-menu">
+                    <div>
+                        <SfTreeView CssClass="main-treeview" ExpandOn="@Expand" TValue="TreeData">
+                            <TreeViewFieldsSettings Id="NodeId" Text="NodeText" DataSource="_treeData"
+                                                    HasChildren="HasChild" ParentID="Pid">
+                            </TreeViewFieldsSettings>
+                        </SfTreeView>
+                    </div>
+                </div>
+            </ChildContent>
+        </SfSidebar>
+        <div class="main-content" id="main-text">
+            <div class="sidebar-content">
+                <div class="content px-4">
+                    @Body
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
-
-@* Required *@
-<MudThemeProvider />
-<MudPopoverProvider />
-
-@* Needed for dialogs *@
-<MudDialogProvider />
-
-@* Needed for snackbars *@
-<MudSnackbarProvider />
