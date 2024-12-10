@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    
+<ItemGroup>
+  <PackageReference Include="ZyphCare.EntityFramework.Common" />
+</ItemGroup>
+    
+<ItemGroup>
+  <ProjectReference Include="..\ZyphCare.Users\ZyphCare.Users.csproj" />
+</ItemGroup>
+
+
+</Project>

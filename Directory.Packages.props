@@ -11,5 +11,6 @@
     <PackageVersion Include="MudBlazor" Version="7.15.0" />
     <PackageVersion Include="Syncfusion.Blazor.Grid" Version="27.2.5" />
     <PackageVersion Include="Syncfusion.Blazor.Themes" Version="27.2.5" />
+    <PackageVersion Include="ZyphCare.EntityFramework.Common" Version="2.0.0" />
   </ItemGroup>
 </Project>
