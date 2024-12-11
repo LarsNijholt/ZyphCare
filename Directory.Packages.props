@@ -8,6 +8,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageVersion Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+    <PackageVersion Update="Microsoft.Data.Sqlite" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
     <PackageVersion Include="MudBlazor" Version="7.15.0" />
     <PackageVersion Include="Syncfusion.Blazor.Grid" Version="27.2.5" />
     <PackageVersion Include="Syncfusion.Blazor.Themes" Version="27.2.5" />

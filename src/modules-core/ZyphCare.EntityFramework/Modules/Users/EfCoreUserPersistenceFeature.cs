@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ZyphCare.EntityFramework.Common;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Handlers;
+using ZyphCare.Users.Contracts;
 using ZyphCare.Users.Entities;
 using ZyphCare.Users.Features;
 
@@ -23,7 +24,7 @@ public class EfCoreUserPersistenceFeature(IModule module) : PersistenceFeatureBa
     {
         Module.Configure<UserFeature>(feature =>
         {
-            feature.UserEntityStore = sp => sp.GetRequiredService<EfCoreUserStore>();
+            feature.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
         });
     }
 

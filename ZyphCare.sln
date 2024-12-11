@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common-core", "common-core"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Common", "src\common-core\ZyphCare.Common\ZyphCare.Common.csproj", "{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Sqlite", "src\modules-core\ZyphCare.EntityFramework.Sqlite\ZyphCare.EntityFramework.Sqlite.csproj", "{B7E1E507-89DB-49A2-979B-F642B50A424B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,7 @@ Global
 		{1E37604B-CAC4-48EF-BDFF-8CAA7BBFD704} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
 		{4DFDFB32-9D59-4DDB-B305-876B230C9055} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
 		{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54} = {4DFDFB32-9D59-4DDB-B305-876B230C9055}
+		{B7E1E507-89DB-49A2-979B-F642B50A424B} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -73,5 +76,9 @@ Global
 		{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
