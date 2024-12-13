@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.VisualBasic;
 using ZyphCare.EntityFramework.Common;
-using ZyphCare.EntityFramework.Modules.Users;
+using ZyphCare.EntityFramework.Units.Users;
 
 namespace ZyphCare.EntityFramework.Sqlite;
 

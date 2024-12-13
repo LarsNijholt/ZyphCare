@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ZyphCare.EntityFramework.Modules.Users;
+using ZyphCare.EntityFramework.Units.Users;
 
 #nullable disable
 
 namespace ZyphCare.EntityFramework.Sqlite.Migrations
 {
     [DbContext(typeof(UserZyphCareDbContext))]
-    [Migration("20241213205604_Initial_Create")]
+    [Migration("20241213214906_Initial_Create")]
     partial class Initial_Create
     {
         /// <inheritdoc />

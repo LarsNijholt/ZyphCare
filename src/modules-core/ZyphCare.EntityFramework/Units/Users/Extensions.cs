@@ -1,6 +1,6 @@
 using ZyphCare.Users.Aspects;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <summary>
 /// Extensions class provides extension methods for the <see cref="UserAspect"/>.

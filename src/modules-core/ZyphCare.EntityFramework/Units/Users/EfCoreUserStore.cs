@@ -6,7 +6,7 @@ using ZyphCare.Users.Contracts;
 using ZyphCare.Users.Entities;
 using ZyphCare.Users.Filters;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <inheritdoc />
 public class EfCoreUserStore : IUserEntityStore

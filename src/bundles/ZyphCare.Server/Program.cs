@@ -1,6 +1,6 @@
 using ZyphCare.Common.Extensions;
-using ZyphCare.EntityFramework.Modules.Users;
 using ZyphCare.EntityFramework.Sqlite;
+using ZyphCare.EntityFramework.Units.Users;
 using ZyphCare.Extensions;
 using ZyphCare.Users.Extensions;
 

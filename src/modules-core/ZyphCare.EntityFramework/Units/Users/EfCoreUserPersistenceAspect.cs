@@ -6,7 +6,7 @@ using ZyphCare.EntityFramework.Handlers;
 using ZyphCare.Users.Aspects;
 using ZyphCare.Users.Entities;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <summary>
 /// Module for the user to use EF Core persistence providers.

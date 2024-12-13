@@ -40,6 +40,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Aspects", "src\com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Common", "src\modules-core\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj", "{1D3AC1ED-80BF-499E-9CD6-62995246514D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-core", "modules-core", "{00F5577D-F614-49C1-8849-358479E99D60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", "{319D9DCA-80CF-4AF7-833D-55DA962896E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Tests", "src\test\ZyphCare.EntityFramework.Tests\ZyphCare.EntityFramework.Tests.csproj", "{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +66,9 @@ Global
 		{B7E1E507-89DB-49A2-979B-F642B50A424B} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
 		{B134BA3B-4821-4C29-90E9-1CBBC2F38498} = {4DFDFB32-9D59-4DDB-B305-876B230C9055}
 		{1D3AC1ED-80BF-499E-9CD6-62995246514D} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
+		{319D9DCA-80CF-4AF7-833D-55DA962896E7} = {C84C5CEA-469F-420E-B3FA-B103402A0C74}
+		{00F5577D-F614-49C1-8849-358479E99D60} = {319D9DCA-80CF-4AF7-833D-55DA962896E7}
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F} = {00F5577D-F614-49C1-8849-358479E99D60}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -94,5 +103,9 @@ Global
 		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

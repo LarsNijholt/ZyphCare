@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ZyphCare.Users.Entities;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <summary>
 /// EF core configuration for the various sets of <see cref="DbContext"/>.
