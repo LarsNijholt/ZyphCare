@@ -1,3 +1,4 @@
+using ZyphCare.Common.Extensions;
 using ZyphCare.EntityFramework.Modules.Users;
 using ZyphCare.EntityFramework.Sqlite;
 using ZyphCare.Extensions;

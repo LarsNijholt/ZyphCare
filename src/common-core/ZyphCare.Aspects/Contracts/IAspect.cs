@@ -14,6 +14,11 @@ public interface IAspect
     IUnit Unit { get; }
 
     void Configure();
+    
+    /// <summary>
+    /// Configures the hosted services.
+    /// </summary>
+    void ConfigureHostedServices();
 
     void Apply();
 

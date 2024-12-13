@@ -9,11 +9,19 @@
   <ItemGroup>
     <PackageVersion Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
     <PackageVersion Update="Microsoft.Data.Sqlite" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageVersion Include="MudBlazor" Version="7.15.0" />
     <PackageVersion Include="Syncfusion.Blazor.Grid" Version="27.2.5" />
     <PackageVersion Include="Syncfusion.Blazor.Themes" Version="27.2.5" />
-    <PackageVersion Include="ZyphCare.EntityFramework.Common" Version="2.0.0" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.20" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+    <PackageVersion Include="Open.Linq.AsyncExtensions" Version="1.2.0" />
   </ItemGroup>
 </Project>

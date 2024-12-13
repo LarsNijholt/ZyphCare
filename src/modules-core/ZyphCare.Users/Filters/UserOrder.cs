@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
 using ZyphCare.Common.Entities;
-using ZyphCare.EntityFramework.Common.Entities;
 using ZyphCare.Users.Entities;
 
 namespace ZyphCare.Users.Filters;

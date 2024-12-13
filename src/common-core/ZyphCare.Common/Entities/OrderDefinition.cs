@@ -1,5 +1,4 @@
 using System.Linq.Expressions;
-using ZyphCare.EntityFramework.Common.Entities;
 
 namespace ZyphCare.Common.Entities;
 

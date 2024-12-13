@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ZyphCare.Aspects.Contracts;
 
@@ -49,6 +50,16 @@ public interface IUnit
     /// <returns>The configured aspect instance of type T.</returns>
     T Configure<T>(Func<IUnit, T> factory, Action<T>? configure = default) where T : class, IAspect;
 
+    /// <summary>
+    /// Configures a <see cref="IHostedService"/> using an optional priority to control in which order it will be registered with the service container.
+    /// </summary>
+    IUnit ConfigureHostedService<T>(int priority = 0) where T : class, IHostedService;
+
+    /// <summary>
+    /// Configures a <see cref="IHostedService"/> using an optional priority to control in which order it will be registered with the service container.
+    /// </summary>
+    IUnit ConfigureHostedService(Type hostedServiceType, int priority = 0);
+    
     /// <summary>
     /// Applies all configured aspects, causing the <see cref="Services"/> collection to be populated.
     /// </summary>

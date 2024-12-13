@@ -1,14 +1,14 @@
 using System.Collections.Concurrent;
-using Elsa.Features.Implementations;
-using Elsa.Features.Services;
 using Microsoft.Extensions.DependencyInjection;
-using ZyphCare.EntityFramework.Common.Features;
+using ZyphCare.Aspects.Contracts;
+using ZyphCare.Aspects.Services;
+using ZyphCare.Common.Aspects;
 
-namespace ZyphCare.Extensions;
+namespace ZyphCare.Common.Extensions;
 
 public static class DependencyInjectionExtensions
 {
-    private static readonly IDictionary<IServiceCollection, IModule> Units = new ConcurrentDictionary<IServiceCollection, IModule>();
+    private static readonly IDictionary<IServiceCollection, IUnit> Units = new ConcurrentDictionary<IServiceCollection, IUnit>();
 
     /// <summary>
     /// Adds and configures ZyphCare units to the specified IServiceCollection.
@@ -16,16 +16,16 @@ public static class DependencyInjectionExtensions
     /// <param name="services">The IServiceCollection to which the ZyphCare units will be added.</param>
     /// <param name="configure">An optional action to configure the IModule instance.</param>
     /// <returns>The configured IModule instance representing the ZyphCare unit.</returns>
-    public static IModule AddZyphCareUnits(this IServiceCollection services, Action<IModule>? configure = default)
+    public static IUnit AddZyphCareUnits(this IServiceCollection services, Action<IUnit>? configure = default)
     {
         var unit = services.GetOrCreateUnit();
-        unit.Configure<AppFeature>(app => app.Configurator = configure);
+        unit.Configure<AppAspect>(app => app.Configurator = configure);
         unit.Apply();
 
         return unit;
     }
 
-    private static IModule GetOrCreateUnit(this IServiceCollection services)
+    private static IUnit GetOrCreateUnit(this IServiceCollection services)
     {
         if (Units.TryGetValue(services, out var unit))
             return unit;
@@ -37,9 +37,9 @@ public static class DependencyInjectionExtensions
         return unit;
     }
 
-    public static IModule CreateUnit(this IServiceCollection services) => new Module(services);
+    public static IUnit CreateUnit(this IServiceCollection services) => new Unit(services);
     
-    public static IModule Use<T>(this IModule module, Action<T>? configure = default) where T: class, IFeature
+    public static IUnit Use<T>(this IUnit module, Action<T>? configure = default) where T: class, IAspect
     {
         module.Configure(configure);
         return module;

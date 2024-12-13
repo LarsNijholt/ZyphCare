@@ -6,11 +6,11 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
-      <PackageReference Include="ZyphCare.EntityFramework.Common" />
         
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj" />
       <ProjectReference Include="..\ZyphCare.EntityFramework\ZyphCare.EntityFramework.csproj" />
     </ItemGroup>
 

@@ -10,9 +10,9 @@ public static class Extensions
     /// <summary>
     /// Configures the Entity Framework Core persistence for the <see cref="UserFeature"/>.
     /// </summary>
-    public static UserFeature UseEntityFrameworkCore(this UserFeature feature, Action<EfCoreUserPersistenceFeature>? configure = default)
+    public static UserFeature UseEntityFrameworkCore(this UserFeature feature, Action<EfCoreUserPersistenceAspect>? configure = default)
     {
-        feature.Module.Configure(configure);
+        feature.Unit.Configure(configure);
         return feature;
     }
 }

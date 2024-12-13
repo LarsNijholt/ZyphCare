@@ -1,5 +1,4 @@
 using ZyphCare.Common.Entities;
-using ZyphCare.EntityFramework.Common.Entities;
 
 // ReSharper disable once CheckNamespace
 namespace ZyphCare.Extensions;

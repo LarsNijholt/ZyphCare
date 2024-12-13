@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ZyphCare.Aspects.Contracts;
 
 namespace ZyphCare.Aspects.Abstractions;
@@ -29,14 +30,29 @@ public abstract class BaseAspect : IAspect
     /// <summary>
     /// Override this method to configure the aspect.
     /// </summary>
-    public void Configure()
+    public virtual void Configure()
+    {
+    }
+
+    /// <inheritdoc />
+    public virtual void ConfigureHostedServices()
+    {
+    }
+
+    /// <summary>
+    /// Override this to register services with <see cref="Services"/>.
+    /// </summary>
+    public virtual void Apply()
     {
     }
     
     /// <summary>
-    /// Override this to register services with <see cref="Services"/>.
+    /// Configures the specified hosted service using an optional priority to control in which order it will be registered with the service container.
     /// </summary>
-    public void Apply()
+    /// <param name="priority">The priority.</param>
+    /// <typeparam name="T">The type of hosted service to configure.</typeparam>
+    protected void ConfigureHostedService<T>(int priority = 0) where T : class, IHostedService
     {
+        Unit.ConfigureHostedService<T>(priority);
     }
 }

@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using ZyphCare.Aspects.Attributes;
 using ZyphCare.Aspects.Contracts;
 using ZyphCare.Aspects.Extensions;
@@ -11,8 +13,11 @@ namespace ZyphCare.Aspects.Services;
 /// <inheritdoc />
 public class Unit : IUnit
 {
+    private sealed record HostedServiceDescriptor(int Order, Type Type);
+    
     private Dictionary<Type, IAspect> _aspects = new();
     private readonly HashSet<IAspect> _configuredAspects = new();
+    private readonly List<HostedServiceDescriptor> _hostedServiceDescriptors = new();
     private bool _isApplying;
     
     /// <summary>
@@ -68,6 +73,18 @@ public class Unit : IUnit
         ConfigureAspect(aspect);
         return (T)aspect;
     }
+    /// <inheritdoc />
+    public IUnit ConfigureHostedService<T>(int priority = 0) where T : class, IHostedService 
+    {
+        return ConfigureHostedService(typeof(T), priority);
+    }
+
+    /// <inheritdoc />
+    public IUnit ConfigureHostedService(Type hostedServiceType, int priority = 0) 
+    {
+        _hostedServiceDescriptors.Add(new HostedServiceDescriptor(priority, hostedServiceType));
+        return this;
+    }
 
     /// <inheritdoc />
     public void Apply()
@@ -85,6 +102,12 @@ public class Unit : IUnit
         
         // Filter out aspects that depend on other aspects that are not installed.
         _aspects = ExcludeAspectsWithMissingDependencies(_aspects.Values).ToDictionary(x => x.GetType(), x => x);
+        
+        // Add hosted services in order of priority.
+        foreach (var hostedServiceDescriptor in _hostedServiceDescriptors.OrderBy(x => x.Order))
+        {
+            Services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHostedService), hostedServiceDescriptor.Type));
+        }
         
         // Make sure to use the complete list of aspects when applying them.
         foreach (var aspect in _aspects.Values)
@@ -124,6 +147,7 @@ public class Unit : IUnit
             return;
         
         aspect.Configure();
+        aspect.ConfigureHostedServices();
         _aspects[aspect.GetType()] = aspect;
         _configuredAspects.Add(aspect);
     }
