@@ -7,7 +7,7 @@ public sealed class EfCoreUserStoreTests : IDisposable
     private readonly SqliteConnection _connection;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="EfCoreConfigurationDefinitionStoreTests"/> class
+    /// Initializes a new instance of the <see cref="EfCoreUserStoreTests"/> class
     /// </summary>
     public EfCoreUserStoreTests()
     {
