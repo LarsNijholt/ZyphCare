@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using ZyphCare.EntityFramework.Common.Models;
+using ZyphCare.Common.Models;
 
 namespace ZyphCare.EntityFramework.Common.Extensions;
 

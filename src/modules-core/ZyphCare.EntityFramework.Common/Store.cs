@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Common.Extensions;
-using ZyphCare.EntityFramework.Common.Models;
 using Open.Linq.AsyncExtensions;
 using ZyphCare.Common.Entities;
+using ZyphCare.Common.Models;
 
 namespace ZyphCare.EntityFramework.Common;
 

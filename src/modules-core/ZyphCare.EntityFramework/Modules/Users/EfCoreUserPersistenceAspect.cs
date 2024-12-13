@@ -3,8 +3,8 @@ using ZyphCare.Aspects.Contracts;
 using ZyphCare.EntityFramework.Common;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Handlers;
+using ZyphCare.Users.Aspects;
 using ZyphCare.Users.Entities;
-using ZyphCare.Users.Features;
 
 namespace ZyphCare.EntityFramework.Modules.Users;
 
@@ -21,7 +21,7 @@ public class EfCoreUserPersistenceAspect(IUnit module) : PersistenceAspectBase<U
     /// <inheritdoc />
     public override void Configure()
     {
-        Unit.Configure<UserFeature>(feature =>
+        Unit.Configure<UserAspect>(feature =>
         {
             feature.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
         });

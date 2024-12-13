@@ -6,12 +6,12 @@ using ZyphCare.Users.Contracts;
 using ZyphCare.Users.Entities;
 using ZyphCare.Users.Stores;
 
-namespace ZyphCare.Users.Features;
+namespace ZyphCare.Users.Aspects;
 
 /// <summary>
 /// Installs user feature.
 /// </summary>
-public class UserFeature : BaseAspect
+public class UserAspect : BaseAspect
 {
     /// <summary>
     /// A factory that instantiates a <see cref="IUserEntityStore"/>.
@@ -20,7 +20,7 @@ public class UserFeature : BaseAspect
         sp => sp.GetRequiredService<MemoryUserEntityStore>();
 
     /// <inheritdoc />
-    public UserFeature(IUnit module) : base(module)
+    public UserAspect(IUnit module) : base(module)
     {
     }
 
