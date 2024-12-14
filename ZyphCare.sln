@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Tests", "src\test\ZyphCare.EntityFramework.Tests\ZyphCare.EntityFramework.Tests.csproj", "{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Users.Tests", "ZyphCare.Users.Tests\ZyphCare.Users.Tests.csproj", "{D503FCE2-018F-405F-A3A4-19D6CB91830B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,7 @@ Global
 		{319D9DCA-80CF-4AF7-833D-55DA962896E7} = {C84C5CEA-469F-420E-B3FA-B103402A0C74}
 		{00F5577D-F614-49C1-8849-358479E99D60} = {319D9DCA-80CF-4AF7-833D-55DA962896E7}
 		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F} = {00F5577D-F614-49C1-8849-358479E99D60}
+		{D503FCE2-018F-405F-A3A4-19D6CB91830B} = {00F5577D-F614-49C1-8849-358479E99D60}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -107,5 +110,9 @@ Global
 		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D503FCE2-018F-405F-A3A4-19D6CB91830B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D503FCE2-018F-405F-A3A4-19D6CB91830B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D503FCE2-018F-405F-A3A4-19D6CB91830B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D503FCE2-018F-405F-A3A4-19D6CB91830B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
