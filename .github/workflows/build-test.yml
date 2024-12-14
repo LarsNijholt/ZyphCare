@@ -1,0 +1,45 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    
+jobs:
+  build:
+    name: Build
+    runs-on: [ubuntu-latest]
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Setup user secrets
+        run: |
+          dotnet user-secrets set "syncfusion:license" "${{ secrets.SYNCFUSION }}" --project ./src/bundles/ZyphCare.Web/ZyphCare.Web.csproj
+
+      - name: Install dotnet-coverage
+        run: dotnet tool update --global dotnet-coverage
+
+      - name: Build
+        run: dotnet build --no-incremental
+
+      - name: Run tests
+        run: dotnet-coverage collect 'dotnet test --no-build --logger "trx;LogFilePrefix=testresults"' -f xml -o 'coverage_data.xml'
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Test results
+          path: "**/testresults*.trx"
+          reporter: dotnet-trx
+          list-suites: "all"
+          list-tests: "all"
+          fail-on-empty: "true"
+          fail-on-error: "true"
