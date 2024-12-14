@@ -53,6 +53,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github-workflows", "github-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Users.Tests", "src\test\ZyphCare.Users.Tests\ZyphCare.Users.Tests.csproj", "{BEDD0312-D54E-4ACF-BA24-456F585E7694}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Api.Common", "src\common-core\ZyphCare.Api.Common\ZyphCare.Api.Common.csproj", "{D7E19663-E10F-48DA-BF63-BCB9B5A7B905}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,7 @@ Global
 		{00F5577D-F614-49C1-8849-358479E99D60} = {319D9DCA-80CF-4AF7-833D-55DA962896E7}
 		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F} = {00F5577D-F614-49C1-8849-358479E99D60}
 		{BEDD0312-D54E-4ACF-BA24-456F585E7694} = {00F5577D-F614-49C1-8849-358479E99D60}
+		{D7E19663-E10F-48DA-BF63-BCB9B5A7B905} = {4DFDFB32-9D59-4DDB-B305-876B230C9055}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -119,5 +122,9 @@ Global
 		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E19663-E10F-48DA-BF63-BCB9B5A7B905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E19663-E10F-48DA-BF63-BCB9B5A7B905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E19663-E10F-48DA-BF63-BCB9B5A7B905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E19663-E10F-48DA-BF63-BCB9B5A7B905}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

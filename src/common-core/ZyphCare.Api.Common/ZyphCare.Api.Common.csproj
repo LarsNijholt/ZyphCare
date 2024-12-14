@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\ZyphCare.Aspects\ZyphCare.Aspects.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" />
+    <PackageReference Include="FastEndpoints.Swagger" />
+  </ItemGroup>
+</Project>
