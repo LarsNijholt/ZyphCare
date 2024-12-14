@@ -14,7 +14,7 @@ public abstract class PersistenceAspectBase<TDbContext> : BaseAspect where TDbCo
 {
     public Action<IServiceProvider, DbContextOptionsBuilder> DbContextOptionsBuilder = (_, options) => options
         .UseZyphCareDbContextOptions(default)
-        .UseSqlite("Data Source=elsa.sqlite.db;Cache=Shared;", sqlite => sqlite
+        .UseSqlite("Data Source=zyphcare.sqlite.db;Cache=Shared;", sqlite => sqlite
             .MigrationsAssembly("ZyphCare.EntityFrameworkCore.Sqlite")
             .MigrationsHistoryTable(ZyphCareDbContextBase.MigrationsHistoryTable, ZyphCareDbContextBase.ZyphCareSchema));
 

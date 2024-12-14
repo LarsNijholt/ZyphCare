@@ -11,8 +11,8 @@
     <PackageVersion Update="Microsoft.Data.Sqlite" Version="9.0.0" />
     <PackageVersion Include="FakeItEasy" Version="8.3.0" />
     <PackageVersion Include="FakeItEasy.Analyzer.CSharp" Version="6.1.1" />
-    <PackageVersion Include="FastEndpoints" Version="5.32.0" />
-    <PackageVersion Include="FastEndpoints.Swagger" Version="5.32.0" />
+    <PackageVersion Include="FastEndpoints" Version="5.27.0" />
+    <PackageVersion Include="FastEndpoints.Swagger" Version="5.27.0" />
     <PackageVersion Include="FluentAssertions" Version="7.0.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />

@@ -14,7 +14,7 @@ public static class SwaggerExtensions
     /// </summary>
     public static IUnit AddSwagger(this IUnit unit)
     {
-        Version ver = new(3, 0);
+        Version ver = new(1, 0);
 
         // Swagger API documentation
         unit.Services.SwaggerDocument(o =>
@@ -23,7 +23,7 @@ public static class SwaggerExtensions
             o.DocumentSettings = s =>
             {
                 s.DocumentName = $"v{ver.Major}";
-                s.Title = "Elsa API";
+                s.Title = "ZyphCare API";
                 s.Version = $"v{ver.Major}.{ver.Minor}";
                 s.AddAuth("ApiKey", new()
                     {

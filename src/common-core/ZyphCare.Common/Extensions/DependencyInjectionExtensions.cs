@@ -14,8 +14,8 @@ public static class DependencyInjectionExtensions
     /// Adds and configures ZyphCare units to the specified IServiceCollection.
     /// </summary>
     /// <param name="services">The IServiceCollection to which the ZyphCare units will be added.</param>
-    /// <param name="configure">An optional action to configure the IModule instance.</param>
-    /// <returns>The configured IModule instance representing the ZyphCare unit.</returns>
+    /// <param name="configure">An optional action to configure the IUnit instance.</param>
+    /// <returns>The configured IUnit instance representing the ZyphCare unit.</returns>
     public static IUnit AddZyphCareUnits(this IServiceCollection services, Action<IUnit>? configure = default)
     {
         var unit = services.GetOrCreateUnit();
