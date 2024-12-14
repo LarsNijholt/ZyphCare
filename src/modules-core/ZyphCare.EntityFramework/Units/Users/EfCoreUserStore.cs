@@ -1,13 +1,12 @@
-using Microsoft.EntityFrameworkCore;
 using Open.Linq.AsyncExtensions;
+using ZyphCare.Common.Models;
 using ZyphCare.EntityFramework.Common;
-using ZyphCare.EntityFramework.Common.Models;
 using ZyphCare.Extensions;
 using ZyphCare.Users.Contracts;
 using ZyphCare.Users.Entities;
 using ZyphCare.Users.Filters;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <inheritdoc />
 public class EfCoreUserStore : IUserEntityStore
@@ -24,11 +23,11 @@ public class EfCoreUserStore : IUserEntityStore
     }
     
     /// <inheritdoc />
-    public async Task<User?> FindAsync(UserFilter definitionFilter,
+    public async Task<User?> FindAsync(UserFilter userFilter,
         CancellationToken cancellationToken = default)
     {
         return await _store
-            .QueryAsync(queryable => Filter(queryable, definitionFilter), cancellationToken)
+            .QueryAsync(queryable => Filter(queryable, userFilter), cancellationToken)
             .FirstOrDefault();
     }
 
@@ -79,41 +78,30 @@ public class EfCoreUserStore : IUserEntityStore
     }
 
     /// <inheritdoc />
-    public async Task SaveAsync(User definition, CancellationToken cancellationToken = default)
+    public async Task SaveAsync(User user, CancellationToken cancellationToken = default)
     {
-        await _store.SaveAsync(definition, cancellationToken);
+        await _store.SaveAsync(user, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task SaveManyAsync(IEnumerable<User> definitions,
+    public async Task SaveManyAsync(IEnumerable<User> users,
         CancellationToken cancellationToken = default)
     {
-        await _store.SaveManyAsync(definitions, cancellationToken);
+        await _store.SaveManyAsync(users, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<long> DeleteManyAsync(UserFilter definitionFilter,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> DeleteAsync(User user, CancellationToken cancellationToken = default)
     {
         await using var dbContext = await _store.CreateDbContextAsync(cancellationToken);
-        var set = dbContext.Users;
-        var queryable = set.AsQueryable();
-        var ids = await Filter(queryable, definitionFilter).Select(x => x.Id).Distinct().ToListAsync(cancellationToken);
-        return await _store.DeleteWhereAsync(x => ids.Contains(x.Id), cancellationToken);
+        return await _store.DeleteAsync(user, cancellationToken);
     }
 
     /// <inheritdoc />
-    public async Task<bool> DeleteAsync(User definition, CancellationToken cancellationToken = default)
-    {
-        await using var dbContext = await _store.CreateDbContextAsync(cancellationToken);
-        return await _store.DeleteAsync(definition, cancellationToken);
-    }
-
-    /// <inheritdoc />
-    public async Task<bool> AnyAsync(UserFilter definitionFilter,
+    public async Task<bool> AnyAsync(UserFilter userFilter,
         CancellationToken cancellationToken = default)
     {
-        return await _store.QueryAsync(queryable => Filter(queryable, definitionFilter), cancellationToken).Any();
+        return await _store.QueryAsync(queryable => Filter(queryable, userFilter), cancellationToken).Any();
     }
 
     /// <inheritdoc />

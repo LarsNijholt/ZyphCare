@@ -1,17 +1,17 @@
-using Elsa.Features.Abstractions;
-using Elsa.Features.Services;
 using Microsoft.Extensions.DependencyInjection;
+using ZyphCare.Aspects.Abstractions;
+using ZyphCare.Aspects.Contracts;
 using ZyphCare.EntityFramework.Common.Extensions;
 using ZyphCare.Users.Contracts;
 using ZyphCare.Users.Entities;
 using ZyphCare.Users.Stores;
 
-namespace ZyphCare.Users.Features;
+namespace ZyphCare.Users.Aspects;
 
 /// <summary>
 /// Installs user feature.
 /// </summary>
-public class UserFeature : FeatureBase
+public class UserAspect : BaseAspect
 {
     /// <summary>
     /// A factory that instantiates a <see cref="IUserEntityStore"/>.
@@ -20,7 +20,7 @@ public class UserFeature : FeatureBase
         sp => sp.GetRequiredService<MemoryUserEntityStore>();
 
     /// <inheritdoc />
-    public UserFeature(IModule module) : base(module)
+    public UserAspect(IUnit module) : base(module)
     {
     }
 
@@ -30,6 +30,5 @@ public class UserFeature : FeatureBase
         Services
             .AddScoped(UserEntityStore)
             .AddMemoryStore<User, MemoryUserEntityStore>();
-
     }
 }

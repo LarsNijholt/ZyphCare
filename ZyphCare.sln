@@ -36,6 +36,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Common", "src\comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Sqlite", "src\modules-core\ZyphCare.EntityFramework.Sqlite\ZyphCare.EntityFramework.Sqlite.csproj", "{B7E1E507-89DB-49A2-979B-F642B50A424B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Aspects", "src\common-core\ZyphCare.Aspects\ZyphCare.Aspects.csproj", "{B134BA3B-4821-4C29-90E9-1CBBC2F38498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Common", "src\modules-core\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj", "{1D3AC1ED-80BF-499E-9CD6-62995246514D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-core", "modules-core", "{00F5577D-F614-49C1-8849-358479E99D60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit-tests", "unit-tests", "{319D9DCA-80CF-4AF7-833D-55DA962896E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.EntityFramework.Tests", "src\test\ZyphCare.EntityFramework.Tests\ZyphCare.EntityFramework.Tests.csproj", "{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github-workflows", "github-workflows", "{F9C698F0-65D3-4989-BB33-82754C0F7B65}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-test.yml = .github\workflows\build-test.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Users.Tests", "src\test\ZyphCare.Users.Tests\ZyphCare.Users.Tests.csproj", "{BEDD0312-D54E-4ACF-BA24-456F585E7694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +71,12 @@ Global
 		{4DFDFB32-9D59-4DDB-B305-876B230C9055} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
 		{D92A30BE-CDA4-4F36-9D9D-92A33DF0AB54} = {4DFDFB32-9D59-4DDB-B305-876B230C9055}
 		{B7E1E507-89DB-49A2-979B-F642B50A424B} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
+		{B134BA3B-4821-4C29-90E9-1CBBC2F38498} = {4DFDFB32-9D59-4DDB-B305-876B230C9055}
+		{1D3AC1ED-80BF-499E-9CD6-62995246514D} = {93C1A262-64C2-427C-8C5A-F7B8805B82A8}
+		{319D9DCA-80CF-4AF7-833D-55DA962896E7} = {C84C5CEA-469F-420E-B3FA-B103402A0C74}
+		{00F5577D-F614-49C1-8849-358479E99D60} = {319D9DCA-80CF-4AF7-833D-55DA962896E7}
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F} = {00F5577D-F614-49C1-8849-358479E99D60}
+		{BEDD0312-D54E-4ACF-BA24-456F585E7694} = {00F5577D-F614-49C1-8849-358479E99D60}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -80,5 +103,21 @@ Global
 		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7E1E507-89DB-49A2-979B-F642B50A424B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B134BA3B-4821-4C29-90E9-1CBBC2F38498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B134BA3B-4821-4C29-90E9-1CBBC2F38498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B134BA3B-4821-4C29-90E9-1CBBC2F38498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B134BA3B-4821-4C29-90E9-1CBBC2F38498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3AC1ED-80BF-499E-9CD6-62995246514D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBA6D7D-454F-4CDF-8A4D-4AF031C7FF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDD0312-D54E-4ACF-BA24-456F585E7694}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

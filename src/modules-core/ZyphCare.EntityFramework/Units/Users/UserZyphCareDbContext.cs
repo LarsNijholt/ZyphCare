@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ZyphCare.EntityFramework.Common;
 using ZyphCare.Users.Entities;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <summary>
 /// The database context for managing user entities.

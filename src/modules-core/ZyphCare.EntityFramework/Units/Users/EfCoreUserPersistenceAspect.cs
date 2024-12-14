@@ -1,18 +1,17 @@
-using Elsa.Features.Services;
 using Microsoft.Extensions.DependencyInjection;
+using ZyphCare.Aspects.Contracts;
 using ZyphCare.EntityFramework.Common;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Handlers;
-using ZyphCare.Users.Contracts;
+using ZyphCare.Users.Aspects;
 using ZyphCare.Users.Entities;
-using ZyphCare.Users.Features;
 
-namespace ZyphCare.EntityFramework.Modules.Users;
+namespace ZyphCare.EntityFramework.Units.Users;
 
 /// <summary>
 /// Module for the user to use EF Core persistence providers.
 /// </summary>
-public class EfCoreUserPersistenceFeature(IModule module) : PersistenceFeatureBase<UserZyphCareDbContext>(module)
+public class EfCoreUserPersistenceAspect(IUnit module) : PersistenceAspectBase<UserZyphCareDbContext>(module)
 {
     /// <summary>
     /// Delegate for determining the exception handler.
@@ -22,7 +21,7 @@ public class EfCoreUserPersistenceFeature(IModule module) : PersistenceFeatureBa
     /// <inheritdoc />
     public override void Configure()
     {
-        Module.Configure<UserFeature>(feature =>
+        Unit.Configure<UserAspect>(feature =>
         {
             feature.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
         });

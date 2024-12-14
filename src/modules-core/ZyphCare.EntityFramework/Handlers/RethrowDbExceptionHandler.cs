@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ZyphCare.EntityFramework.Common.Contracts;
-using ZyphCare.EntityFramework.Modules.Users;
+using ZyphCare.EntityFramework.Units.Users;
 
 namespace ZyphCare.EntityFramework.Handlers;
 

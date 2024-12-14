@@ -3,21 +3,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ZyphCare.EntityFramework.Modules.Users;
+using ZyphCare.EntityFramework.Units.Users;
 
 #nullable disable
 
 namespace ZyphCare.EntityFramework.Sqlite.Migrations
 {
     [DbContext(typeof(UserZyphCareDbContext))]
-    [Migration("20241211191924_Initial_Create")]
+    [Migration("20241213214906_Initial_Create")]
     partial class Initial_Create
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
             modelBuilder.Entity("ZyphCare.Users.Entities.User", b =>
                 {
