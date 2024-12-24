@@ -52,11 +52,11 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.Al
     
 var app = builder.Build();
 app.UseAuthorization();
-app.UseZyphCareAPI();
+app.UseZyphCareApi();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerUI();
+    app.UseSwaggerUi();
 }
 
 app.Run();

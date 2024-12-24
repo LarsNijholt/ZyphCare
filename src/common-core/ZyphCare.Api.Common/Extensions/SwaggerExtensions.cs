@@ -34,7 +34,7 @@ public static class SwaggerExtensions
     /// <summary>
     /// Adds middleware to enable the Swagger UI at '/swagger'
     /// </summary>
-    public static IApplicationBuilder UseSwaggerUI(this IApplicationBuilder app)
+    public static IApplicationBuilder UseSwaggerUi(this IApplicationBuilder app)
     {
         return app.UseSwaggerGen();
     }

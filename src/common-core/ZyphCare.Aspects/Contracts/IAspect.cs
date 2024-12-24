@@ -13,13 +13,20 @@ public interface IAspect
     /// </summary>
     IUnit Unit { get; }
 
+    /// <summary>
+    /// Configures the aspect. Can be overridden to implement custom configuration logic.
+    /// </summary>
     void Configure();
-    
+
     /// <summary>
     /// Configures the hosted services.
     /// </summary>
     void ConfigureHostedServices();
 
+    /// <summary>
+    /// Applies the aspect configuration and behavior. Intended to be overridden
+    /// by derived types to provide custom logic for applying the aspect.
+    /// </summary>
     void Apply();
 
 }

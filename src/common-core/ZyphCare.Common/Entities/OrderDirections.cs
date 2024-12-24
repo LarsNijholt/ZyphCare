@@ -1,16 +1,17 @@
 ﻿namespace ZyphCare.Common.Entities;
 
 /// <summary>
-///     The order direction.
+/// The order direction.
 /// </summary>
 public enum OrderDirection
 {
     /// <summary>
-    ///     Ascending order.
+    /// Ascending order.
     /// </summary>
     Ascending,
 
     /// <summary>
+    /// Descending order.
     /// </summary>
     Descending
 }
