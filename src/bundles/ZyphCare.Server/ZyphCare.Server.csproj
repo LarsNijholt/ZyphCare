@@ -5,4 +5,7 @@
     <ProjectReference Include="..\..\modules-core\ZyphCare.EntityFramework\ZyphCare.EntityFramework.csproj" />
     <ProjectReference Include="..\..\modules-core\ZyphCare.Users\ZyphCare.Users.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+  </ItemGroup>
 </Project>

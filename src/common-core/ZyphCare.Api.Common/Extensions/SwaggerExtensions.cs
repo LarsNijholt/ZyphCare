@@ -19,19 +19,12 @@ public static class SwaggerExtensions
         // Swagger API documentation
         unit.Services.SwaggerDocument(o =>
         {
-            o.EnableJWTBearerAuth = true;
+            o.EnableJWTBearerAuth = false;
             o.DocumentSettings = s =>
             {
                 s.DocumentName = $"v{ver.Major}";
                 s.Title = "ZyphCare API";
                 s.Version = $"v{ver.Major}.{ver.Minor}";
-                s.AddAuth("ApiKey", new()
-                    {
-                        Name = "Authorization",
-                        In = NSwag.OpenApiSecurityApiKeyLocation.Header,
-                        Type = NSwag.OpenApiSecuritySchemeType.ApiKey,
-                        Description = "Enter: ApiKey [your API key]"
-                    });
             };
         });
 
