@@ -3,6 +3,7 @@
     <ProjectReference Include="..\..\common-core\ZyphCare.Api.Common\ZyphCare.Api.Common.csproj" />
     <ProjectReference Include="..\..\modules-core\ZyphCare.EntityFramework.Sqlite\ZyphCare.EntityFramework.Sqlite.csproj" />
     <ProjectReference Include="..\..\modules-core\ZyphCare.EntityFramework\ZyphCare.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\modules-core\ZyphCare.Users.Api\ZyphCare.Users.Api.csproj" />
     <ProjectReference Include="..\..\modules-core\ZyphCare.Users\ZyphCare.Users.csproj" />
   </ItemGroup>
   <ItemGroup>

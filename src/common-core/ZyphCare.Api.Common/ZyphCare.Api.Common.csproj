@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\ZyphCare.Aspects\ZyphCare.Aspects.csproj" />
+    <ProjectReference Include="..\ZyphCare.Common\ZyphCare.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FastEndpoints" />
