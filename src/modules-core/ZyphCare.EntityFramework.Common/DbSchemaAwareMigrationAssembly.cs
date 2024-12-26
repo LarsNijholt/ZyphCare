@@ -9,12 +9,16 @@ using ZyphCare.EntityFramework.Common.Contracts;
 namespace ZyphCare.EntityFramework.Common;
 
 /// <summary>
-///     Class That enable Schema change for Migration
+/// Extends the functionality of the MigrationsAssembly class to support schema-aware migration generation
+/// for DbContext instances that implement the IZyphCareDbContextSchema interface. Ensures schema-specific
+/// migrations are created dynamically when a schema is provided, while retaining the ability to fall back
+/// to the default migration creation logic.
 /// </summary>
 public class DbSchemaAwareMigrationAssembly : MigrationsAssembly
 {
     private readonly DbContext _context;
 
+    /// <inheritdoc />
     public DbSchemaAwareMigrationAssembly(ICurrentDbContext currentContext,
         IDbContextOptions options, IMigrationsIdGenerator idGenerator,
         IDiagnosticsLogger<DbLoggerCategory.Migrations> logger)
@@ -23,6 +27,7 @@ public class DbSchemaAwareMigrationAssembly : MigrationsAssembly
         _context = currentContext.Context;
     }
 
+    /// <inheritdoc />
     public override Migration CreateMigration(TypeInfo migrationClass,
         string activeProvider)
     {
