@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
@@ -42,8 +44,12 @@ app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = 
     var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
         .WithRedirectUri(returnUrl)
         .Build();
-
+    
     await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+    
+    var user = httpContext.User;
+    var auth0Id = user.FindFirstValue(ClaimTypes.NameIdentifier);
+    Console.WriteLine(auth0Id);
 });
 
 app.MapGet("/Account/Logout", async httpContext =>

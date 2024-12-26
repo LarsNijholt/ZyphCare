@@ -49,6 +49,7 @@
   <ItemGroup>
     <PackageReference Include="Auth0.AspNetCore.Authentication" />
     <PackageReference Include="MudBlazor" />
+    <PackageReference Include="RestSharp" />
     <PackageReference Include="Syncfusion.Blazor.Grid" />
     <PackageReference Include="Syncfusion.Blazor.Themes" />
   </ItemGroup>
