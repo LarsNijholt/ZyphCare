@@ -7,8 +7,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contracts\" />
-      <Folder Include="Services\" />
+      <PackageReference Include="Microsoft.Extensions.Options" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\clients\ZyphCare.Api.Client\ZyphCare.Api.Client.csproj" />
     </ItemGroup>
 
 </Project>
