@@ -5,6 +5,7 @@ using ZyphCare.Web.Core.Options;
 
 namespace ZyphCare.Web.Core.Services;
 
+/// <inheritdoc />
 public class DefaultRemoteBackendAccessor : IRemoteBackendAccessor
 {
 

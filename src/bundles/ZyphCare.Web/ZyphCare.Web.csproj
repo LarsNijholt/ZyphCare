@@ -52,4 +52,7 @@
     <PackageReference Include="Syncfusion.Blazor.Grid" />
     <PackageReference Include="Syncfusion.Blazor.Themes" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\common-web\ZyphCare.Web.Core\ZyphCare.Web.Core.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,5 +1,8 @@
 namespace ZyphCare.Web.Core.Contracts;
 
+/// <summary>
+/// Defines a provider for accessing backend API clients.
+/// </summary>
 public interface IBackendApiClientProvider
 {
     /// <summary>

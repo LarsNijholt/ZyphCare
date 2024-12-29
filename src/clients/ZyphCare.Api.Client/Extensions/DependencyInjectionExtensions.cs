@@ -2,14 +2,25 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Refit;
-using static ZyphCare.Api.Client.Helpers.RefitSettingsHelper;
 using ZyphCare.Api.Client.Options;
+using ZyphCare.Api.Client.Users.Contracts;
+using static ZyphCare.Api.Client.Helpers.RefitSettingsHelper;
 
-namespace ZyphCare.Api.Client;
+namespace ZyphCare.Api.Client.Extensions;
 
+/// <summary>
+/// Provides extension methods for integrating ZyphCare API client functionality into the dependency injection container.
+/// These methods help configure and register ZyphCare API clients with various customization options.
+/// </summary>
 public static class DependencyInjectionExtensions
 {
-      public static IServiceCollection AddDefaultApiClientsUsingApiKey(this IServiceCollection services, Action<ZyphCareClientOptions> configureOptions)
+    /// <summary>
+    /// Adds default ZyphCare API clients using an API key for authentication.
+    /// </summary>
+    /// <param name="services">The dependency injection service collection to which the ZyphCare API clients are added.</param>
+    /// <param name="configureOptions">A delegate to configure the <see cref="ZyphCareClientOptions"/> instance.</param>
+    /// <returns>The updated service collection with the configured ZyphCare API clients.</returns>
+    public static IServiceCollection AddDefaultApiClientsUsingApiKey(this IServiceCollection services, Action<ZyphCareClientOptions> configureOptions)
     {
         var options = new ZyphCareClientOptions();
         configureOptions(options);
@@ -25,7 +36,20 @@ public static class DependencyInjectionExtensions
     /// Adds default Elsa API clients.
     public static IServiceCollection AddDefaultApiClients(this IServiceCollection services, Action<ZyphCareClientBuilderOptions>? configureClient = null)
     {
-        return services.AddApiClients(configureClient);
+        return services.AddApiClients(configureClient, builderoptions =>
+        {
+            var builderOptionsWithoutRetryPolicy = new ZyphCareClientBuilderOptions
+                {
+                    ApiKey = builderoptions.ApiKey,
+                    AuthenticationHandler = builderoptions.AuthenticationHandler,
+                    BaseAddress = builderoptions.BaseAddress,
+                    ConfigureHttpClient = builderoptions.ConfigureHttpClient,
+                    ConfigureHttpClientBuilder = builderoptions.ConfigureHttpClientBuilder,
+                    ConfigureRetryPolicy = null
+                };
+
+            services.AddApi<IUserApi>();
+        });
     }
 
     /// <summary>

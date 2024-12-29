@@ -1,5 +1,8 @@
 namespace ZyphCare.Web.Core.Models;
 
+/// <summary>
+/// Represents a remote backend service with a specified URL.
+/// </summary>
 public class RemoteBackend
 {
     /// <summary>

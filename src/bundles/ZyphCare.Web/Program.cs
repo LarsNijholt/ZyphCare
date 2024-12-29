@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
+using ZyphCare.Web.Core.Extensions;
+using ZyphCare.Web.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -21,6 +23,11 @@ services
 
 services.AddServerSideBlazor();
 
+var backendApiConfig = new BackendApiConfig
+    {
+        ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options),
+    };
+
 services
     .AddMudServices()
     .AddAuth0WebAppAuthentication(options =>
@@ -28,6 +35,8 @@ services
         options.Domain = configuration["Auth0:Domain"] ?? string.Empty;
         options.ClientId = configuration["Auth0:ClientId"] ?? string.Empty;
     });
+
+services.AddRemoteBackend(backendApiConfig);
 
 var app = builder.Build();
 

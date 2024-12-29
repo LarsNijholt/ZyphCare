@@ -1,5 +1,8 @@
 namespace ZyphCare.Web.Core.Options;
 
+/// <summary>
+/// Represents configuration options for connecting to a backend service.
+/// </summary>
 public class BackendOptions
 {
     /// <summary>

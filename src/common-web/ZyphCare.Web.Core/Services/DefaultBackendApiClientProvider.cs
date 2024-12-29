@@ -1,8 +1,10 @@
 using ZyphCare.Api.Client;
+using ZyphCare.Api.Client.Extensions;
 using ZyphCare.Web.Core.Contracts;
 
 namespace ZyphCare.Web.Core.Services;
 
+/// <inheritdoc />
 public class DefaultBackendApiClientProvider : IBackendApiClientProvider
 {
     private readonly IRemoteBackendAccessor _remoteBackendAccessor;

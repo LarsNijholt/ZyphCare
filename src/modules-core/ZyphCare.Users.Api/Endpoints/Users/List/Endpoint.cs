@@ -23,7 +23,7 @@ public class Endpoint : ZyphCareEndpoint<Request, PagedListResponse<Response>, M
     /// <inheritdoc />
     public override void Configure()
     {
-        Get("/users/list");
+        Get("/users");
         ConfigurePermissions("read:users");
     }
 
