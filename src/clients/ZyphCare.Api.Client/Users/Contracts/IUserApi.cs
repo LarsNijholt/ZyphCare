@@ -19,4 +19,6 @@ public interface IUserApi
     /// <returns>A task that represents the asynchronous operation. The task result contains a paginated list response of users.</returns>
     [Get("/users")]
     Task<PagedListResponse<User>> ListAsync([Query] ListUserRequest request, CancellationToken cancellationToken = default);
+    
+    Task PostAsync(PostUserRequest request, CancellationToken cancellationToken = default);
 }
