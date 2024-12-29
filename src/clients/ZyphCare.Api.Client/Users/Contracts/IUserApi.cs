@@ -20,5 +20,6 @@ public interface IUserApi
     [Get("/users")]
     Task<PagedListResponse<User>> ListAsync([Query] ListUserRequest request, CancellationToken cancellationToken = default);
     
+    [Post("/users")]
     Task PostAsync(PostUserRequest request, CancellationToken cancellationToken = default);
 }

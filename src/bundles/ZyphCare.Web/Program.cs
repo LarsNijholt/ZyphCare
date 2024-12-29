@@ -8,6 +8,7 @@ using MudBlazor.Services;
 using Syncfusion.Blazor;
 using ZyphCare.Api.Client.Users.Contracts;
 using ZyphCare.Api.Client.Users.Requests;
+using ZyphCare.Web.Core.Contracts;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 
@@ -60,8 +61,9 @@ app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = 
     
     var user = httpContext.User;
     var auth0Id = user.FindFirstValue(ClaimTypes.NameIdentifier);
-    var userApi = httpContext.RequestServices.GetRequiredService<IUserApi>();
-    var request = new PostUserRequest { Id = Guid.NewGuid().ToString(), Auth0Id = auth0Id };
+    var apiClientProvider = httpContext.RequestServices.GetRequiredService<IBackendApiClientProvider>();
+    var request = new PostUserRequest { Id = Guid.NewGuid().ToString(), Auth0Id = auth0Id, Role = "user"};
+    var userApi = await apiClientProvider.GetApiAsync<IUserApi>();
     await userApi.PostAsync(request);
 });
 

@@ -14,4 +14,9 @@ public class PostUserRequest
     /// The Id that is provided from auth 0.
     /// </summary>
     public string? Auth0Id { get; set; }
+
+    /// <summary>
+    /// The role assigned to the user.
+    /// </summary>
+    public string? Role { get; set; }
 }
