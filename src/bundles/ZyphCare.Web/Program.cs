@@ -58,13 +58,6 @@ app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = 
         .Build();
     
     await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-    
-    var user = httpContext.User;
-    var auth0Id = user.FindFirstValue(ClaimTypes.NameIdentifier);
-    var apiClientProvider = httpContext.RequestServices.GetRequiredService<IBackendApiClientProvider>();
-    var request = new PostUserRequest { Id = Guid.NewGuid().ToString(), Auth0Id = auth0Id, Role = "user"};
-    var userApi = await apiClientProvider.GetApiAsync<IUserApi>();
-    await userApi.PostAsync(request);
 });
 
 app.MapGet("/Account/Logout", async httpContext =>
