@@ -1,13 +1,8 @@
 ﻿@inherits LayoutComponentBase
 @using Syncfusion.Blazor.Navigations
 @using Syncfusion.Blazor.Buttons
-@using ZyphCare.Api.Client.Users.Contracts
-@using ZyphCare.Api.Client.Users.Requests
-@using ZyphCare.Web.Core.Contracts
 @using ZyphCare.Web.Models
 
-<AuthorizeView>
-    <Authorized>
         <div class="page">
             <div class="control-container">
                 <div>
@@ -41,9 +36,4 @@
                 </div>
             </div>
         </div>
-    </Authorized>
-    <NotAuthorized>
-        Not authorized... <a href="Account/Login">Log in</a>
-    </NotAuthorized>
-</AuthorizeView>
 

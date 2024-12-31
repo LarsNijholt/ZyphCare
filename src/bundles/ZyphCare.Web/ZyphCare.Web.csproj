@@ -55,4 +55,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\common-web\ZyphCare.Web.Core\ZyphCare.Web.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Components\Pages\callback.razor" />
+  </ItemGroup>
 </Project>

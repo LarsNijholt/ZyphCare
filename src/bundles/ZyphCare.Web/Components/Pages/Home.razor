@@ -5,7 +5,14 @@
 
 <PageTitle>Home</PageTitle>
 
-<SfGrid DataSource="Orders"/>
+<AuthorizeView>
+    <Authorized>
+        <SfGrid DataSource="Orders"/>
+    </Authorized>
+    <NotAuthorized>
+        Not authorized... <a href="https://dev-g2gar2vb3zazyj0s.us.auth0.com/authorize?response_type=code&client_id=uYjZgtRicwlVkRR6WW9N3DqHw8C7EmAT&redirect_uri=https://localhost:7184/login&scope=offline_access&audience=https://zyphcare.com/authentication">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code{
     public List<Order> Orders { get; set; }
