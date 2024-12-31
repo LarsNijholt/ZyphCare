@@ -1,6 +1,39 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
+﻿@using System.Reflection
+@using ZyphCare.Web.Core.Contracts
+<Router AppAssembly="@(typeof(Routes).Assembly)" AdditionalAssemblies="Assemblies">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+        <AuthorizeRouteView RouteData="routeData" DefaultLayout="@(typeof(Layout.MainLayout))" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
 </Router>
+
+
+@code
+{
+    [Inject] private IEnumerable<IAspect> Aspects { get; set; } = default!;
+    [Inject] private IAspectService AspectService { get; set; } = default!;
+    
+    private IEnumerable<Assembly> Assemblies { get; set; } = default!;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        Assemblies = Aspects.Select(x => x.GetType().Assembly).Distinct().ToList();
+    }
+
+    /// <inheritdoc />
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await AspectService.InitializeAspectsAsync();
+        // if (AuthenticationState != null)
+        // {
+        //     var authState = await AuthenticationState;
+        //     if (authState.User.Identity?.IsAuthenticated == true)
+        //         
+        //
+        // }
+    }
+}

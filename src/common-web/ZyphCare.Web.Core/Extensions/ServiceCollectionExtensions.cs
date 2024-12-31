@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using ZyphCare.Api.Client;
 using ZyphCare.Api.Client.Extensions;
 using ZyphCare.Web.Core.Contracts;
 using ZyphCare.Web.Core.Models;
@@ -13,6 +12,19 @@ namespace ZyphCare.Web.Core.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// Adds core services and configurations, including dependencies required for managing and initializing aspects.
+    /// </summary>
+    /// <param name="services">The service collection to which the core services and configurations are added.</param>
+    /// <returns>
+    /// The updated <see cref="IServiceCollection"/> with the core services and configurations added.
+    /// </returns>
+    public static IServiceCollection AddCore(this IServiceCollection services)
+    {
+        return services
+            .AddScoped<IAspectService, DefaultAspectService>();
+    }
+    
     /// <summary>
     /// Adds services and configurations necessary for interacting with a remote backend API to the service collection.
     /// </summary>

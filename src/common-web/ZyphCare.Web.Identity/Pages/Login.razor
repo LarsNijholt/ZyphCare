@@ -1,0 +1,35 @@
+@page "/Login"
+@page "/Login/{Code}"
+@using Microsoft.AspNetCore.WebUtilities
+@using ZyphCare.Web.Identity.Contracts
+@using Blazored.LocalStorage;
+
+<h3>Login</h3>
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
+    [Inject] private ILocalStorageService LocalStorageService { get; set; } = default!;
+
+
+    /// <summary>
+    /// The code retrieved from the Url.
+    /// </summary>
+    [Parameter]
+    public string? Code { get; set; }
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
+        var secret = Environment.GetEnvironmentVariable("AUTH0_SECRET");
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("code", out var codeValue))
+        {
+            var jwt = await AuthenticationProvider.GetAccessTokenAsync(codeValue!, secret!);
+            // await LocalStorageService.SetItemAsStringAsync("access_token")
+        }
+    }
+}
+
+}

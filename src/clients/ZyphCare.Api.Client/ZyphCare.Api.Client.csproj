@@ -9,7 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\common-core\ZyphCare.Api.Common\ZyphCare.Api.Common.csproj" />
+      <Folder Include="Shared\" />
     </ItemGroup>
-
 </Project>

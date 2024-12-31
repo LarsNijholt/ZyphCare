@@ -1,21 +1,18 @@
-using System.Security.Claims;
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components.Authorization;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
-using ZyphCare.Api.Client.Users.Contracts;
-using ZyphCare.Api.Client.Users.Requests;
-using ZyphCare.Web.Core.Contracts;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
+using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 var license = builder.Configuration.GetSection("syncfusion")["license"];
+var auth0Secret = builder.Configuration.GetSection("auth0")["secret"];
 
 services.AddSyncfusionBlazor();
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(license);
@@ -39,7 +36,10 @@ services
         options.ClientId = configuration["Auth0:ClientId"] ?? string.Empty;
     });
 
-services.AddRemoteBackend(backendApiConfig);
+services
+    .AddCore()
+    .AddRemoteBackend(backendApiConfig)
+    .AddIdentityServices();
 
 var app = builder.Build();
 
@@ -49,6 +49,11 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+    Environment.SetEnvironmentVariable("AUTH0_SECRET", auth0Secret);
 }
 
 app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = "/") =>

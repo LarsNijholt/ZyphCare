@@ -65,6 +65,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{21A7
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Api.Client", "src\clients\ZyphCare.Api.Client\ZyphCare.Api.Client.csproj", "{FAC95F6E-E795-44C5-AEC9-0CD2978425FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web.Identity", "src\common-web\ZyphCare.Web.Identity\ZyphCare.Web.Identity.csproj", "{FBFA932F-91A4-4997-A336-810560A8576C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,7 @@ Global
 		{BDF0D6CA-E7EE-441E-AB7A-05C4DF21CE69} = {E5B45DD1-5CC5-46B3-9485-1E3F097315C0}
 		{21A7F941-61BE-494A-9FE4-B992CFBA844B} = {119FD4F3-5AAA-4784-B1FB-1EB9F27E973C}
 		{FAC95F6E-E795-44C5-AEC9-0CD2978425FC} = {21A7F941-61BE-494A-9FE4-B992CFBA844B}
+		{FBFA932F-91A4-4997-A336-810560A8576C} = {E5B45DD1-5CC5-46B3-9485-1E3F097315C0}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -153,5 +156,9 @@ Global
 		{FAC95F6E-E795-44C5-AEC9-0CD2978425FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAC95F6E-E795-44C5-AEC9-0CD2978425FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAC95F6E-E795-44C5-AEC9-0CD2978425FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBFA932F-91A4-4997-A336-810560A8576C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBFA932F-91A4-4997-A336-810560A8576C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBFA932F-91A4-4997-A336-810560A8576C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBFA932F-91A4-4997-A336-810560A8576C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

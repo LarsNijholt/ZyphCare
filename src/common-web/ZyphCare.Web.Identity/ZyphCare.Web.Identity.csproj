@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <ItemGroup>
+      <PackageReference Include="Blazored.Localstorage" />
+        <PackageReference Include="Microsoft.AspNetCore.WebUtilities" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="Pages\Login.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ZyphCare.Web.Core\ZyphCare.Web.Core.csproj" />
+    </ItemGroup>
+
+</Project>
