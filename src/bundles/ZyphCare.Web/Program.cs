@@ -6,6 +6,7 @@ using MudBlazor.Services;
 using Syncfusion.Blazor;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
+using ZyphCare.Web.Extensions;
 using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,10 +78,10 @@ app.MapGet("/Account/Logout", async httpContext =>
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+var conventionBuilder = app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+app.AddRouting(conventionBuilder);
 
 app.Run();

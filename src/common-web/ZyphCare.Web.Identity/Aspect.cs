@@ -5,5 +5,4 @@ namespace ZyphCare.Web.Identity;
 /// <inheritdoc />
 public class Aspect : BaseAspect
 {
-    
 }

@@ -1,10 +1,16 @@
 @page "/Login"
 @page "/Login/{Code}"
+
+@using System.Text.Json
 @using Microsoft.AspNetCore.WebUtilities
 @using ZyphCare.Web.Identity.Contracts
 @using Blazored.LocalStorage;
 
+@inherits ComponentBase
+
 <h3>Login</h3>
+
+<p>Logging in....</p>
 
 @code {
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
@@ -27,7 +33,13 @@
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("code", out var codeValue))
         {
             var jwt = await AuthenticationProvider.GetAccessTokenAsync(codeValue!, secret!);
-            // await LocalStorageService.SetItemAsStringAsync("access_token")
+            var tokens = JsonSerializer.Deserialize<JsonElement>(jwt);
+            
+            if(tokens.TryGetProperty("access_token", out var accessToken) && tokens.TryGetProperty("refresh_token", out var refreshToken))
+            {
+                await LocalStorageService.SetItemAsStringAsync("access_token", accessToken.GetString()!);
+                await LocalStorageService.SetItemAsStringAsync("refresh_token", refreshToken.GetString()!);
+            }
         }
     }
 }

@@ -1,10 +1,41 @@
 ﻿@using System.Reflection
+@using ZyphCare.Web.Components.Layout
 @using ZyphCare.Web.Core.Contracts
+
 <Router AppAssembly="@(typeof(Routes).Assembly)" AdditionalAssemblies="Assemblies">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="routeData" DefaultLayout="@(typeof(Layout.MainLayout))" />
+        <CascadingAuthenticationState>
+            <AuthorizeView Context="_">
+                <Authorized>
+                    <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                        <NotAuthorized>
+                            <div>Unauthorized...</div>
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </Authorized>
+                <Authorizing>
+                    <div Style="padding: 20px; height: 100vh; width: 100vw;">
+                        <div>Authorizing...</div>
+                    </div>
+                </Authorizing>
+                <NotAuthorized>
+                    <AuthorizeRouteView RouteData="@routeData">
+                        <NotAuthorized>
+                            <div>Unauthorized...</div>
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </NotAuthorized>
+            </AuthorizeView>
+        </CascadingAuthenticationState>
+        <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
+    <NotFound>
+        <PageTitle>Not found | ZyphCare</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
 </Router>
 
 
