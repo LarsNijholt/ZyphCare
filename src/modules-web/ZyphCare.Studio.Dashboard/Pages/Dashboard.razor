@@ -1,14 +1,21 @@
 @page "/"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
+@using Syncfusion.Blazor.Buttons
+@using ZyphCare.Web.Core.Constants
+@using ZyphCare.Web.Identity.Contracts
 
 @attribute [Authorize]
 
 <h3>Dashboard</h3>
 
+<SfButton @onclick="LogOut">LogOut</SfButton>
 
 @code{
     public List<Order> Orders { get; set; }
+
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
@@ -21,6 +28,13 @@
             var state = await AuthenticationState;
             Console.WriteLine(state.User.Identity.IsAuthenticated);
         }
+    }
+
+    private async Task LogOut()
+    {
+        await JwtAccessor.RemoveTokenAsync(TokenNames.AccessToken);
+        await JwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
+        NavigationManager.NavigateTo("https://dev-g2gar2vb3zazyj0s.us.auth0.com/v2/logout?client_id=uYjZgtRicwlVkRR6WW9N3DqHw8C7EmAT&returnTo=https://localhost:7184/SignIn");
     }
     
 

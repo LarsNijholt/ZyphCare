@@ -61,18 +61,6 @@ else
     Environment.SetEnvironmentVariable("AUTH0_SECRET", auth0Secret);
 }
 
-app.MapGet("/Account/Logout", async httpContext =>
-{
-    var serviceProvider = httpContext.RequestServices;
-    var jwtAccessor = serviceProvider.GetRequiredService<IJwtAccessor>();
-
-    await jwtAccessor.RemoveTokenAsync(TokenNames.AccessToken);
-    await jwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
-    
-    var navigationManager = serviceProvider.GetRequiredService<NavigationManager>();
-    navigationManager.NavigateTo("/SignIn");
-});
-
 app.UseAuthorization();
 app.UseHttpsRedirection();
 
