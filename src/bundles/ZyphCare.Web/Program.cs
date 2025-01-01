@@ -1,6 +1,4 @@
-using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
