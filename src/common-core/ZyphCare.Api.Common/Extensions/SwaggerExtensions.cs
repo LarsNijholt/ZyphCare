@@ -19,7 +19,7 @@ public static class SwaggerExtensions
         // Swagger API documentation
         unit.Services.SwaggerDocument(o =>
         {
-            o.EnableJWTBearerAuth = false;
+            o.EnableJWTBearerAuth = true;
             o.DocumentSettings = s =>
             {
                 s.DocumentName = $"v{ver.Major}";

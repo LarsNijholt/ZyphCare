@@ -14,10 +14,9 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 
 var sqliteConnectionString = configuration.GetConnectionString("Sqlite")!;
-EndpointSecurityOptions.DisableSecurity();
 
 services
-    .AddAuthentication("Bearer")
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.Authority = configuration.GetValue<string>("Authentication:Authority");
@@ -28,7 +27,6 @@ services
             {
                 OnTokenValidated = (context) =>
                 {
-                    //Simplification of the Elsa permissions by granting access to everything
                     var identity = context.Principal.Identity as ClaimsIdentity;
                     identity?.AddClaim(new Claim("permissions", PermissionNames.All));
                     return Task.CompletedTask;
