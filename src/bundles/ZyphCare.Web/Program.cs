@@ -9,6 +9,7 @@ using ZyphCare.Web.Core.Constants;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 using ZyphCare.Web.Extensions;
+using ZyphCare.Web.Handlers;
 using ZyphCare.Web.Identity.Contracts;
 using ZyphCare.Web.Identity.Extensions;
 
@@ -37,12 +38,14 @@ services
     .AddStudioDashboard()
     .AddCascadingAuthenticationState()
     .AddRemoteBackend(backendApiConfig)
-    .AddIdentityServices()
-    .AddAuth0WebAppAuthentication(options =>
+    .AddIdentityServices();
+
+services.AddAuthentication(options =>
     {
-        options.Domain = configuration["Auth0:Domain"] ?? string.Empty;
-        options.ClientId = configuration["Auth0:ClientId"] ?? string.Empty;
-    });
+        options.DefaultAuthenticateScheme = "DefaultScheme";
+        options.DefaultChallengeScheme = "DefaultScheme";
+    })
+    .AddScheme<AuthenticationSchemeOptions, DefaultAuthenticationHandler>("DefaultScheme", _ => { });
 
 var app = builder.Build();
 
@@ -75,6 +78,7 @@ app.MapGet("/Account/Logout", async httpContext =>
     await jwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
 });
 
+app.UseAuthorization();
 app.UseHttpsRedirection();
 
 app.UseAntiforgery();

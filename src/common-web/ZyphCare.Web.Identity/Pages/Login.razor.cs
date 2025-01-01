@@ -21,6 +21,7 @@ public partial class Login
     /// </summary>
     [Parameter]
     public string? Code { get; set; }
+    
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
@@ -38,12 +39,11 @@ public partial class Login
                 await JwtAccessor.WriteTokenAsync("refresh_token", refreshToken.GetString()!);
             }
         }
-
-        NavigationManager.NavigateTo("/");
+        
         // ReSharper disable once SuspiciousTypeConversion.Global
-        if (AuthenticationProvider is AccessTokenAuthenticationStateProvider accessTokenAuthenticationStateProvider)
-        {
+        if (AuthenticationStateProvider is AccessTokenAuthenticationStateProvider accessTokenAuthenticationStateProvider)
             accessTokenAuthenticationStateProvider.NotifyAuthenticationStateChanged();
-        }
+        
+        NavigationManager.NavigateTo("/");
     }
 }

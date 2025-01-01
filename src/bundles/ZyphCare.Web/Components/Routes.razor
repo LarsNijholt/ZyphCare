@@ -11,18 +11,23 @@
                 <Authorized>
                     <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)">
                         <NotAuthorized>
-                            @UnauthorizedComponentProvider.GetUnauthorizedComponent()
+                            @{
+                                NavigationManager.NavigateTo("/SignIn");
+                            }
                         </NotAuthorized>
                     </AuthorizeRouteView>
                 </Authorized>
                 <Authorizing>
-                    <SfSkeleton Height="15px" Width="200px"></SfSkeleton><br/>
+                    <SfSkeleton Height="15px" Width="200px"></SfSkeleton>
+                    <br/>
                     <SfSkeleton Height="15px" Width="100px"></SfSkeleton>
                 </Authorizing>
                 <NotAuthorized>
                     <AuthorizeRouteView RouteData="@routeData">
                         <NotAuthorized>
-                            @UnauthorizedComponentProvider.GetUnauthorizedComponent()
+                            @{
+                                NavigationManager.NavigateTo("/SignIn");
+                            }
                         </NotAuthorized>
                     </AuthorizeRouteView>
                 </NotAuthorized>
@@ -44,7 +49,6 @@
 
     [Inject] private IEnumerable<IAspect> Aspects { get; set; } = default!;
     [Inject] private IAspectService AspectService { get; set; } = default!;
-    [Inject] private IUnauthorizedComponentProvider UnauthorizedComponentProvider { get; set; } = default!;
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
 
     [CascadingParameter]

@@ -1,19 +1,28 @@
 @page "/"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+
+@attribute [Authorize]
+
 <h3>Dashboard</h3>
 
-<SfGrid DataSource="@Orders" />
 
 @code{
     public List<Order> Orders { get; set; }
+    
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Orders = Enumerable.Range(1, 5).Select(x => new Order()
-            {
-                OrderID = 0 + x,
-                CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)],
-            }).ToList();
+
+        if (AuthenticationState != null)
+        {
+            var state = await AuthenticationState;
+            Console.WriteLine(state.User.Identity.IsAuthenticated);
+        }
     }
+    
 
     public class Order
     {
