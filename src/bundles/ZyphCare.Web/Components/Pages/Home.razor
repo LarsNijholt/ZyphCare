@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using Syncfusion.Blazor.Grids
 
+@inherits ComponentBase;
+
 <PageTitle>Home</PageTitle>
 
-@* <SfGrid DataSource="Orders"/> *@
+<SfGrid DataSource="Orders"/>
 
 @code{
     public List<Order> Orders { get; set; }

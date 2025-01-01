@@ -15,6 +15,7 @@ public partial class Login
     [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     [Inject] private AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
+    
     /// <summary>
     /// The code retrieved from the Url.
     /// </summary>

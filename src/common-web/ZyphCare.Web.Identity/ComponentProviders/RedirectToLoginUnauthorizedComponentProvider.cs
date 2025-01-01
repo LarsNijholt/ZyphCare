@@ -12,7 +12,6 @@ namespace ZyphCare.Web.Identity.ComponentProviders;
 /// </summary>
 public class RedirectToLoginUnauthorizedComponentProvider : IUnauthorizedComponentProvider
 {
-
     /// <summary>
     /// Retrieves a RenderFragment that represents a component to be displayed
     /// when a user is unauthorized to access a specific resource or component.

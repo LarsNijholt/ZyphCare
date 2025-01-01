@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
+using ZyphCare.Web.Core.Constants;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 using ZyphCare.Web.Extensions;
+using ZyphCare.Web.Identity.Contracts;
 using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,33 +16,31 @@ var services = builder.Services;
 var configuration = builder.Configuration;
 var license = builder.Configuration.GetSection("syncfusion")["license"];
 var auth0Secret = builder.Configuration.GetSection("auth0")["secret"];
-
-services.AddSyncfusionBlazor();
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(license);
-
-services
-    .AddRazorComponents()
-    .AddInteractiveServerComponents();
-
-services.AddServerSideBlazor();
-
 var backendApiConfig = new BackendApiConfig
     {
         ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options),
     };
 
+
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(license);
+
+services
+    .AddSyncfusionBlazor()
+    .AddRazorComponents()
+    .AddInteractiveServerComponents();
+
+services.AddServerSideBlazor();
 services
     .AddMudServices()
+    .AddCore()
+    .AddCascadingAuthenticationState()
+    .AddRemoteBackend(backendApiConfig)
+    .AddIdentityServices()
     .AddAuth0WebAppAuthentication(options =>
     {
         options.Domain = configuration["Auth0:Domain"] ?? string.Empty;
         options.ClientId = configuration["Auth0:ClientId"] ?? string.Empty;
     });
-
-services
-    .AddCore()
-    .AddRemoteBackend(backendApiConfig)
-    .AddIdentityServices();
 
 var app = builder.Build();
 
@@ -57,15 +57,6 @@ else
     Environment.SetEnvironmentVariable("AUTH0_SECRET", auth0Secret);
 }
 
-app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = "/") =>
-{
-    var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-        .WithRedirectUri(returnUrl)
-        .Build();
-    
-    await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-});
-
 app.MapGet("/Account/Logout", async httpContext =>
 {
     var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
@@ -74,6 +65,12 @@ app.MapGet("/Account/Logout", async httpContext =>
 
     await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
     await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+    
+    var serviceProvider = httpContext.RequestServices;
+    var jwtAccessor = serviceProvider.GetRequiredService<IJwtAccessor>();
+
+    await jwtAccessor.RemoveTokenAsync(TokenNames.AccessToken);
+    await jwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
 });
 
 app.UseHttpsRedirection();
