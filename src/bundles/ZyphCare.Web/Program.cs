@@ -1,6 +1,7 @@
 using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
@@ -64,18 +65,14 @@ else
 
 app.MapGet("/Account/Logout", async httpContext =>
 {
-    var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
-        .WithRedirectUri("/")
-        .Build();
-
-    await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-    await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-    
     var serviceProvider = httpContext.RequestServices;
     var jwtAccessor = serviceProvider.GetRequiredService<IJwtAccessor>();
 
     await jwtAccessor.RemoveTokenAsync(TokenNames.AccessToken);
     await jwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
+    
+    var navigationManager = serviceProvider.GetRequiredService<NavigationManager>();
+    navigationManager.NavigateTo("/SignIn");
 });
 
 app.UseAuthorization();
