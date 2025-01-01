@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
+using ZyphCare.Studio.Dashboard.Extensions;
 using ZyphCare.Web.Core.Constants;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
@@ -33,6 +34,7 @@ services.AddServerSideBlazor();
 services
     .AddMudServices()
     .AddCore()
+    .AddStudioDashboard()
     .AddCascadingAuthenticationState()
     .AddRemoteBackend(backendApiConfig)
     .AddIdentityServices()
