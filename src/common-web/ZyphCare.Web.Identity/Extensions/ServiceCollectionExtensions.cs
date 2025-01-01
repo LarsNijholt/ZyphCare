@@ -1,6 +1,8 @@
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using ZyphCare.Web.Core.Contracts;
+using ZyphCare.Web.Identity.ComponentProviders;
 using ZyphCare.Web.Identity.Contracts;
 using ZyphCare.Web.Identity.Services;
 
@@ -24,6 +26,10 @@ public static class ServiceCollectionExtensions
             .AddAuthorizationCore()
             .AddHttpContextAccessor()
             .AddScoped<IAspect, Aspect>()
-            .AddScoped<IAuthenticationProvider, AuthenticationProvider>();
+            .AddScoped<IAuthenticationProvider, AuthenticationProvider>()
+            .AddScoped<IJwtParser, JwtParser>()
+            .AddScoped<IJwtAccessor, JwtAccessor>()
+            .AddScoped<AuthenticationStateProvider, AccessTokenAuthenticationStateProvider>()
+            .AddScoped<IUnauthorizedComponentProvider, RedirectToLoginUnauthorizedComponentProvider>();
     }
 }

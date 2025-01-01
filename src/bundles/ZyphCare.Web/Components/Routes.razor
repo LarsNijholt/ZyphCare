@@ -1,15 +1,16 @@
 ﻿@using System.Reflection
 @using ZyphCare.Web.Components.Layout
 @using ZyphCare.Web.Core.Contracts
+@using ZyphCare.Web.Identity.Extensions
 
 <Router AppAssembly="@(typeof(Routes).Assembly)" AdditionalAssemblies="Assemblies">
     <Found Context="routeData">
         <CascadingAuthenticationState>
             <AuthorizeView Context="_">
                 <Authorized>
-                    <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    <AuthorizeRouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)">
                         <NotAuthorized>
-                            <div>Unauthorized...</div>
+                            @UnauthorizedComponentProvider.GetUnauthorizedComponent()
                         </NotAuthorized>
                     </AuthorizeRouteView>
                 </Authorized>
@@ -21,13 +22,12 @@
                 <NotAuthorized>
                     <AuthorizeRouteView RouteData="@routeData">
                         <NotAuthorized>
-                            <div>Unauthorized...</div>
+                            @UnauthorizedComponentProvider.GetUnauthorizedComponent()
                         </NotAuthorized>
                     </AuthorizeRouteView>
                 </NotAuthorized>
             </AuthorizeView>
         </CascadingAuthenticationState>
-        <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
     <NotFound>
@@ -41,10 +41,11 @@
 
 @code
 {
+    private IEnumerable<Assembly> Assemblies { get; set; } = default!;
+    
     [Inject] private IEnumerable<IAspect> Aspects { get; set; } = default!;
     [Inject] private IAspectService AspectService { get; set; } = default!;
-    
-    private IEnumerable<Assembly> Assemblies { get; set; } = default!;
+    [Inject] private IUnauthorizedComponentProvider UnauthorizedComponentProvider { get; set; } = default!;
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
@@ -58,13 +59,11 @@
     /// <inheritdoc />
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await AspectService.InitializeAspectsAsync();
-        // if (AuthenticationState != null)
-        // {
-        //     var authState = await AuthenticationState;
-        //     if (authState.User.Identity?.IsAuthenticated == true)
-        //         
-        //
-        // }
+        if (AuthenticationState != null)
+        {
+            var authState = await AuthenticationState;
+            if (authState.User.Identity?.IsAuthenticated == true && !authState.User.Claims.IsExpired())
+                await AspectService.InitializeAspectsAsync();
+        }
     }
 }

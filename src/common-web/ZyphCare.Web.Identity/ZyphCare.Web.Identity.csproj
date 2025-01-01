@@ -2,7 +2,13 @@
 
     <ItemGroup>
       <PackageReference Include="Blazored.Localstorage" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" />
+      <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
         <PackageReference Include="Microsoft.AspNetCore.WebUtilities" />
+        <PackageReference Include="MudBlazor" />
+        <PackageReference Include="Syncfusion.Blazor.Buttons" />
+        <PackageReference Include="Syncfusion.Blazor.Themes" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
     </ItemGroup>
 
     <ItemGroup>
