@@ -1,15 +1,12 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Components;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
 using ZyphCare.Studio.Dashboard.Extensions;
-using ZyphCare.Web.Core.Constants;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 using ZyphCare.Web.Extensions;
 using ZyphCare.Web.Handlers;
-using ZyphCare.Web.Identity.Contracts;
 using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

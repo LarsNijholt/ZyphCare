@@ -19,6 +19,9 @@ public interface IUserApi
     [Get("/users")]
     Task<PagedListResponse<User>> ListAsync([Query] ListUserRequest request, CancellationToken cancellationToken = default);
     
+    [Get("/users/by-auth-id/{authId}")]
+    Task<User?> GetWithAuth0IdAsync([Query] string authId, CancellationToken cancellationToken = default);
+    
     [Post("/users")]
     Task PostAsync(PostUserRequest request, CancellationToken cancellationToken = default);
 }
