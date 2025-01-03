@@ -3,12 +3,12 @@
 namespace ZyphCare.EntityFramework.Common.Extensions;
 
 /// <summary>
-///     Provides extension methods for <see cref="Expression{TDelegate}" /> objects.
+/// Provides extension methods for <see cref="Expression{TDelegate}" /> objects.
 /// </summary>
 public static class ExpressionsExtensions
 {
     /// <summary>
-    ///     Builds an expression that checks if the specified property is contained in the specified list of entities.
+    /// Builds an expression that checks if the specified property is contained in the specified list of entities.
     /// </summary>
     /// <param name="keySelector">The key selector.</param>
     /// <param name="entities">The entities.</param>
@@ -32,7 +32,7 @@ public static class ExpressionsExtensions
     }
 
     /// <summary>
-    ///     Builds an expression that checks if the specified property is equal to the specified entity's property.
+    /// Builds an expression that checks if the specified property is equal to the specified entity's property.
     /// </summary>
     /// <param name="keySelector">The key selector.</param>
     /// <param name="entity">The entity.</param>

@@ -4,12 +4,12 @@ using System.Reflection;
 namespace ZyphCare.EntityFramework.Common.Extensions;
 
 /// <summary>
-///     Provides extension methods for working with property accessors.
+/// Provides extension methods for working with property accessors.
 /// </summary>
 public static class PropertyAccessorExtensions
 {
     /// <summary>
-    ///     Sets the value of the property referenced by the expression.
+    /// Sets the value of the property referenced by the expression.
     /// </summary>
     /// <param name="target">The target on which to set the property value.</param>
     /// <param name="propertyName">The name of the property.</param>
@@ -21,7 +21,7 @@ public static class PropertyAccessorExtensions
     }
 
     /// <summary>
-    ///     Sets the value of the property referenced by the expression.
+    /// Sets the value of the property referenced by the expression.
     /// </summary>
     /// <param name="target">The target on which to set the property value.</param>
     /// <param name="expression">The expression.</param>
@@ -38,7 +38,7 @@ public static class PropertyAccessorExtensions
     }
 
     /// <summary>
-    ///     Gets the value of the property referenced by the expression.
+    /// Gets the value of the property referenced by the expression.
     /// </summary>
     /// <param name="target">The target from which to get the property value.</param>
     /// <param name="expression">The expression.</param>
@@ -52,7 +52,7 @@ public static class PropertyAccessorExtensions
     }
 
     /// <summary>
-    ///     Gets the name of the property referenced by the expression.
+    /// Gets the name of the property referenced by the expression.
     /// </summary>
     /// <param name="expression">The expression.</param>
     /// <typeparam name="T">The type of the object containing the property.</typeparam>
@@ -64,7 +64,7 @@ public static class PropertyAccessorExtensions
     }
 
     /// <summary>
-    ///     Gets the property referenced by the expression.
+    /// Gets the property referenced by the expression.
     /// </summary>
     /// <param name="expression">The expression.</param>
     /// <typeparam name="T">The type of the object containing the property.</typeparam>

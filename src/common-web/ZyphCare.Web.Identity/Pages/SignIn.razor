@@ -1,0 +1,24 @@
+@page "/SignIn"
+
+@using ZyphCare.Web.Identity.Layouts
+@using Microsoft.AspNetCore.Components.Web
+@using Syncfusion.Blazor.Buttons
+@using ZyphCare.Web.Core.Constants
+
+@layout LoginLayout;
+@inherits ComponentBase;
+
+
+<PageTitle>ZyphCare | Sign In</PageTitle>
+
+<SfButton IsPrimary="true" @onclick="@OnLoginClicked">Login</SfButton>
+
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    
+    private void OnLoginClicked()
+    {
+        NavigationManager.NavigateTo($"{UrlConstants.Auth0Login}");
+    }
+}

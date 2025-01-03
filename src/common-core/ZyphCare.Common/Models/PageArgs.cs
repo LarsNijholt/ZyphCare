@@ -1,5 +1,9 @@
 namespace ZyphCare.Common.Models;
 
+/// <summary>
+/// Represents the arguments required for pagination, allowing the specification
+/// of offset and limit or computation of pagination based on page number and size.
+/// </summary>
 public record PageArgs
 {
     /// <summary>

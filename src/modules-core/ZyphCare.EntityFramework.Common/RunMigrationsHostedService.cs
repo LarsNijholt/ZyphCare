@@ -19,7 +19,6 @@ public class RunMigrationsHostedService<TDbContext> : IHostedService where TDbCo
         _scopeFactory = scopeFactory;
     }
 
-
     /// <inheritdoc />
     public async Task StartAsync(CancellationToken cancellationToken)
     {

@@ -10,7 +10,7 @@ namespace ZyphCare.Users.Contracts;
 public interface IUserEntityStore
 {
     /// <summary>
-    /// Finds a user user using the specified userFilter.
+    /// Finds a user using the specified userFilter.
     /// </summary>
     /// <param name="userFilter">the userFilter.</param>
     /// <param name="cancellationToken">the cancellation token.</param>
@@ -18,7 +18,7 @@ public interface IUserEntityStore
         CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Finds a user user using the specified filter and order.
+    /// Finds a user using the specified filter and order.
     /// </summary>
     /// <param name="filter">The filter.</param>
     /// <param name="order">The order.</param>

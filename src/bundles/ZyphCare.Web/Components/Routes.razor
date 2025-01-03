@@ -1,6 +1,73 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
+﻿@using System.Reflection
+@using ZyphCare.Web.Components.Layout
+@using ZyphCare.Web.Core.Contracts
+@using ZyphCare.Web.Identity.Extensions
+@using Syncfusion.Blazor.Notifications
+
+<Router AppAssembly="@typeof(Routes).Assembly" AdditionalAssemblies="@Assemblies">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+        <CascadingAuthenticationState>
+            <AuthorizeView Context="_">
+                <Authorized>
+                    <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)">
+                        <NotAuthorized>
+                            @{
+                                NavigationManager.NavigateTo("/SignIn");
+                            }
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </Authorized>
+                <Authorizing>
+                    <SfSkeleton Height="15px" Width="200px"></SfSkeleton>
+                    <br/>
+                    <SfSkeleton Height="15px" Width="100px"></SfSkeleton>
+                </Authorizing>
+                <NotAuthorized>
+                    <AuthorizeRouteView RouteData="@routeData">
+                        <NotAuthorized>
+                            @{
+                                NavigationManager.NavigateTo("/SignIn");
+                            }
+                        </NotAuthorized>
+                    </AuthorizeRouteView>
+                </NotAuthorized>
+            </AuthorizeView>
+        </CascadingAuthenticationState>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
+    <NotFound>
+        <PageTitle>Not found | ZyphCare</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p role="alert">Sorry, there's nothing at this address.</p>
+        </LayoutView>
+    </NotFound>
 </Router>
+
+@code
+{
+    private IEnumerable<Assembly> Assemblies { get; set; } = default!;
+
+    [Inject] private IEnumerable<IAspect> Aspects { get; set; } = default!;
+    [Inject] private IAspectService AspectService { get; set; } = default!;
+    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        Assemblies = Aspects.Select(x => x.GetType().Assembly).Distinct().ToList();
+    }
+
+    /// <inheritdoc />
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (AuthenticationState != null)
+        {
+            var authState = await AuthenticationState;
+            if (authState.User.Identity?.IsAuthenticated == true && !authState.User.Claims.IsExpired())
+                await AspectService.InitializeAspectsAsync();
+        }
+    }
+}

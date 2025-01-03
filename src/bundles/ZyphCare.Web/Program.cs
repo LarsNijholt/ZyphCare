@@ -1,31 +1,47 @@
-using Auth0.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
+using ZyphCare.Studio.Dashboard.Extensions;
+using ZyphCare.Web.Core.Extensions;
+using ZyphCare.Web.Core.Models;
+using ZyphCare.Web.Extensions;
+using ZyphCare.Web.Handlers;
+using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 var license = builder.Configuration.GetSection("syncfusion")["license"];
+var auth0Secret = builder.Configuration.GetSection("auth0")["secret"];
+var backendApiConfig = new BackendApiConfig
+    {
+        ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options),
+    };
 
-services.AddSyncfusionBlazor();
+
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(license);
 
 services
+    .AddSyncfusionBlazor()
     .AddRazorComponents()
     .AddInteractiveServerComponents();
 
 services.AddServerSideBlazor();
-
 services
     .AddMudServices()
-    .AddAuth0WebAppAuthentication(options =>
+    .AddCore()
+    .AddStudioDashboard()
+    .AddCascadingAuthenticationState()
+    .AddRemoteBackend(backendApiConfig)
+    .AddIdentityServices();
+
+services.AddAuthentication(options =>
     {
-        options.Domain = configuration["Auth0:Domain"] ?? string.Empty;
-        options.ClientId = configuration["Auth0:ClientId"] ?? string.Empty;
-    });
+        options.DefaultAuthenticateScheme = "DefaultScheme";
+        options.DefaultChallengeScheme = "DefaultScheme";
+    })
+    .AddScheme<AuthenticationSchemeOptions, DefaultAuthenticationHandler>("DefaultScheme", _ => { });
 
 var app = builder.Build();
 
@@ -36,32 +52,19 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.MapGet("/Account/Login", async (HttpContext httpContext, string returnUrl = "/") =>
+else
 {
-    var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-        .WithRedirectUri(returnUrl)
-        .Build();
+    app.UseDeveloperExceptionPage();
+    Environment.SetEnvironmentVariable("AUTH0_SECRET", auth0Secret);
+}
 
-    await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-});
-
-app.MapGet("/Account/Logout", async httpContext =>
-{
-    var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
-        .WithRedirectUri("/")
-        .Build();
-
-    await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-    await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-});
-
+app.UseAuthorization();
 app.UseHttpsRedirection();
-
 
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+var conventionBuilder = app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+app.AddRouting(conventionBuilder);
 
 app.Run();
