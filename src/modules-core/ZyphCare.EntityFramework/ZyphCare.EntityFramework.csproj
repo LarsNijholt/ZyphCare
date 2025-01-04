@@ -2,7 +2,10 @@
     
 <ItemGroup>
   <ProjectReference Include="..\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj" />
-  <ProjectReference Include="..\ZyphCare.Users\ZyphCare.Users.csproj" />
+</ItemGroup>
+    
+<ItemGroup>
+  <Folder Include="Units\" />
 </ItemGroup>
 
 

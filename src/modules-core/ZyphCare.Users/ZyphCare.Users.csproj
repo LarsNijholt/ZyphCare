@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\common-core\ZyphCare.Common\ZyphCare.Common.csproj" />
-      <ProjectReference Include="..\ZyphCare.EntityFramework.Common\ZyphCare.EntityFramework.Common.csproj" />
-    </ItemGroup>
-
-</Project>

@@ -29,4 +29,8 @@
       <ProjectReference Include="..\..\modules-core\ZyphCare.EntityFramework\ZyphCare.EntityFramework.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Units\" />
+    </ItemGroup>
+
 </Project>

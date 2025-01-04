@@ -1,17 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using ZyphCare.EntityFramework.Common.Abstractions;
-using ZyphCare.EntityFramework.Units.Users;
 
 namespace ZyphCare.EntityFramework.Sqlite;
 
-/// <summary>
-/// A factory for creating instances of the <see cref="UserZyphCareDbContext"/> during design-time for SQLite.
-/// This factory is primarily used by EF Core tools, such as migrations, to provide a DbContext
-/// configured with a SQLite database connection and associated options.
-/// </summary>
-public class ReportDbContextFactory : SqliteDesignTimeDbContextFactory<UserZyphCareDbContext>
-{
-}
+
 
 /// <summary>
 /// A factory for creating instances of a specified <see cref="DbContext"/> implementation
