@@ -20,6 +20,22 @@ public abstract class ZyphCareEndpointWithMapper<TRequest, TMapper> : EndpointWi
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
     }
+    
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
+    }
 }
 
 /// <inheritdoc />
@@ -39,6 +55,22 @@ public abstract class ZyphCareEndpointWithoutRequest : EndpointWithoutRequest
             AllowAnonymous();
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
+    }
+    
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
     }
 }
 
@@ -60,6 +92,22 @@ public abstract class ZyphCareEndpointWithoutRequest<TResponse> : EndpointWithou
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
     }
+    
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
+    }
 }
 
 /// <inheritdoc />
@@ -79,6 +127,22 @@ public class ZyphCareEndpoint<TRequest, TResponse> : Endpoint<TRequest, TRespons
             AllowAnonymous();
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
+    }
+
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
     }
 }
 
@@ -119,5 +183,21 @@ public class ZyphCareEndpoint<TRequest> : Endpoint<TRequest> where TRequest : no
             AllowAnonymous();
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
+    }
+
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
     }
 }

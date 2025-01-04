@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using ZyphCare.Web.Core.Contracts;
 using ZyphCare.Web.Identity.Contracts;
+using ZyphCare.Web.Identity.Options;
 using ZyphCare.Web.Identity.Services;
 
 namespace ZyphCare.Web.Identity.Extensions;
@@ -17,10 +18,12 @@ public static class ServiceCollectionExtensions
     /// Registers identity-related services, including authentication providers, into the service collection.
     /// </summary>
     /// <param name="services">The service collection to which the identity services will be added.</param>
+    /// <param name="options">The identity options.</param>
     /// <returns>The updated service collection with identity services registered.</returns>
-    public static IServiceCollection AddIdentityServices(this IServiceCollection services)
+    public static IServiceCollection AddIdentityServices(this IServiceCollection services, Action<ZyphCareIdentityOptions> options)
     {
         return services
+            .Configure(options)
             .AddBlazoredLocalStorage()
             .AddAuthorizationCore()
             .AddHttpContextAccessor()

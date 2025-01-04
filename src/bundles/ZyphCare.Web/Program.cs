@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 var license = builder.Configuration.GetSection("syncfusion")["license"];
-var auth0Secret = builder.Configuration.GetSection("auth0")["secret"];
+var auth0Secret = builder.Configuration.GetRequiredSection("auth0");
 var backendApiConfig = new BackendApiConfig
     {
         ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options),
@@ -34,7 +34,7 @@ services
     .AddStudioDashboard()
     .AddCascadingAuthenticationState()
     .AddRemoteBackend(backendApiConfig)
-    .AddIdentityServices();
+    .AddIdentityServices(options => auth0Secret.Bind(options));
 
 services.AddAuthentication(options =>
     {
@@ -55,7 +55,6 @@ if (!app.Environment.IsDevelopment())
 else
 {
     app.UseDeveloperExceptionPage();
-    Environment.SetEnvironmentVariable("AUTH0_SECRET", auth0Secret);
 }
 
 app.UseAuthorization();

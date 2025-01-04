@@ -1,4 +1,6 @@
 @page "/"
+@using System.Security.Claims
+@using Microsoft.AspNet.Identity
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @using Syncfusion.Blazor.Buttons
@@ -12,21 +14,36 @@
 <SfButton @onclick="LogOut">LogOut</SfButton>
 
 @code{
-    public List<Order> Orders { get; set; }
 
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
-    
+    [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
+
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
 
+    /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
+        if (AuthenticationState == null) 
+            return;
 
-        if (AuthenticationState != null)
+        var state = await AuthenticationState;
+        var role = state.User.Identities.First().FindFirstValue(ClaimTypes.Role);
+
+        if (!string.IsNullOrEmpty(role)) 
+            return;
+
+        var refreshToken = await JwtAccessor.ReadTokenAsync(TokenNames.RefreshToken);
+
+        if (string.IsNullOrEmpty(refreshToken)) 
+            return;
+
+        var accessToken = await AuthenticationProvider.GetAccessTokenByRefreshTokenAsync(refreshToken);
+
+        if (!string.IsNullOrEmpty(accessToken))
         {
-            var state = await AuthenticationState;
-            Console.WriteLine(state.User.Identity.IsAuthenticated);
+            await JwtAccessor.WriteTokenAsync(TokenNames.AccessToken, accessToken);
         }
     }
 
@@ -37,11 +54,4 @@
         NavigationManager.NavigateTo("https://dev-g2gar2vb3zazyj0s.us.auth0.com/v2/logout?client_id=uYjZgtRicwlVkRR6WW9N3DqHw8C7EmAT&returnTo=https://localhost:7184/SignIn");
     }
     
-
-    public class Order
-    {
-        public int? OrderID { get; set; }
-        public string CustomerID { get; set; }
-
-    }
 }

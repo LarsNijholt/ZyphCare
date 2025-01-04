@@ -26,11 +26,10 @@ public partial class Login
     protected override async Task OnInitializedAsync()
     {
         var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-        var secret = Environment.GetEnvironmentVariable("AUTH0_SECRET");
 
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("code", out var codeValue))
         {
-            var jwt = await AuthenticationProvider.GetAccessTokenAsync(codeValue!, secret!);
+            var jwt = await AuthenticationProvider.GetAccessTokenAsync(codeValue!);
             var tokens = JsonSerializer.Deserialize<JsonElement>(jwt);
 
             if (tokens.TryGetProperty("access_token", out var accessToken) && tokens.TryGetProperty("refresh_token", out var refreshToken))

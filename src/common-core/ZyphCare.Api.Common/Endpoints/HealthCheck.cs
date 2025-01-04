@@ -11,7 +11,7 @@ public class HealthCheck : ZyphCareEndpoint<Request, Response>
     public override void Configure()
     {
         Get("/health");
-        ConfigurePermissions("read:health");
+        ConfigureRoles("admin");
     }
 
     /// <inheritdoc />

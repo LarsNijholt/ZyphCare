@@ -13,5 +13,17 @@ public interface IAuthenticationProvider
     /// A task that represents the asynchronous operation, containing the access token as a string
     /// if successful, or null if the token could not be retrieved.
     /// </returns>
-    Task<string> GetAccessTokenAsync(string code, string secret);
+    Task<string> GetAccessTokenAsync(string code);
+
+    /// <summary>
+    /// Asynchronously retrieves a new access token using the provided refresh token.
+    /// </summary>
+    /// <param name="refreshToken">
+    /// The refresh token used to obtain a new access token.
+    /// </param>
+    /// <returns>
+    /// A task that represents the asynchronous operation, containing the new access token as a string
+    /// if successful, or null if the token could not be retrieved.
+    /// </returns>
+    Task<string?> GetAccessTokenByRefreshTokenAsync(string refreshToken);
 }
