@@ -13,6 +13,9 @@ public class Configurations : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasIndex(x => new { x.Auth0Id }).HasDatabaseName($"IX_{nameof(User)}_{nameof(User.Auth0Id)}").IsUnique();
-        builder.HasIndex(x => x.Role).HasDatabaseName($"IX_{nameof(User)}_{nameof(User.Role)}");
+        builder.HasIndex(x => new { x.FirstName }).HasDatabaseName($"IX_{nameof(User)}_{nameof(User.FirstName)}");
+        builder.HasIndex(x => new { x.LastName }).HasDatabaseName($"IX_{nameof(User)}_{nameof(User.LastName)}");
+        builder.HasIndex(x => new { x.BloodType }).HasDatabaseName($"IX_{nameof(User)}_{nameof(User.BloodType)}");
+
     }
 }

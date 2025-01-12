@@ -47,7 +47,6 @@ public class Endpoint : ZyphCareEndpoint<Request>
             {
                 Id = Guid.NewGuid().ToString(),
                 Auth0Id = req.Auth0Id,
-                Role = req.Role,
             };
 
         await _userEntityStore.SaveAsync(user, ct);

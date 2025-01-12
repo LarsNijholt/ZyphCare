@@ -21,11 +21,25 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Auth0Id")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Role")
+                    b.Property<int>("BloodType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -35,8 +49,14 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations
                         .IsUnique()
                         .HasDatabaseName("IX_User_Auth0Id");
 
-                    b.HasIndex("Role")
-                        .HasDatabaseName("IX_User_Role");
+                    b.HasIndex("BloodType")
+                        .HasDatabaseName("IX_User_BloodType");
+
+                    b.HasIndex("FirstName")
+                        .HasDatabaseName("IX_User_FirstName");
+
+                    b.HasIndex("LastName")
+                        .HasDatabaseName("IX_User_LastName");
 
                     b.ToTable("Users");
                 });

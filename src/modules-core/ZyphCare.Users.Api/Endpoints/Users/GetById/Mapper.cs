@@ -14,6 +14,5 @@ public class Mapper : ResponseMapper<Response, User>
     /// <inheritdoc />
     public override Task<Response> FromEntityAsync(User user, CancellationToken ct = new CancellationToken()) => Task.FromResult(new Response(
     user.Id,
-    user.Auth0Id,
-    user.Role));
+    user.Auth0Id));
 }

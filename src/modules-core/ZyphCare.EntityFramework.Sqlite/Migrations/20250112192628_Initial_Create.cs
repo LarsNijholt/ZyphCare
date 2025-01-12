@@ -16,7 +16,11 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Auth0Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Role = table.Column<string>(type: "TEXT", nullable: false)
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Sex = table.Column<string>(type: "TEXT", nullable: false),
+                    Age = table.Column<int>(type: "INTEGER", nullable: false),
+                    BloodType = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,9 +34,19 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_Role",
+                name: "IX_User_BloodType",
                 table: "Users",
-                column: "Role");
+                column: "BloodType");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_FirstName",
+                table: "Users",
+                column: "FirstName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_LastName",
+                table: "Users",
+                column: "LastName");
         }
 
         /// <inheritdoc />

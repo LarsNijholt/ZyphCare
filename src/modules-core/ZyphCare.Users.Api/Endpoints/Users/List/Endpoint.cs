@@ -48,8 +48,6 @@ public class Endpoint : ZyphCareEndpoint<Request, PagedListResponse<Response>, M
                 Ids = request.Ids,
                 Auth0Id = request.Auth0Id,
                 Auth0Ids = request.Auth0Ids,
-                Role = request.Role,
-                Roles = request.Roles,
             };
     }
 }

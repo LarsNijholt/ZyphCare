@@ -1,4 +1,7 @@
 using ZyphCare.EntityFramework.Common.Entities;
+using ZyphCare.Users.Models;
+
+// ReSharper disable EntityFramework.ModelValidation.UnlimitedStringLength
 
 namespace ZyphCare.Users.Entities;
 
@@ -13,7 +16,27 @@ public class User : Entity
     public string Auth0Id { get; set; } = default!;
 
     /// <summary>
-    /// The role of the user.
+    /// The first name of the user.
     /// </summary>
-    public string Role { get; set; } = default!;
+    public string FirstName { get; set; } = default!;
+
+    /// <summary>
+    /// The last name of the user.
+    /// </summary>
+    public string LastName { get; set; } = default!;
+
+    /// <summary>
+    /// Represents the gender of the user.
+    /// </summary>
+    public string Sex { get; set; } = default!;
+
+    /// <summary>
+    /// The age of the user.
+    /// </summary>
+    public int Age { get; set; }
+
+    /// <summary>
+    /// The blood type of the user, based on the ABO and Rh factor classification.
+    /// </summary>
+    public BloodTypes BloodType { get; set; }
 }
