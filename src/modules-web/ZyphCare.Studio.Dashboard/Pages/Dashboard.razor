@@ -3,14 +3,16 @@
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor
 @using Syncfusion.Blazor.Buttons
 @using ZyphCare.Web.Core.Constants
 @using ZyphCare.Web.Identity.Contracts
 @using Syncfusion.Blazor.Layouts
+@using ZyphCare.Studio.Dashboard.Components
 
 @attribute [Authorize]
 
-<SfDashboardLayout CellSpacing="@(new double[]{20 ,20 })" Columns="5" MediaQuery="max-width:700px">
+<SfDashboardLayout CellSpacing="@(new double[] { 20, 20 })" Columns="5" MediaQuery="max-width:700px">
     <DashboardLayoutPanels>
         <DashboardLayoutPanel>
             <ContentTemplate>
@@ -20,13 +22,19 @@
             </ContentTemplate>
         </DashboardLayoutPanel>
         <DashboardLayoutPanel SizeX=2 SizeY=2 Column=1>
-            <ContentTemplate><div>1</div></ContentTemplate>
+            <ContentTemplate>
+                <div>1</div>
+            </ContentTemplate>
         </DashboardLayoutPanel>
         <DashboardLayoutPanel SizeY=2 Column=3>
-            <ContentTemplate><div>2</div></ContentTemplate>
+            <ContentTemplate>
+                <div>2</div>
+            </ContentTemplate>
         </DashboardLayoutPanel>
         <DashboardLayoutPanel Row=1>
-            <ContentTemplate><div>3</div></ContentTemplate>
+            <ContentTemplate>
+                <div>3</div>
+            </ContentTemplate>
         </DashboardLayoutPanel>
     </DashboardLayoutPanels>
 </SfDashboardLayout>
@@ -43,6 +51,7 @@
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
+    [Inject] private IDialogService DialogService { get; set; }
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
@@ -50,18 +59,18 @@
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
-        if (AuthenticationState == null) 
+        if (AuthenticationState == null)
             return;
 
         var state = await AuthenticationState;
         var role = state.User.Identities.First().FindFirstValue(ClaimTypes.Role);
 
-        if (!string.IsNullOrEmpty(role)) 
+        if (!string.IsNullOrEmpty(role))
             return;
 
         var refreshToken = await JwtAccessor.ReadTokenAsync(TokenNames.RefreshToken);
 
-        if (string.IsNullOrEmpty(refreshToken)) 
+        if (string.IsNullOrEmpty(refreshToken))
             return;
 
         var accessToken = await AuthenticationProvider.GetAccessTokenByRefreshTokenAsync(refreshToken);
@@ -72,11 +81,23 @@
         }
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var options = new DialogOptions
+            {
+                BackdropClick = false,
+                CloseOnEscapeKey = false,
+                FullScreen = true
+            };
+
+        await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
+    }
+
     private async Task LogOut()
     {
         await JwtAccessor.RemoveTokenAsync(TokenNames.AccessToken);
         await JwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
         NavigationManager.NavigateTo("https://dev-g2gar2vb3zazyj0s.us.auth0.com/v2/logout?client_id=uYjZgtRicwlVkRR6WW9N3DqHw8C7EmAT&returnTo=https://localhost:7184/SignIn");
     }
-    
+
 }
