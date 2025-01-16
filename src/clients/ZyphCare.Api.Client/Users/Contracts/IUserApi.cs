@@ -2,6 +2,7 @@ using Refit;
 using ZyphCare.Api.Client.Shared.Models;
 using ZyphCare.Api.Client.Users.Models;
 using ZyphCare.Api.Client.Users.Requests;
+using ZyphCare.Api.Client.Users.Requests.Users;
 
 namespace ZyphCare.Api.Client.Users.Contracts;
 

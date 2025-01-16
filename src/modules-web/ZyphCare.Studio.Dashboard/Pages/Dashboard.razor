@@ -8,7 +8,10 @@
 @using ZyphCare.Web.Core.Constants
 @using ZyphCare.Web.Identity.Contracts
 @using Syncfusion.Blazor.Layouts
+@using ZyphCare.Api.Client.Users.Contracts
+@using ZyphCare.Api.Client.Users.Requests.Users
 @using ZyphCare.Studio.Dashboard.Components
+@using ZyphCare.Web.Core.Services
 
 @attribute [Authorize]
 
@@ -49,6 +52,7 @@
 @code{
 
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] private DefaultBackendApiClientProvider ApiClientProvider { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
     [Inject] private IDialogService DialogService { get; set; }
@@ -81,6 +85,7 @@
         }
     }
 
+    /// <inheritdoc />
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         var options = new DialogOptions
@@ -90,7 +95,13 @@
                 FullScreen = true
             };
 
-        await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
+        var dialog = await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
+        var result = await dialog.Result;
+        if (result?.Data is PostUserRequest postUserRequest)
+        {
+            var userApi = await ApiClientProvider.GetApiAsync<IUserApi>(CancellationToken.None);
+            await userApi.PostAsync(postUserRequest, CancellationToken.None);
+        }
     }
 
     private async Task LogOut()

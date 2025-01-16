@@ -1,17 +1,62 @@
 @using MudBlazor
+@using ZyphCare.Api.Client.Users.Requests.Users
 
 <MudDialog>
     <TitleContent>Your data</TitleContent>
     <DialogContent>
-        <MudText>Hello There!</MudText>
+        <MudForm>
+            <MudTextField @bind-Value="FirstName" Label="First Name" Required="true"/>
+            <MudTextField @bind-Value="LastName" Label="Last Name" Required="true"/>
+            <MudSelect @bind-Value="Sex" Label="Sex" Required="true">
+                @foreach (var sex in _sexOptions)
+                {
+                    <MudSelectItem Value="sex">@sex</MudSelectItem>
+                }
+            </MudSelect>
+            <MudDatePicker @bind-Date="DateOfBirth" Label="Date of Birth" Required="true"/>
+            <MudTextField @bind-Value="PhoneNumber" Label="PhoneNumber" Required="true"/>
+            <MudTextField @bind-Value="AddressLine" Label="Address" Required="true"/>
+            <MudTextField @bind-Value="City" Label="City" Required="true"/>
+            <MudTextField @bind-Value="PostalCode" Label="Postal Code" Required="true"/>
+            <MudTextField @bind-Value="Country" Label="Country" Required="true"/>
+            <MudButton Color="Color.Primary" OnClick="Submit">Submit</MudButton>
+        </MudForm>
     </DialogContent>
 </MudDialog>
 
 @code {
+    private string FirstName { get; set; } = "";
+    private string LastName { get; set; } = "";
+    private string Sex { get; set; } = "";
+    private DateTime? DateOfBirth { get; set; }
+    private string PhoneNumber { get; set; } = "";
+    private string AddressLine { get; set; } = "";
+    private string City { get; set; } = "";
+    private string PostalCode { get; set; } = "";
+    private string Country { get; set; } = "";
 
+    private readonly string[] _sexOptions = ["Male", "Female", "Other"];
+
+    
     [CascadingParameter]
     private MudDialogInstance MudDialog { get; set; }
     
-    
+    private void Submit()
+    {
+        var postUserRequest = new PostUserRequest
+            {
+                FirstName = FirstName,
+                LastName = LastName,
+                Sex = Sex,
+                DateOfBirth = (DateTime)DateOfBirth!,
+                PhoneNumber = PhoneNumber,
+                AddressLine = AddressLine,
+                City = City,
+                PostalCode = PostalCode,
+                Country = Country
+            };
+        
+        MudDialog.Close(postUserRequest);
+    }
 
 }

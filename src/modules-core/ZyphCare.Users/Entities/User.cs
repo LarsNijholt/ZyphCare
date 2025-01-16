@@ -31,12 +31,37 @@ public class User : Entity
     public string Sex { get; set; } = default!;
 
     /// <summary>
-    /// The age of the user.
+    /// The date of birth of the user.
     /// </summary>
-    public int Age { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    
+    /// <summary>
+    /// The user's phone number.
+    /// </summary>
+    public string PhoneNumber { get; set; } = default!;
+
+    /// <summary>
+    /// The street address information associated with the user.
+    /// </summary>
+    public string AddressLine { get; set; } = default!;
+
+    /// <summary>
+    /// The city in which the user resides.
+    /// </summary>
+    public string City { get; set; } = default!;
+
+    /// <summary>
+    /// The postal code associated with the user's address.
+    /// </summary>
+    public string PostalCode { get; set; } = default!;
+
+    /// <summary>
+    /// The country associated with the user's address.
+    /// </summary>
+    public string Country { get; set; } = default!;
 
     /// <summary>
     /// The blood type of the user, based on the ABO and Rh factor classification.
     /// </summary>
-    public BloodTypes BloodType { get; set; }
+    public BloodTypes? BloodType { get; set; }
 }
