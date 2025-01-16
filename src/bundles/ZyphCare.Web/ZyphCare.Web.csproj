@@ -47,6 +47,9 @@
         <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map"/>
         <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js"/>
         <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map"/>
+        <_ContentIncludedByDefault Remove="Components\Pages\Counter.razor" />
+        <_ContentIncludedByDefault Remove="Components\Pages\Error.razor" />
+        <_ContentIncludedByDefault Remove="Components\Pages\Weather.razor" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="MudBlazor"/>

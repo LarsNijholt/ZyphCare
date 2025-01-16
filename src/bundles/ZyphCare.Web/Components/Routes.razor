@@ -6,7 +6,6 @@
 
 <Router AppAssembly="@typeof(Routes).Assembly" AdditionalAssemblies="@Assemblies">
     <Found Context="routeData">
-        <CascadingAuthenticationState>
             <AuthorizeView Context="_">
                 <Authorized>
                     <AuthorizeRouteView RouteData="routeData" DefaultLayout="@typeof(MainLayout)">
@@ -32,7 +31,6 @@
                     </AuthorizeRouteView>
                 </NotAuthorized>
             </AuthorizeView>
-        </CascadingAuthenticationState>
         <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
     <NotFound>
