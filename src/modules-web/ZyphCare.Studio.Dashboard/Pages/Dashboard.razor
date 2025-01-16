@@ -60,12 +60,6 @@
     private Task<AuthenticationState>? AuthenticationState { get; set; }
 
     /// <inheritdoc />
-    protected override async Task OnInitializedAsync()
-    {
-        
-    }
-
-    /// <inheritdoc />
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
