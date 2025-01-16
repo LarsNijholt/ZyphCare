@@ -11,7 +11,7 @@
 @using ZyphCare.Api.Client.Users.Contracts
 @using ZyphCare.Api.Client.Users.Requests.Users
 @using ZyphCare.Studio.Dashboard.Components
-@using ZyphCare.Web.Core.Services
+@using ZyphCare.Web.Core.Contracts
 
 @attribute [Authorize]
 
@@ -50,9 +50,8 @@
 </style>
 
 @code{
-
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
-    [Inject] private DefaultBackendApiClientProvider ApiClientProvider { get; set; } = default!;
+    [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
     [Inject] private IDialogService DialogService { get; set; }
@@ -63,45 +62,55 @@
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
     {
-        if (AuthenticationState == null)
-            return;
-
-        var state = await AuthenticationState;
-        var role = state.User.Identities.First().FindFirstValue(ClaimTypes.Role);
-
-        if (!string.IsNullOrEmpty(role))
-            return;
-
-        var refreshToken = await JwtAccessor.ReadTokenAsync(TokenNames.RefreshToken);
-
-        if (string.IsNullOrEmpty(refreshToken))
-            return;
-
-        var accessToken = await AuthenticationProvider.GetAccessTokenByRefreshTokenAsync(refreshToken);
-
-        if (!string.IsNullOrEmpty(accessToken))
-        {
-            await JwtAccessor.WriteTokenAsync(TokenNames.AccessToken, accessToken);
-        }
+        
     }
 
     /// <inheritdoc />
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var options = new DialogOptions
-            {
-                BackdropClick = false,
-                CloseOnEscapeKey = false,
-                FullScreen = true
-            };
-
-        var dialog = await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
-        var result = await dialog.Result;
-        if (result?.Data is PostUserRequest postUserRequest)
+        if (firstRender)
         {
-            var userApi = await ApiClientProvider.GetApiAsync<IUserApi>(CancellationToken.None);
-            await userApi.PostAsync(postUserRequest, CancellationToken.None);
+            if (AuthenticationState == null)
+                return;
+
+            var state = await AuthenticationState;
+            var role = state.User.Identities.First().FindFirstValue(ClaimTypes.Role);
+
+            if (!string.IsNullOrEmpty(role))
+                return;
+
+            var refreshToken = await JwtAccessor.ReadTokenAsync(TokenNames.RefreshToken);
+
+            if (string.IsNullOrEmpty(refreshToken))
+                return;
+
+            var accessToken = await AuthenticationProvider.GetAccessTokenByRefreshTokenAsync(refreshToken);
+
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                await JwtAccessor.WriteTokenAsync(TokenNames.AccessToken, accessToken);
+            }
+
+            var options = new DialogOptions
+                {
+                    BackdropClick = false,
+                    CloseOnEscapeKey = false,
+                    FullScreen = true
+                };
+
+            var dialog = await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
+            var result = await dialog.Result;
+            if (result?.Data is PostUserRequest postUserRequest)
+            {
+                if (AuthenticationState == null)
+                    return;
+                
+                postUserRequest.Auth0Id = state.User.Identities.First().FindFirstValue("sub");
+                var userApi = await ApiClientProvider.GetApiAsync<IUserApi>(CancellationToken.None);
+                await userApi.PostAsync(postUserRequest, CancellationToken.None);
+            }
         }
+       
     }
 
     private async Task LogOut()
