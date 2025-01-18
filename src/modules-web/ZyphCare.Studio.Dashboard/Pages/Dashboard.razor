@@ -50,6 +50,9 @@
 </style>
 
 @code{
+    private AuthenticationState? _authenticationState;
+    private IUserApi _userApi = default!;
+    
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;
     [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
@@ -67,8 +70,15 @@
             if (AuthenticationState == null)
                 return;
 
-            var state = await AuthenticationState;
-            var role = state.User.Identities.First().FindFirstValue(ClaimTypes.Role);
+            _userApi = await ApiClientProvider.GetApiAsync<IUserApi>();
+            
+            _authenticationState = await AuthenticationState;
+            var role = _authenticationState.User.Identities.First().FindFirstValue(ClaimTypes.Role);
+            var auth0Id = _authenticationState.User.Identities.First().FindFirstValue("sub");
+            var user = await _userApi.GetWithAuth0IdAsync(auth0Id);
+
+            if(user == null)
+                await SignUp(auth0Id);
 
             if (!string.IsNullOrEmpty(role))
                 return;
@@ -84,27 +94,32 @@
             {
                 await JwtAccessor.WriteTokenAsync(TokenNames.AccessToken, accessToken);
             }
-
-            var options = new DialogOptions
-                {
-                    BackdropClick = false,
-                    CloseOnEscapeKey = false,
-                    FullScreen = true
-                };
-
-            var dialog = await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
-            var result = await dialog.Result;
-            if (result?.Data is PostUserRequest postUserRequest)
-            {
-                if (AuthenticationState == null)
-                    return;
-                
-                postUserRequest.Auth0Id = state.User.Identities.First().FindFirstValue("sub");
-                var userApi = await ApiClientProvider.GetApiAsync<IUserApi>(CancellationToken.None);
-                await userApi.PostAsync(postUserRequest, CancellationToken.None);
-            }
         }
        
+    }
+
+    private async Task SignUp(string auth0Id)
+    {
+        if(_authenticationState == null)
+            return;
+        
+        var options = new DialogOptions
+            {
+                BackdropClick = false,
+                CloseOnEscapeKey = false,
+                FullScreen = true
+            };
+
+        var dialog = await DialogService.ShowAsync<SignUpDialog>("Sign Up", options);
+        var result = await dialog.Result;
+        if (result?.Data is PostUserRequest postUserRequest)
+        {
+            if (AuthenticationState == null)
+                return;
+
+            postUserRequest.Auth0Id = auth0Id;
+            await _userApi.PostAsync(postUserRequest, CancellationToken.None);
+        }
     }
 
     private async Task LogOut()
@@ -113,5 +128,4 @@
         await JwtAccessor.RemoveTokenAsync(TokenNames.RefreshToken);
         NavigationManager.NavigateTo("https://dev-g2gar2vb3zazyj0s.us.auth0.com/v2/logout?client_id=uYjZgtRicwlVkRR6WW9N3DqHw8C7EmAT&returnTo=https://localhost:7184/SignIn");
     }
-
 }
