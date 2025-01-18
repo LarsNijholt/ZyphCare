@@ -11,8 +11,36 @@
 
 <PageTitle>ZyphCare | Sign In</PageTitle>
 
-<SfButton IsPrimary="true" @onclick="@OnLoginClicked">Login</SfButton>
+<div class="container">
+    <div class="login">
+        <SfButton IsPrimary="true" @onclick="@OnLoginClicked">Login</SfButton>
+    </div>
+    <div class="image">
 
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        height: 100vh; /* Full height of the viewport */
+        width: 100vw; /* Full width of the viewport */
+    }
+
+    .login {
+        flex: 1; /* 50% width */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5; /* Optional: Background color or leave it empty */
+    }
+
+    .image {
+        flex: 1; /* 50% width */
+        background: white no-repeat center center;
+        background-size: cover; /* Adjust this based on your design */
+    }
+</style>
 
 @code {
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;

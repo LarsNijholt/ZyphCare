@@ -26,8 +26,8 @@ services
     .AddSyncfusionBlazor()
     .AddRazorComponents()
     .AddInteractiveServerComponents();
-
 services.AddServerSideBlazor();
+
 services
     .AddMudServices()
     .AddCore()

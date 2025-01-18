@@ -13,7 +13,14 @@ public class Mapper : ResponseMapper<Response, User>
 {
     /// <inheritdoc />
     public override Task<Response> FromEntityAsync(User user, CancellationToken ct = new CancellationToken()) => Task.FromResult(new Response(
-    user.Id,
-    user.Auth0Id,
-    user.Role));
+    user.FirstName,
+    user.LastName,
+    user.Sex,
+    user.DateOfBirth,
+    user.PhoneNumber,
+    user.AddressLine,
+    user.City,
+    user.PostalCode,
+    user.Country,
+    user.BloodType));
 }

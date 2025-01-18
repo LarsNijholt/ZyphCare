@@ -18,7 +18,6 @@ public partial class MainLayout
     /// <inheritdoc />
     protected override void OnInitialized()
     {
-        _treeData.Add(new TreeData { NodeId = "02", NodeText = "Deployment", IconCss = "icon-annotation-edit icon", NavigateUrl = "/counter" });
-        _treeData.Add(new TreeData { NodeId = "03", NodeText = "Quick Start", IconCss = "icon-docs icon", NavigateUrl = "/" });
+        _treeData.Add(new TreeData { NodeId = "01", NodeText = "Dashboard", IconCss = "icon-docs icon", NavigateUrl = "/" });
     }
 }

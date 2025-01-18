@@ -10,8 +10,8 @@
 <MudSnackbarProvider/>
 
 <MudLayout>
-    <div class="page">
-        <div class="control-container">
+    <div class="page" style="width: 100%; height: 100%;">
+        <div class="control-container" style="width: 100%; height: 100%;">
             <div>
                 <SfAppBar>
                     <SfButton CssClass="e-inherit" IconCss="e-icons e-menu" OnClick="@Toggle"></SfButton>
@@ -26,9 +26,7 @@
                     <div class="main-menu">
                         <div>
                             <SfTreeView CssClass="main-treeview" ExpandOn="@Expand" TValue="TreeData">
-                                <TreeViewFieldsSettings Id="NodeId" Text="NodeText" DataSource="_treeData"
-                                                        HasChildren="HasChild" ParentID="Pid">
-                                </TreeViewFieldsSettings>
+                                <TreeViewFieldsSettings Id="NodeId" Text="NodeText" DataSource="_treeData"HasChildren="HasChild" ParentID="Pid"/>
                             </SfTreeView>
                         </div>
                     </div>

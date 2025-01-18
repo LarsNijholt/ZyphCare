@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZyphCare.EntityFramework.Units.Users;
 
@@ -10,9 +11,11 @@ using ZyphCare.EntityFramework.Units.Users;
 namespace ZyphCare.EntityFramework.Sqlite.Migrations
 {
     [DbContext(typeof(UserZyphCareDbContext))]
-    partial class UserZyphCareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250116191702_Initial_Create")]
+    partial class Initial_Create
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");

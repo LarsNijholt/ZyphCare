@@ -13,5 +13,5 @@ public class Mapper : ResponseMapper<Response, User>
     /// </summary>
     /// <param name="user">The user entity to be mapped.</param>
     /// <returns>A <see cref="Response"/> object containing the mapped properties of the user.</returns>
-    public override Response FromEntity(User user) => new(user.Id, user.Auth0Id, user.Role);
+    public override Response FromEntity(User user) => new(user.Id, user.Auth0Id);
 }

@@ -1,29 +1,27 @@
-using ZyphCare.Users.Models;
-
-namespace ZyphCare.Users.Api.Endpoints.Users.GetByAuthId;
+namespace ZyphCare.Api.Client.Users.Requests.Users;
 
 /// <summary>
-/// Represents a request to retrieve a user by their unique identifier.
+/// Represents a request to create or update a user record in the API.
 /// </summary>
-public class Request
+public class PostUserRequest
 {
     /// <summary>
-    /// Represents the unique identifier for the request or response object.
+    /// The Id that is provided from auth 0.
     /// </summary>
-    public string AuthId { get; set; } = default!;
-    
+    public string Auth0Id { get; set; } = default!;
+
     /// <summary>
-    /// The first name of the user.
+    /// The user's first name.
     /// </summary>
     public string FirstName { get; set; } = default!;
 
     /// <summary>
-    /// The last name of the user.
+    /// The user's last name.
     /// </summary>
     public string LastName { get; set; } = default!;
 
     /// <summary>
-    /// Represents the gender of the user.
+    /// Specifies the biological or self-identified sex of the user.
     /// </summary>
     public string Sex { get; set; } = default!;
 
@@ -56,25 +54,4 @@ public class Request
     /// The country associated with the user's address.
     /// </summary>
     public string Country { get; set; } = default!;
-
-    /// <summary>
-    /// The blood type of the user, based on the ABO and Rh factor classification.
-    /// </summary>
-    public BloodTypes? BloodType { get; set; }
 }
-
-/// <summary>
-/// Represents the response containing details of a user retrieved by their unique identifier.
-/// </summary>
-public record Response(
-    string FirstName,
-    string LastName,
-    string Sex,
-    DateTime DateOfBirth,
-    string PhoneNumber,
-    string AddressLine,
-    string City,
-    string PostalCode,
-    string Country,
-    BloodTypes? BloodType
-);

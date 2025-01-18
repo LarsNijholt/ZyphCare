@@ -14,4 +14,4 @@ public class Request
 /// <summary>
 /// Represents the response containing details of a user retrieved by their unique identifier.
 /// </summary>
-public record Response(string Id, string Auth0Id, string Role);
+public record Response(string Id, string Auth0Id);

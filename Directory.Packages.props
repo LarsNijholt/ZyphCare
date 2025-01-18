@@ -26,6 +26,8 @@
     <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="Syncfusion.Blazor.Buttons" Version="28.1.37" />
+    <PackageVersion Include="Syncfusion.Blazor.Charts" Version="28.1.38" />
+    <PackageVersion Include="Syncfusion.Blazor.Layouts" Version="28.1.38" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
     <PackageVersion Include="xunit" Version="2.9.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />

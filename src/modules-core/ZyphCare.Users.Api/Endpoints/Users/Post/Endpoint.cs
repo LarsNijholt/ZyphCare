@@ -47,7 +47,16 @@ public class Endpoint : ZyphCareEndpoint<Request>
             {
                 Id = Guid.NewGuid().ToString(),
                 Auth0Id = req.Auth0Id,
-                Role = req.Role,
+                FirstName = req.FirstName,
+                LastName = req.LastName,
+                AddressLine = req.AddressLine,
+                BloodType = req.BloodType,
+                City = req.City,
+                Country = req.Country,
+                DateOfBirth = req.DateOfBirth,
+                PhoneNumber = req.PhoneNumber,
+                PostalCode = req.PostalCode,
+                Sex = req.Sex
             };
 
         await _userEntityStore.SaveAsync(user, ct);

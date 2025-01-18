@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Syncfusion.Blazor.Popups;
 using ZyphCare.Web.Core.Contracts;
 
 namespace ZyphCare.Studio.Dashboard.Extensions;

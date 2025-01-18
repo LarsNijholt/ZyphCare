@@ -52,4 +52,4 @@ public class Request
 /// <param name="Id">The unique identifier of the user.</param>
 /// <param name="Auth0Id">The identifier associated with the user in Auth0.</param>
 /// <param name="Role">The role assigned to the user.</param>
-public record Response(string Id, string Auth0Id, string Role);
+public record Response(string Id, string Auth0Id);
