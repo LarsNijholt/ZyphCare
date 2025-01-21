@@ -164,6 +164,22 @@ public class ZyphCareEndpoint<TRequest, TResponse, TMapper> : Endpoint<TRequest,
         else
             Permissions(new[] { PermissionNames.All }.Concat(permissions).ToArray());
     }
+    
+    /// <summary>
+    /// Configures the roles required to access the endpoint.
+    /// </summary>
+    /// <param name="roles">
+    /// An array of role names to be configured for the endpoint.
+    /// If security is disabled, the endpoint will allow anonymous access.
+    /// Otherwise, only users belonging to the specified roles will have access.
+    /// </param>
+    protected void ConfigureRoles(params string[] roles)
+    {
+        if(!EndpointSecurityOptions.SecurityIsEnabled)
+            AllowAnonymous();
+        else
+            Roles(roles);
+    }
 }
 
 /// <inheritdoc />

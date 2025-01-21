@@ -25,7 +25,7 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
     public override void Configure()
     {
         Get("/users/{id}");
-        ConfigurePermissions("read:users");
+        Roles("user");
     }
 
     /// <inheritdoc />

@@ -3,6 +3,7 @@ using ZyphCare.Web.Components;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
 using ZyphCare.Studio.Dashboard.Extensions;
+using ZyphCare.Studio.Dashboard.HttpMessageHandler;
 using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 using ZyphCare.Web.Extensions;
@@ -17,6 +18,10 @@ var auth0Secret = builder.Configuration.GetRequiredSection("auth0");
 var backendApiConfig = new BackendApiConfig
     {
         ConfigureBackendOptions = options => configuration.GetSection("Backend").Bind(options),
+        ConfigureHttpClientBuilder = options =>
+        {
+            options.AuthenticationHandler = typeof(AuthenticatingApiHttpMessageHandler);
+        }
     };
 
 

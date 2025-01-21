@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Syncfusion.Blazor.Popups;
+using ZyphCare.Studio.Dashboard.HttpMessageHandler;
 using ZyphCare.Web.Core.Contracts;
 
 namespace ZyphCare.Studio.Dashboard.Extensions;
@@ -21,6 +22,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddStudioDashboard(this IServiceCollection services)
     {
         return services
-            .AddScoped<IAspect, Aspect>();
+            .AddScoped<IAspect, Aspect>()
+            .AddScoped<AuthenticatingApiHttpMessageHandler>();
     }
 }
