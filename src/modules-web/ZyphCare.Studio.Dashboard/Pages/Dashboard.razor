@@ -1,4 +1,5 @@
 @page "/"
+@using System.Net
 @using System.Security.Claims
 @using Microsoft.AspNet.Identity
 @using Microsoft.AspNetCore.Authorization
@@ -12,6 +13,8 @@
 @using ZyphCare.Api.Client.Users.Requests.Users
 @using ZyphCare.Studio.Dashboard.Components
 @using ZyphCare.Web.Core.Contracts
+
+@inherits ComponentBase;
 
 @attribute [Authorize]
 
@@ -57,7 +60,7 @@
     [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = default!;
     [Inject] private IJwtAccessor JwtAccessor { get; set; } = default!;
     [Inject] private IAuthenticationProvider AuthenticationProvider { get; set; } = default!;
-    [Inject] private IDialogService DialogService { get; set; }
+    [Inject] private IDialogService DialogService { get; set; } = default!;
 
     [CascadingParameter]
     private Task<AuthenticationState>? AuthenticationState { get; set; }
@@ -67,22 +70,7 @@
     {
         if (AuthenticationState == null)
             return;
-
-        var token = await JwtAccessor.ReadTokenAsync(TokenNames.AccessToken);
-
-        _userApi = await ApiClientProvider.GetApiAsync<IUserApi>();
-
-        _authenticationState = await AuthenticationState;
-        var role = _authenticationState.User.Identities.First().FindFirstValue(ClaimTypes.Role);
-        var auth0Id = _authenticationState.User.Identities.First().FindFirstValue("sub");
-        var user = await _userApi.GetWithAuth0IdAsync(auth0Id);
-
-        if (user == null)
-            await SignUp(auth0Id);
-
-        if (!string.IsNullOrEmpty(role))
-            return;
-
+        
         var refreshToken = await JwtAccessor.ReadTokenAsync(TokenNames.RefreshToken);
 
         if (string.IsNullOrEmpty(refreshToken))
@@ -95,6 +83,14 @@
             await JwtAccessor.WriteTokenAsync(TokenNames.AccessToken, accessToken);
         }
 
+        _userApi = await ApiClientProvider.GetApiAsync<IUserApi>();
+
+        _authenticationState = await AuthenticationState;
+        var auth0Id = _authenticationState.User.Identities.First().FindFirstValue("sub");
+        var response = await _userApi.GetWithAuth0IdAsync(auth0Id);
+
+        if (response.StatusCode == HttpStatusCode.NotFound)
+            await SignUp(auth0Id);
     }
 
     private async Task SignUp(string auth0Id)
