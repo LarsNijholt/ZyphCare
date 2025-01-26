@@ -48,7 +48,7 @@ public static class DependencyInjectionExtensions
                     ConfigureRetryPolicy = null
                 };
 
-            services.AddApi<IUserApi>();
+            services.AddApi<IUserApi>(builderOptionsWithoutRetryPolicy);
         });
     }
 
@@ -99,7 +99,7 @@ public static class DependencyInjectionExtensions
     /// <param name="httpClientBuilderOptions">An options object that can be used to configure the HTTP client builder.</param>
     public static IServiceCollection AddApi(this IServiceCollection services, Type apiType, ZyphCareClientBuilderOptions? httpClientBuilderOptions = default)
     {
-        var builder = services.AddRefitClient(apiType, _ => CreateRefitSettings(), apiType.Name).ConfigureHttpClient(ConfigureElsaApiHttpClient);
+        var builder = services.AddRefitClient(apiType, _ => CreateRefitSettings(), apiType.Name).ConfigureHttpClient(ConfigureZyphCareApiHttpClient);
         httpClientBuilderOptions?.ConfigureHttpClientBuilder(builder);
         httpClientBuilderOptions?.ConfigureRetryPolicy?.Invoke(builder);
         return services;
@@ -115,7 +115,7 @@ public static class DependencyInjectionExtensions
     {
         var builder = services
             .AddRefitClient<T>(_ => CreateRefitSettings(), typeof(T).Name)
-            .ConfigureHttpClient(ConfigureElsaApiHttpClient);
+            .ConfigureHttpClient(ConfigureZyphCareApiHttpClient);
         httpClientBuilderOptions?.ConfigureHttpClientBuilder(builder);
     }
 
@@ -134,7 +134,7 @@ public static class DependencyInjectionExtensions
         return RestService.For<T>(httpClient, CreateRefitSettings());
     }
 
-    private static void ConfigureElsaApiHttpClient(IServiceProvider serviceProvider, HttpClient httpClient)
+    private static void ConfigureZyphCareApiHttpClient(IServiceProvider serviceProvider, HttpClient httpClient)
     {
         var options = serviceProvider.GetRequiredService<IOptions<ZyphCareClientOptions>>().Value;
         httpClient.BaseAddress = options.BaseAddress;

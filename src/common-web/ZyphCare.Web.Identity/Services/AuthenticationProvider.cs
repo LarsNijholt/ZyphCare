@@ -36,7 +36,7 @@ public class AuthenticationProvider : IAuthenticationProvider
     }
     
     /// <inheritdoc />
-    public async Task<string?> GetAccessTokenByRefreshTokenAsync(string refreshToken)
+    public async Task<string?> GetAccessTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken = default)
     {
         var requestBody = new Dictionary<string, string>
             {
@@ -50,8 +50,8 @@ public class AuthenticationProvider : IAuthenticationProvider
         using var request = new HttpRequestMessage(HttpMethod.Post, "https://dev-g2gar2vb3zazyj0s.us.auth0.com/oauth/token");
         request.Content = new FormUrlEncodedContent(requestBody);
 
-        var response = await client.SendAsync(request);
-        var token = await response.Content.ReadAsStringAsync();
+        var response = await client.SendAsync(request, cancellationToken);
+        var token = await response.Content.ReadAsStringAsync(cancellationToken);
         
         var tokenJson = JsonDocument.Parse(token);
         return tokenJson.RootElement.TryGetProperty("access_token", out var accessToken) ? accessToken.GetString() : null;

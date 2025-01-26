@@ -21,9 +21,10 @@ public interface IAuthenticationProvider
     /// <param name="refreshToken">
     /// The refresh token used to obtain a new access token.
     /// </param>
+    /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>
     /// A task that represents the asynchronous operation, containing the new access token as a string
     /// if successful, or null if the token could not be retrieved.
     /// </returns>
-    Task<string?> GetAccessTokenByRefreshTokenAsync(string refreshToken);
+    Task<string?> GetAccessTokenByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken = default);
 }

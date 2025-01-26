@@ -42,6 +42,7 @@ public static class ServiceCollectionExtensions
         services.Configure(config?.ConfigureBackendOptions ?? (_ => { }));
         services.AddDefaultApiClients(config?.ConfigureHttpClientBuilder);
         services.TryAddScoped<IRemoteBackendAccessor, DefaultRemoteBackendAccessor>();
+        services.TryAddScoped<IBlazorServiceAccessor, BlazorServiceAccessor>();
         services.TryAddScoped<IBackendApiClientProvider, DefaultBackendApiClientProvider>();
         return services;
     }
