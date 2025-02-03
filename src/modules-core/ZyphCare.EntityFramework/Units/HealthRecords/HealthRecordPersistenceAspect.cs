@@ -1,24 +1,20 @@
+using System.Data;
 using Microsoft.Extensions.DependencyInjection;
 using ZyphCare.Aspects.Contracts;
 using ZyphCare.EntityFramework.Common;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Handlers;
+using ZyphCare.EntityFramework.Units.Users;
+using ZyphCare.HealthRecords.Entities;
 using ZyphCare.Users.Aspects;
-using ZyphCare.Users.Entities;
+using ZyphCare.Users.Contracts;
 
-namespace ZyphCare.EntityFramework.Units.Users;
+namespace ZyphCare.EntityFramework.Units.HealthRecords;
 
-/// <summary>
-/// Module for the user to use EF Core persistence providers.
-/// </summary>
-public class EfCoreUserPersistenceAspect(IUnit module) : PersistenceAspectBase<UserZyphCareDbContext>(module)
+public class HealthRecordPersistenceAspect(IUnit unit) : PersistenceAspectBase<HealthRecordZyphCareDbContext>(unit)
 {
-    /// <summary>
-    /// Delegate for determining the exception handler.
-    /// </summary>
-    public Func<IServiceProvider, IDbExceptionHandler<UserZyphCareDbContext>> DbExceptionHandler { get; set; } = _ => new RethrowDbExceptionHandler();
+    public Func<IServiceProvider, IDbExceptionHandler<HealthRecordZyphCareDbContext>> DbExceptionHandler { get; set; } = _ => new RethrowDbExceptionHandler();
 
-    /// <inheritdoc />
     public override void Configure()
     {
         Unit.Configure<UserAspect>(aspect =>
@@ -27,11 +23,10 @@ public class EfCoreUserPersistenceAspect(IUnit module) : PersistenceAspectBase<U
         });
     }
 
-    /// <inheritdoc />
     public override void Apply()
     {
         base.Apply();
         Services.AddScoped(DbExceptionHandler);
-        AddEntityStore<User, EfCoreUserStore>();
+        AddEntityStore<HealthRecord, EfCoreHealthRecordStore>();
     }
 }
