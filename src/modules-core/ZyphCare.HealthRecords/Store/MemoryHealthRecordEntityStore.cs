@@ -78,17 +78,34 @@ public class MemoryHealthRecordEntityStore : IHealthRecordEntityStore
         return Task.CompletedTask;
     }
 
+    /// <inheritdoc />
     public Task SaveManyAsync(IEnumerable<HealthRecord> healthRecords, CancellationToken cancellationToken = default)
     {
         _store.SaveMany(healthRecords, GetId);
         return Task.CompletedTask;
     }
-    
-    public Task<bool> DeleteAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default) => throw new NotImplementedException();
-    public Task<bool> AnyAsync(HealthRecord healthRecordFilter, CancellationToken cancellationToken = default) => throw new NotImplementedException();
-    public Task<long> CountAsync(HealthRecord filter, CancellationToken cancellationToken = default) => throw new NotImplementedException();
+
+    /// <inheritdoc />
+    public Task<bool> DeleteAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default)
+    {
+        var completed = _store.Delete(healthRecord.Id);
+        return Task.FromResult(completed);
+    }
+
+    /// <inheritdoc />
+    public Task<bool> AnyAsync(HealthRecordFilter healthRecordFilter, CancellationToken cancellationToken = default)
+    {
+        var exists = _store.Query(queryable => Filter(queryable, healthRecordFilter)).Any();
+        return Task.FromResult(exists);
+    }
+
+    /// <inheritdoc />
+    public Task<long> CountAsync(HealthRecordFilter filter, CancellationToken cancellationToken = default)
+    {
+        // The memory store does not support CountAsync with a filter, so we need to use Query with a LongCount instead.
+        return Task.FromResult(_store.Query(queryable => Filter(queryable, filter)).LongCount());
+    }
     
     private static IQueryable<HealthRecord> Filter(IQueryable<HealthRecord> queryable, HealthRecordFilter filter) => filter.Apply(queryable);
     private static string GetId(HealthRecord healthRecord) => healthRecord.Id;
-    
 }
