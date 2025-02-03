@@ -6,6 +6,8 @@ using ZyphCare.Api.Common.Extensions;
 using ZyphCare.Common.Extensions;
 using ZyphCare.EntityFramework.Sqlite;
 using ZyphCare.EntityFramework.Units.Users;
+using ZyphCare.HealthRecords.Api.Extensions;
+using ZyphCare.HealthRecords.Extensions;
 using ZyphCare.Users.Api.Extensions;
 using ZyphCare.Users.Extensions;
 
@@ -41,6 +43,8 @@ services
         units
             .AddZyphCareUsers(x => x.UseEntityFrameworkCore(unit => unit.UseSqlite(sqliteConnectionString)))
             .UseZyphCareUsersApi()
+            .AddZyphCareHealthRecords()
+            .AddZyphCareHealthRecordsApi()
             .AddSwagger()
             .AddFastEndpointsAssembly<Program>();
     });

@@ -4,7 +4,6 @@ using ZyphCare.Extensions;
 using ZyphCare.HealthRecords.Contracts;
 using ZyphCare.HealthRecords.Entities;
 using ZyphCare.HealthRecords.Filters;
-using ZyphCare.HealthRecords.Models;
 
 namespace ZyphCare.HealthRecords.Store;
 
