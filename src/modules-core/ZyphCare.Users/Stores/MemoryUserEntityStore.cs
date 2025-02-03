@@ -54,9 +54,9 @@ public class MemoryUserEntityStore : IUserEntityStore
     }
 
     /// <inheritdoc />
-    public Task<IEnumerable<User>> FindManyAsync(UserFilter definitionFilter, CancellationToken cancellationToken = default)
+    public Task<IEnumerable<User>> FindManyAsync(UserFilter userFilter, CancellationToken cancellationToken = default)
     {
-        var result = _store.Query(queryable => Filter(queryable, definitionFilter)).ToList().AsEnumerable();
+        var result = _store.Query(queryable => Filter(queryable, userFilter)).ToList().AsEnumerable();
         return Task.FromResult(result);
     }
 

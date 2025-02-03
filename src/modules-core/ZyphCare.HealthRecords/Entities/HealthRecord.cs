@@ -1,4 +1,5 @@
 using ZyphCare.EntityFramework.Common.Entities;
+using ZyphCare.HealthRecords.Models;
 
 namespace ZyphCare.HealthRecords.Entities;
 
@@ -20,5 +21,5 @@ public class HealthRecord : Entity
     /// <summary>
     /// Gets or sets the type of the health record, indicating its category or classification.
     /// </summary>
-    public string? Type { get; set; }
+    public HealthRecordType Type { get; set; }
 }
