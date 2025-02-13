@@ -44,7 +44,7 @@ services
         units
             .AddZyphCareUsers(x => x.UseEntityFrameworkCore(unit => unit.UseSqlite(sqliteConnectionString)))
             .UseZyphCareUsersApi()
-            .AddZyphCareHealthRecords(x => x.UseEntityFrameworkCore())
+            .AddZyphCareHealthRecords(x => x.UseEntityFrameworkCore(unit => unit.UseSqlite(sqliteConnectionString)))
             .AddZyphCareHealthRecordsApi()
             .AddSwagger()
             .AddFastEndpointsAssembly<Program>();

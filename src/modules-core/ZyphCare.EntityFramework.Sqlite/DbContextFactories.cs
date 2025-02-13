@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ZyphCare.EntityFramework.Common.Abstractions;
+using ZyphCare.EntityFramework.Units.HealthRecords;
 using ZyphCare.EntityFramework.Units.Users;
 
 namespace ZyphCare.EntityFramework.Sqlite;
@@ -9,8 +10,13 @@ namespace ZyphCare.EntityFramework.Sqlite;
 /// This factory is primarily used by EF Core tools, such as migrations, to provide a DbContext
 /// configured with a SQLite database connection and associated options.
 /// </summary>
-public class ReportDbContextFactory : SqliteDesignTimeDbContextFactory<UserZyphCareDbContext>
+public class UserDbContextFactory : SqliteDesignTimeDbContextFactory<UserZyphCareDbContext>
 {
+}
+
+public class HealthRecordDbContextFactory : SqliteDesignTimeDbContextFactory<HealthRecordZyphCareDbContext>
+{
+
 }
 
 /// <summary>
