@@ -45,6 +45,8 @@ public class Endpoint : ZyphCareEndpoint<Request, PagedListResponse<Response>, M
             {
                 Id = request.Id,
                 Ids = request.Ids,
+                PatientId = request.PatientId,
+                PatientIds = request.PatientIds,
                 CreatedDate = request.CreatedDate,
                 FileName = request.FileName,
                 FileNames = request.FileNames,

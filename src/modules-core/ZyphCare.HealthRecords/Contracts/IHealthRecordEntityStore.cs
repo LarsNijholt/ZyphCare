@@ -74,9 +74,9 @@ public interface IHealthRecordEntityStore
     /// <summary>
     /// Saves the specified HealthRecord.
     /// </summary>
-    /// <param name="healthRecords">The HealthRecord file to save.</param>
+    /// <param name="healthRecord">The HealthRecord file to save.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    Task SaveAsync(HealthRecord healthRecords, CancellationToken cancellationToken = default);
+    Task SaveAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Save a collection of HealthRecords.

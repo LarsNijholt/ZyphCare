@@ -16,6 +16,16 @@ public class Request
     /// A collection of unique identifiers for filtering user records.
     /// </summary>
     public ICollection<string>? Ids { get; set; }
+
+    /// <summary>
+    /// The identifier associated with the patient.
+    /// </summary>
+    public string? PatientId { get; set; }
+
+    /// <summary>
+    /// A collection of patient identifiers used to filter health records.
+    /// </summary>
+    public ICollection<string>? PatientIds { get; set; }
     
     /// <summary>
     /// Gets or sets the name of the file associated with the health record.
@@ -55,4 +65,4 @@ public class Request
 /// <param name="FileName">The name of the file associated with the health record.</param>
 /// <param name="CreatedDate">The date and time when the health record was created.</param>
 /// <param name="Type">The type of the health record.</param>
-public record Response(string Id, string? FileName, DateTimeOffset CreatedDate, HealthRecordType Type);
+public record Response(string Id, string PatientId, string? FileName, DateTimeOffset CreatedDate, HealthRecordType Type);

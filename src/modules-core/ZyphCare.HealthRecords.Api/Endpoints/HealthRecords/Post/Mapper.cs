@@ -1,8 +1,7 @@
 using FastEndpoints;
 using ZyphCare.HealthRecords.Entities;
 
-namespace ZyphCare.HealthRecords.Api.Endpoints.HealthRecords.List;
-
+namespace ZyphCare.HealthRecords.Api.Endpoints.HealthRecords.Post;
 /// <summary>
 /// Provides functionality to map between <see cref="HealthRecord"/> entities and <see cref="Response"/> models.
 /// </summary>

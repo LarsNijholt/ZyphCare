@@ -24,3 +24,13 @@ public class Request
     /// </summary>
     public IFormFile File { get; set; } = default!;
 }
+
+/// <summary>
+/// Represents the response model containing details of a health record.
+/// </summary>
+/// <param name="Id">The unique identifier for the health record.</param>
+/// <param name="PatientId">The unique identifier for the patient associated with the health record.</param>
+/// <param name="FileName">The name of the file associated with the health record, if any.</param>
+/// <param name="CreatedDate">The date and time the health record was created.</param>
+/// <param name="Type">The type of the health record.</param>
+public record Response(string Id, string PatientId, string? FileName, DateTimeOffset CreatedDate, HealthRecordType Type);

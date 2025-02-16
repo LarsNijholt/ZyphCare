@@ -9,6 +9,11 @@ namespace ZyphCare.HealthRecords.Entities;
 public class HealthRecord : Entity
 {
     /// <summary>
+    /// Gets or sets the unique identifier associated with the patient.
+    /// </summary>
+    public string PatientId { get; set; }
+    
+    /// <summary>
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }

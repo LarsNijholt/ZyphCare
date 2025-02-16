@@ -4,6 +4,7 @@ using ZyphCare.Aspects.Contracts;
 using ZyphCare.EntityFramework.Common.Extensions;
 using ZyphCare.HealthRecords.Contracts;
 using ZyphCare.HealthRecords.Entities;
+using ZyphCare.HealthRecords.Services;
 using ZyphCare.HealthRecords.Store;
 
 namespace ZyphCare.HealthRecords.Aspects;
@@ -29,6 +30,7 @@ public class HealthRecordAspect : BaseAspect
     {
         Services
             .AddScoped(HealthRecordEntityStore)
+            .AddSingleton<IHealthRecordBlobStorage, HealthRecordBlobStorage>()
             .AddMemoryStore<HealthRecord, MemoryHealthRecordEntityStore>();
     }
 }

@@ -20,6 +20,16 @@ public class HealthRecordFilter
     public ICollection<string>? Ids { get; set; }
     
     /// <summary>
+    /// Gets or sets the unique identifier associated with the patient.
+    /// </summary>
+    public string? PatientId { get; set; }
+
+    /// <summary>
+    /// Gets or sets a collection of patient identifiers used to filter health records associated with specific patients.
+    /// </summary>
+    public ICollection<string>? PatientIds { get; set; }
+    
+    /// <summary>
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }
@@ -53,6 +63,10 @@ public class HealthRecordFilter
             queryable = queryable.Where(x => x.Id == Id);
         if(Ids != null)
             queryable = queryable.Where(x => Ids.Contains(x.Id));
+        if(PatientId != null)
+            queryable = queryable.Where(x => x.PatientId == PatientId);
+        if(PatientIds != null)
+            queryable = queryable.Where(x => PatientIds.Contains(x.PatientId));
         if(FileName != null)
             queryable = queryable.Where(x => x.FileName == FileName);
         if(FileNames != null)

@@ -71,9 +71,9 @@ public class MemoryHealthRecordEntityStore : IHealthRecordEntityStore
     }
 
     /// <inheritdoc />
-    public Task SaveAsync(HealthRecord healthRecords, CancellationToken cancellationToken = default)
+    public Task SaveAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default)
     {
-        _store.Save(healthRecords, GetId);
+        _store.Save(healthRecord, GetId);
         return Task.CompletedTask;
     }
 

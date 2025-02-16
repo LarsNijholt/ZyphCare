@@ -66,9 +66,9 @@ public class EfCoreHealthRecordStore : IHealthRecordEntityStore
     }
 
     /// <inheritdoc />
-    public async Task SaveAsync(HealthRecord healthRecords, CancellationToken cancellationToken = default)
+    public async Task SaveAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default)
     {
-       await _store.SaveAsync(healthRecords, cancellationToken);
+       await _store.SaveAsync(healthRecord, cancellationToken);
     }
 
     /// <inheritdoc />
