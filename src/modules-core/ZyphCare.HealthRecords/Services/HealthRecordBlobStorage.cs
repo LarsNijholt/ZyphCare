@@ -31,10 +31,19 @@ public sealed class HealthRecordBlobStorage : IHealthRecordBlobStorage
         {
             await fileStream.CopyToAsync(memoryStream, cancellationToken);
         }
-        
+
         // Reset the stream's position before returning
         memoryStream.Position = 0;
         return memoryStream;
+    }
+
+    /// <inheritdoc />
+    public void Delete(HealthRecord healthRecord)
+    {
+        var filePath = Path.Combine(GetDefaultStorageDirectory(), healthRecord.GetStoragePath());
+
+        if (File.Exists(filePath)) 
+            File.Delete(filePath);
     }
 
     private static string GetDefaultStorageDirectory()

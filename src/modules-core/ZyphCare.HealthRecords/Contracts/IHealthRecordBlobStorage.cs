@@ -33,4 +33,12 @@ public interface IHealthRecordBlobStorage
     /// Defaults to <see cref="CancellationToken.None"/> if not provided.
     /// </param>
     Task<Stream?> ReadAsync(HealthRecord healthRecord, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes the specified health record and its associated data from blob storage.
+    /// </summary>
+    /// <param name="healthRecord">
+    /// The health record whose data is to be deleted, containing metadata like file name, type, and created date.
+    /// </param>
+    void Delete(HealthRecord healthRecord);
 }
