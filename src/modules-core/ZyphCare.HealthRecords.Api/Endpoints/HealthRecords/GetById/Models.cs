@@ -1,6 +1,6 @@
 using ZyphCare.HealthRecords.Models;
 
-namespace ZyphCare.HealthRecords.Api.Endpoints.GetById;
+namespace ZyphCare.HealthRecords.Api.Endpoints.HealthRecords.GetById;
 
 /// <summary>
 /// Represents the incoming request containing the identifier information needed to fetch specific health records data.

@@ -2,7 +2,7 @@ using ZyphCare.Api.Common.Abstractions;
 using ZyphCare.HealthRecords.Contracts;
 using ZyphCare.HealthRecords.Filters;
 
-namespace ZyphCare.HealthRecords.Api.Endpoints.GetById;
+namespace ZyphCare.HealthRecords.Api.Endpoints.HealthRecords.GetById;
 
 /// <summary>
 /// Endpoint that gets a health record by its Id.
