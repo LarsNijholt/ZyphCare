@@ -17,6 +17,11 @@ public class HealthRecord : Entity
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }
+    
+    /// <summary>
+    /// A short description about what the health record is about.
+    /// </summary>
+    public string? Description { get; set; }
 
     /// <summary>
     /// Gets or sets the date and time when the health record was created.

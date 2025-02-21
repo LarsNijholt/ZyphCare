@@ -1,7 +1,6 @@
 using ZyphCare.Common.Models;
 using ZyphCare.HealthRecords.Entities;
 using ZyphCare.HealthRecords.Filters;
-using ZyphCare.HealthRecords.Models;
 
 namespace ZyphCare.HealthRecords.Contracts;
 
@@ -26,7 +25,7 @@ public interface IHealthRecordEntityStore
     /// <param name="order">The order.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <typeparam name="TOrderBy">The type of the property to order by.</typeparam>
-    /// <returns>The HealthRecord HealthRecord.</returns>
+    /// <returns>The HealthRecord.</returns>
     Task<HealthRecord?> FindAsync<TOrderBy>(HealthRecordFilter healthRecordFilter, HealthRecordOrder<TOrderBy> order,
         CancellationToken cancellationToken = default);
 
