@@ -12,7 +12,7 @@ public sealed class HealthRecordBlobStorage : IHealthRecordBlobStorage
     {
         var storageDirectory = healthRecord.GetStoragePath();
         Directory.CreateDirectory(storageDirectory);
-        await using var fileStream = new FileStream(storageDirectory, FileMode.Create, FileAccess.Write, FileShare.None);
+        await using var fileStream = new FileStream(Path.Combine(storageDirectory, healthRecord.Id), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.ReadWrite);
         await data.CopyToAsync(fileStream, cancellationToken);
     }
 
@@ -32,7 +32,6 @@ public sealed class HealthRecordBlobStorage : IHealthRecordBlobStorage
             await fileStream.CopyToAsync(memoryStream, cancellationToken);
         }
 
-        // Reset the stream's position before returning
         memoryStream.Position = 0;
         return memoryStream;
     }

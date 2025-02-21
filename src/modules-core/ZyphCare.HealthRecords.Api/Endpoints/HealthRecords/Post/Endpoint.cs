@@ -36,7 +36,7 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
         await _healthRecordBlobStorage.WriteAsync(healthRecord, stream, cancellationToken);
 
         await _healthRecordEntityStore.SaveAsync(healthRecord, cancellationToken);
-        var response = await Map.FromEntityAsync(healthRecord, cancellationToken);
+        var response =  Map.FromEntity(healthRecord);
         await SendCreatedAtAsync<GetById.Endpoint>(healthRecord.Id, response, cancellation: cancellationToken);
     }
 
