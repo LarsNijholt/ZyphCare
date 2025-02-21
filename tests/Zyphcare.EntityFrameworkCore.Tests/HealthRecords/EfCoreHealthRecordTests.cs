@@ -188,6 +188,11 @@ public sealed class EfCoreHealthRecordTests : IDisposable
             ];
     }
 
+    /// <summary>
+    /// Tests that the FindAsync method retrieves a health record from the store
+    /// when provided with a valid filter and order, ensuring the returned record
+    /// matches the expected criteria and order.
+    /// </summary>
     [Fact]
     public async Task FindAsync_WithCorrectFilterAndOrder_ReturnsValidHealthRecord()
     {
@@ -206,6 +211,10 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         foundHealthRecord.Should().BeEquivalentTo(healthRecordList.OrderBy(r => r.FileName).First());
     }
 
+    /// <summary>
+    /// Tests the FindManyAsync method with a specified filter and pagination arguments
+    /// to ensure it returns the correct paginated set of health records matching the filter criteria.
+    /// </summary>
     [Fact]
     public async Task FindManyAsync_WithFilterAndPageArgs_ReturnsPaginatedHealthRecords()
     {
@@ -227,6 +236,11 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         pageResult.TotalCount.Should().Be(2);
     }
 
+    /// <summary>
+    /// Validates that the method retrieves health records that match the specified filter criteria,
+    /// orders them according to the provided ordering definition,
+    /// and returns the records in a paginated format with the correct count and order validation.
+    /// </summary>
     [Fact]
     public async Task FindManyAsync_WithFilterOrderingAndPagination_ReturnsOrderedPaginatedHealthRecords()
     {
@@ -252,6 +266,11 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         pageResult.TotalCount.Should().Be(2);
     }
 
+    /// <summary>
+    /// Ensures that the FindManyAsync method of the EF Core-based health record store
+    /// returns a list of health records filtered by the specified filter criteria and
+    /// ordered as defined in the provided order configuration.
+    /// </summary>
     [Fact]
     public async Task FindManyAsync_WithFilterAndOrder_ReturnsOrderedHealthRecords()
     {
@@ -272,6 +291,9 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         healthRecords.Should().OnlyContain(hr => hr.FileName == "test-consult-1");
     }
 
+    /// <summary>
+    /// Verifies that the method returns true when the supplied filter matches at least one existing health record.
+    /// </summary>
     [Fact]
     public async Task AnyAsync_WithExistingFilter_ReturnsTrue()
     {
