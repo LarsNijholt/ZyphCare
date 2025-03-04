@@ -18,6 +18,7 @@ var configuration = builder.Configuration;
 
 var sqliteConnectionString = configuration.GetConnectionString("Sqlite")!;
 
+services.AddHealthChecks();
 services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -58,6 +59,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.Al
 var app = builder.Build();
 app.UseAuthorization();
 app.UseZyphCareApi();
+
+app.MapHealthChecks("/api/status");
 
 if (app.Environment.IsDevelopment())
 {

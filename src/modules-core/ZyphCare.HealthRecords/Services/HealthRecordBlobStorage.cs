@@ -40,8 +40,11 @@ public sealed class HealthRecordBlobStorage : IHealthRecordBlobStorage
     public void Delete(HealthRecord healthRecord)
     {
         var filePath = Path.Combine(GetDefaultStorageDirectory(), healthRecord.GetStoragePath());
+        
+        if(Directory.Exists(filePath))
+            Directory.Delete(filePath, true);
 
-        if (File.Exists(filePath)) 
+        if (File.Exists(filePath))
             File.Delete(filePath);
     }
 
