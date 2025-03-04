@@ -239,7 +239,7 @@ public class Store<TDbContext, TEntity>(
     }
 
     /// <summary>
-    ///     Finds a single entity using a query
+    /// Finds a single entity using a query
     /// </summary>
     /// <param name="query">The query to use</param>
     /// <param name="cancellationToken">The cancellation token</param>
@@ -251,7 +251,7 @@ public class Store<TDbContext, TEntity>(
     }
 
     /// <summary>
-    ///     Finds a list of entities using a query
+    /// Finds a list of entities using a query
     /// </summary>
     public async Task<IEnumerable<TEntity>> FindManyAsync(Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken = default)

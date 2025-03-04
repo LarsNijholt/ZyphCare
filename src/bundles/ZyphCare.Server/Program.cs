@@ -5,7 +5,10 @@ using ZyphCare.Api.Common;
 using ZyphCare.Api.Common.Extensions;
 using ZyphCare.Common.Extensions;
 using ZyphCare.EntityFramework.Sqlite;
+using ZyphCare.EntityFramework.Units.HealthRecords;
 using ZyphCare.EntityFramework.Units.Users;
+using ZyphCare.HealthRecords.Api.Extensions;
+using ZyphCare.HealthRecords.Extensions;
 using ZyphCare.Users.Api.Extensions;
 using ZyphCare.Users.Extensions;
 
@@ -15,6 +18,7 @@ var configuration = builder.Configuration;
 
 var sqliteConnectionString = configuration.GetConnectionString("Sqlite")!;
 
+services.AddHealthChecks();
 services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -41,6 +45,8 @@ services
         units
             .AddZyphCareUsers(x => x.UseEntityFrameworkCore(unit => unit.UseSqlite(sqliteConnectionString)))
             .UseZyphCareUsersApi()
+            .AddZyphCareHealthRecords(x => x.UseEntityFrameworkCore(unit => unit.UseSqlite(sqliteConnectionString)))
+            .AddZyphCareHealthRecordsApi()
             .AddSwagger()
             .AddFastEndpointsAssembly<Program>();
     });
@@ -53,6 +59,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.Al
 var app = builder.Build();
 app.UseAuthorization();
 app.UseZyphCareApi();
+
+app.MapHealthChecks("/api/status");
 
 if (app.Environment.IsDevelopment())
 {

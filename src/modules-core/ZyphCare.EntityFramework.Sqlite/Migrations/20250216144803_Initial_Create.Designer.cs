@@ -11,7 +11,7 @@ using ZyphCare.EntityFramework.Units.Users;
 namespace ZyphCare.EntityFramework.Sqlite.Migrations
 {
     [DbContext(typeof(UserZyphCareDbContext))]
-    [Migration("20250116191702_Initial_Create")]
+    [Migration("20250216144803_Initial_Create")]
     partial class Initial_Create
     {
         /// <inheritdoc />

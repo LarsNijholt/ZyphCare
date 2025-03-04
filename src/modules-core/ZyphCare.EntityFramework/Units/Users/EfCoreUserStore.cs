@@ -93,7 +93,6 @@ public class EfCoreUserStore : IUserEntityStore
     /// <inheritdoc />
     public async Task<bool> DeleteAsync(User user, CancellationToken cancellationToken = default)
     {
-        await using var dbContext = await _store.CreateDbContextAsync(cancellationToken);
         return await _store.DeleteAsync(user, cancellationToken);
     }
 

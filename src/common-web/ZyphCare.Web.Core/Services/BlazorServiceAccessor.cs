@@ -2,6 +2,15 @@ using ZyphCare.Web.Core.Contracts;
 
 namespace ZyphCare.Web.Core.Services;
 
+/// <summary>
+/// A Blazor service accessor implementation for managing asynchronous access
+/// to an <see cref="IServiceProvider"/> throughout a Blazor application context.
+/// This class enables dependency management across execution contexts that support async behavior.
+/// </summary>
+/// <remarks>
+/// This class leverages <see cref="AsyncLocal{T}"/> to ensure that the service provider can be
+/// set and retrieved appropriately within the execution contexts of Blazor components or services.
+/// </remarks>
 public class BlazorServiceAccessor : IBlazorServiceAccessor
 {
     private static readonly AsyncLocal<BlazorServiceHolder> CurrentServiceHolder = new();

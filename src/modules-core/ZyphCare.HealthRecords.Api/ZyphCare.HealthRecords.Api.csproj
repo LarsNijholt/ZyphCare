@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\common-core\ZyphCare.Api.Common\ZyphCare.Api.Common.csproj" />
+      <ProjectReference Include="..\ZyphCare.HealthRecords\ZyphCare.HealthRecords.csproj" />
+    </ItemGroup>
+
+</Project>

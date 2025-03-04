@@ -9,7 +9,7 @@ using ZyphCare.Users.Stores;
 namespace ZyphCare.Users.Aspects;
 
 /// <summary>
-/// Installs user feature.
+/// Installs user aspect.
 /// </summary>
 public class UserAspect : BaseAspect
 {
@@ -20,7 +20,7 @@ public class UserAspect : BaseAspect
         sp => sp.GetRequiredService<MemoryUserEntityStore>();
 
     /// <inheritdoc />
-    public UserAspect(IUnit module) : base(module)
+    public UserAspect(IUnit unit) : base(unit)
     {
     }
 

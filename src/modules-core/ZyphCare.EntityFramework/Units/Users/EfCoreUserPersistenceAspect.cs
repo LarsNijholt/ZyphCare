@@ -21,9 +21,9 @@ public class EfCoreUserPersistenceAspect(IUnit module) : PersistenceAspectBase<U
     /// <inheritdoc />
     public override void Configure()
     {
-        Unit.Configure<UserAspect>(feature =>
+        Unit.Configure<UserAspect>(aspect =>
         {
-            feature.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
+            aspect.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
         });
     }
 
