@@ -232,7 +232,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         // Assert
         pageResult.Should().NotBeNull();
         pageResult.Items.Should().HaveCount(pageArgs.Limit.Value);
-        pageResult.Items.Should().OnlyContain(hr => hr.FileName == "test-consult-1");
+        pageResult.Items.Should().OnlyContain(hr => hr.Type == HealthRecordType.Consultation);
         pageResult.TotalCount.Should().Be(2);
     }
 
