@@ -7,7 +7,7 @@
 
 <MudLayout>
     <MudAppBar Elevation="0" Color="Color.Inherit">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"/>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" @onclick="ToggleDrawer"/>
         <MudSpacer/>
     </MudAppBar>
     <MudDrawer @bind-open="_drawerIsOpen" Elevation="0" ClipMode="DrawerClipMode.Always" Style="background-color: #FAF9F6">
