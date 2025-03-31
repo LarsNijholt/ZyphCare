@@ -57,15 +57,4 @@
     {
         Assemblies = Aspects.Select(x => x.GetType().Assembly).Distinct().ToList();
     }
-
-    /// <inheritdoc />
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (AuthenticationState != null)
-        {
-            var authState = await AuthenticationState;
-            if (authState.User.Identity?.IsAuthenticated == true && !authState.User.Claims.IsExpired())
-                await AspectService.InitializeAspectsAsync();
-        }
-    }
 }

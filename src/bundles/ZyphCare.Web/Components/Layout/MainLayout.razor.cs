@@ -1,23 +1,49 @@
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
-using Syncfusion.Blazor.Navigations;
-using ZyphCare.Web.Models;
+using ZyphCare.Web.Core.Contracts;
+using ZyphCare.Web.Identity.Extensions;
 
 namespace ZyphCare.Web.Components.Layout;
 
 public partial class MainLayout
 {
-    private const ExpandAction Expand = ExpandAction.Click;
-    private bool _sidebarToggle;
-    private readonly Dictionary<string, object> _htmlAttribute = new() { { "class", "sidebar-treeview" } };
-    private readonly List<TreeData> _treeData = [];
-    private void Toggle(MouseEventArgs args)
+    private bool _drawerIsOpen = true;
+    private ErrorBoundary? _errorBoundary;
+    
+    [Inject] private IAspectService AspectService { get; set; } = null!;
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
     {
-        _sidebarToggle = !_sidebarToggle;
+        if (AuthenticationState != null)
+        {
+            var authState = await AuthenticationState;
+            if (authState.User.Identity?.IsAuthenticated == true && !authState.User.Claims.IsExpired())
+            {
+                await AspectService.InitializeAspectsAsync();
+                StateHasChanged();
+            }
+        }
+        else
+        {
+            await AspectService.InitializeAspectsAsync();
+            StateHasChanged();
+        }
+        
     }
 
     /// <inheritdoc />
-    protected override void OnInitialized()
+    protected override void OnParametersSet()
     {
-        _treeData.Add(new TreeData { NodeId = "01", NodeText = "Dashboard", IconCss = "icon-docs icon", NavigateUrl = "/" });
+        _errorBoundary?.Recover();
+    }
+    
+    private void ToggleDrawer()
+    {
+        _drawerIsOpen = !_drawerIsOpen;
     }
 }
