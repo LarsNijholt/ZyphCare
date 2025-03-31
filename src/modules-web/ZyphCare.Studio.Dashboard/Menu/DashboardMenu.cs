@@ -10,7 +10,7 @@ namespace ZyphCare.Studio.Dashboard.Menu;
 public class DashboardMenu : IMenuProvider
 {
     /// <inheritdoc />
-    public ValueTask<IEnumerable<MenuItem>> GetMenuItemsAsync()
+    public ValueTask<IEnumerable<MenuItem>> GetMenuItemsAsync(CancellationToken cancellationToken)
     {
         var menuItems = new List<MenuItem>
             {

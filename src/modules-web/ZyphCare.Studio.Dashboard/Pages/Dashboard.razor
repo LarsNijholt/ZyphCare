@@ -18,32 +18,35 @@
 
 @attribute [Authorize]
 
-<SfDashboardLayout CellSpacing="@(new double[] { 20, 20 })" Columns="5" MediaQuery="max-width:700px">
-    <DashboardLayoutPanels>
-        <DashboardLayoutPanel>
-            <ContentTemplate>
-                <div>
-                    <SfButton @onclick="LogOut">LogOut</SfButton>
-                </div>
-            </ContentTemplate>
-        </DashboardLayoutPanel>
-        <DashboardLayoutPanel SizeX=2 SizeY=2 Column=1>
-            <ContentTemplate>
-                <div>1</div>
-            </ContentTemplate>
-        </DashboardLayoutPanel>
-        <DashboardLayoutPanel SizeY=2 Column=3>
-            <ContentTemplate>
-                <div>2</div>
-            </ContentTemplate>
-        </DashboardLayoutPanel>
-        <DashboardLayoutPanel Row=1>
-            <ContentTemplate>
-                <div>3</div>
-            </ContentTemplate>
-        </DashboardLayoutPanel>
-    </DashboardLayoutPanels>
-</SfDashboardLayout>
+<MudContainer MaxWidth="MaxWidth.False">
+    <SfDashboardLayout CellSpacing="@(new double[] { 20, 20 })" Columns="5" MediaQuery="max-width:700px">
+        <DashboardLayoutPanels>
+            <DashboardLayoutPanel>
+                <ContentTemplate>
+                    <div>
+                        <SfButton @onclick="LogOut">LogOut</SfButton>
+                    </div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+            <DashboardLayoutPanel SizeX=2 SizeY=2 Column=1>
+                <ContentTemplate>
+                    <div>1</div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+            <DashboardLayoutPanel SizeY=2 Column=3>
+                <ContentTemplate>
+                    <div>2</div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+            <DashboardLayoutPanel Row=1>
+                <ContentTemplate>
+                    <div>3</div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+        </DashboardLayoutPanels>
+    </SfDashboardLayout>
+</MudContainer>
+
 
 <style>
     .e-panel-content {

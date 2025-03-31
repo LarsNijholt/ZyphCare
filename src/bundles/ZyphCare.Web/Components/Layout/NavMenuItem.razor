@@ -1,0 +1,11 @@
+@using ZyphCare.Web.Core.Models
+
+<MudNavLink Href="@MenuItem.Href" Match="@MenuItem.Match">@MenuItem.Text</MudNavLink>
+
+@code {
+    /// <summary>
+    /// The <see cref="MenuItem"/> to display.
+    /// </summary>
+    [Parameter]
+    public required MenuItem MenuItem { get; set; }
+}

@@ -13,5 +13,5 @@ public interface IMenuProvider
     /// <returns>
     /// A task that represents the asynchronous operation. The task result contains an enumerable collection of menu items.
     /// </returns>
-    ValueTask<IEnumerable<MenuItem>> GetMenuItemsAsync();
+    ValueTask<IEnumerable<MenuItem>> GetMenuItemsAsync(CancellationToken cancellationToken = default);
 }
