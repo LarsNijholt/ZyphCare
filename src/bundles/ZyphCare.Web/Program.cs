@@ -8,6 +8,7 @@ using ZyphCare.Web.Core.Extensions;
 using ZyphCare.Web.Core.Models;
 using ZyphCare.Web.Extensions;
 using ZyphCare.Web.Handlers;
+using ZyphCare.Web.HealthRecords.Extensions;
 using ZyphCare.Web.Identity.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +38,7 @@ services
     .AddMudServices()
     .AddCore()
     .AddStudioDashboard()
+    .AddHealthRecords()
     .AddCascadingAuthenticationState()
     .AddRemoteBackend(backendApiConfig)
     .AddIdentityServices(options => auth0Secret.Bind(options));
