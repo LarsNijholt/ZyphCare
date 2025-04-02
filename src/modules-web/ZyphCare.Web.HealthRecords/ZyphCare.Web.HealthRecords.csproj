@@ -3,5 +3,9 @@
     <ItemGroup>
       <ProjectReference Include="..\..\common-web\ZyphCare.Web.Core\ZyphCare.Web.Core.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="MudBlazor" />
+    </ItemGroup>
 
 </Project>

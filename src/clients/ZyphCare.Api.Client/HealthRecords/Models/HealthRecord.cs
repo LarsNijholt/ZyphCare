@@ -1,22 +1,19 @@
-using ZyphCare.EntityFramework.Common.Entities;
-using ZyphCare.HealthRecords.Models;
-
-namespace ZyphCare.HealthRecords.Entities;
+namespace ZyphCare.Api.Client.HealthRecords.Models;
 
 /// <summary>
-/// Represents a health record entity in the system that manages health-related information.
+/// Model representing a health record.
 /// </summary>
-public class HealthRecord : Entity
+public class HealthRecord
 {
-    /// <summary>
-    /// Gets or sets the unique identifier associated with the patient.
-    /// </summary>
-    public string PatientId { get; set; }
-    
     /// <summary>
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }
+
+    /// <summary>
+    /// The name of the patient.
+    /// </summary>
+    public string PatientName { get; set; } = default!;
     
     /// <summary>
     /// A short description about what the health record is about.
@@ -36,5 +33,5 @@ public class HealthRecord : Entity
     /// <summary>
     /// Gets or sets the type of the health record, indicating its category or classification.
     /// </summary>
-    public HealthRecordType Type { get; set; }
+    public string? Type { get; set; }
 }

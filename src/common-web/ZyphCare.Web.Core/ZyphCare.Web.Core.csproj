@@ -11,4 +11,8 @@
         <ProjectReference Include="..\..\clients\ZyphCare.Api.Client\ZyphCare.Api.Client.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\" />
+    </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Refit;
+using ZyphCare.Api.Client.HealthRecords.Contracts;
 using ZyphCare.Api.Client.Options;
 using ZyphCare.Api.Client.Users.Contracts;
 using static ZyphCare.Api.Client.Helpers.RefitSettingsHelper;
@@ -48,7 +49,9 @@ public static class DependencyInjectionExtensions
                     ConfigureRetryPolicy = null
                 };
 
-            services.AddApi<IUserApi>(builderOptionsWithoutRetryPolicy);
+            services
+                .AddApi<IUserApi>(builderOptionsWithoutRetryPolicy)
+                .AddApi<IHealthRecordApi>(builderOptionsWithoutRetryPolicy);
         });
     }
 
