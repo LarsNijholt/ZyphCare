@@ -4,12 +4,13 @@
 @using ZyphCare.Web.Core.Contracts
 @using ZyphCare.Web.HealthRecords.Models
 
-<MudContainer>
+<MudContainer MaxWidth="MaxWidth.False">
     <MudText Typo="Typo.h5" Color="Color.Primary" Class="my-6">Health Records</MudText>
 
     <MudTable
         @ref="_table"
         T="HealthRecordRow"
+        ServerData="ServerReload"
         Dense="true"
         Hover="true"
         Elevation="0"
