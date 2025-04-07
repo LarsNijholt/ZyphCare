@@ -1,4 +1,4 @@
-namespace ZyphCare.Api.Client.HealthRecords.Models;
+namespace ZyphCare.Api.Client.Clients.HealthRecords.Models;
 
 /// <summary>
 /// Model representing a health record.

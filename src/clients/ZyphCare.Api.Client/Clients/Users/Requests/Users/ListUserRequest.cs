@@ -1,4 +1,4 @@
-namespace ZyphCare.Api.Client.Users.Requests.Users;
+namespace ZyphCare.Api.Client.Clients.Users.Requests.Users;
 
 /// <summary>
 /// Represents a request for listing users with the option to filter by various criteria.

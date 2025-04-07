@@ -2,9 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Refit;
-using ZyphCare.Api.Client.HealthRecords.Contracts;
+using ZyphCare.Api.Client.Clients.HealthRecords.Contracts;
+using ZyphCare.Api.Client.Clients.Users.Contracts;
 using ZyphCare.Api.Client.Options;
-using ZyphCare.Api.Client.Users.Contracts;
 using static ZyphCare.Api.Client.Helpers.RefitSettingsHelper;
 
 namespace ZyphCare.Api.Client.Extensions;

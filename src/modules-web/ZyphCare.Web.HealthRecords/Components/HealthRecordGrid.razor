@@ -1,7 +1,8 @@
 @using MudBlazor;
-@using ZyphCare.Api.Client.HealthRecords.Contracts
-@using ZyphCare.Api.Client.HealthRecords.Requests
+@using ZyphCare.Api.Client.Clients.HealthRecords.Contracts
+@using ZyphCare.Api.Client.Clients.HealthRecords.Requests
 @using ZyphCare.Web.Core.Contracts
+@using ZyphCare.Web.HealthRecords.Dialogs
 @using ZyphCare.Web.HealthRecords.Models
 
 <MudContainer MaxWidth="MaxWidth.False">
@@ -34,7 +35,7 @@
                 Style="height: 36.5px;"/>
 
             <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" DropShadow="true">
-                <MudButtonGroup Variant="Variant.Filled" Color="Color.Primary">Create new document</MudButtonGroup>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnCreateNewHealthRecordClicked">Create new document</MudButton>
                 <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown">
                     <MudTooltip Text="Import document" Inline="false" Delay="1000">
                         <MudMenuItem Icon="@Icons.Material.Filled.FileUpload">Import</MudMenuItem>
@@ -93,6 +94,7 @@
     private string SearchTerm { get; set; } = string.Empty;
 
     [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = default!;
+    [Inject] private IDialogService DialogService { get; set; } = default!;
 
     /// <inheritdoc />
     protected override async Task OnInitializedAsync()
@@ -124,6 +126,17 @@
                 TotalItems = (int)totalCount,
                 Items = healthRecordRows
             };
+    }
+    
+    private async Task OnCreateNewHealthRecordClicked()
+    {
+        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>();
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false, Data: PostHealthRecordRequest postHealthRecordRequest })
+        {
+            await _healthRecordApi.PostAsync(postHealthRecordRequest);
+        }
     }
 }
 

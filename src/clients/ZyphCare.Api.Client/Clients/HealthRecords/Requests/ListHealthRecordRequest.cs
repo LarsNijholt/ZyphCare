@@ -1,4 +1,4 @@
-namespace ZyphCare.Api.Client.HealthRecords.Requests;
+namespace ZyphCare.Api.Client.Clients.HealthRecords.Requests;
 
 /// <summary>
 /// Represents a request for listing health records with various filtering options.

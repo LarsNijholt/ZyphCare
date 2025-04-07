@@ -14,6 +14,16 @@ public class Request
     public string? Name { get; set; }
 
     /// <summary>
+    /// Gets or sets a brief description or summary of the health record, which provides additional context or details about its content.
+    /// </summary>
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Gets or sets the unique identifier for the patient associated with the health record.
+    /// </summary>
+    public string PatientId { get; set; } = null!;
+
+    /// <summary>
     /// Gets or sets the type of the health record, which indicates the classification or category of the record, such as invoice, lab result, or consultation.
     /// </summary>
     public HealthRecordType Type { get; set; }

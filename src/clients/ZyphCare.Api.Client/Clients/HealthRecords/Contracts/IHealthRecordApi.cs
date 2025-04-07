@@ -1,9 +1,9 @@
 using Refit;
-using ZyphCare.Api.Client.HealthRecords.Models;
-using ZyphCare.Api.Client.HealthRecords.Requests;
+using ZyphCare.Api.Client.Clients.HealthRecords.Models;
+using ZyphCare.Api.Client.Clients.HealthRecords.Requests;
 using ZyphCare.Api.Client.Shared.Models;
 
-namespace ZyphCare.Api.Client.HealthRecords.Contracts;
+namespace ZyphCare.Api.Client.Clients.HealthRecords.Contracts;
 
 /// <summary>
 /// Defines the contract for accessing health record resources in the API.
@@ -17,4 +17,13 @@ public interface IHealthRecordApi
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     [Get("/health-records")]
     Task<PagedListResponse<HealthRecord>> ListAsync([Query] ListHealthRecordRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Creates a new health record based on the specified details.
+    /// </summary>
+    /// <param name="request">The request object containing details of the health record to be created.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+    /// <returns>The newly created health record.</returns>
+    [Post("/health-records")]
+    Task<HealthRecord> PostAsync([Body] PostHealthRecordRequest request, CancellationToken cancellationToken = default);
 }

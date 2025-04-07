@@ -1,0 +1,69 @@
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using MudBlazor;
+@using Refit
+@using ZyphCare.Api.Client.Clients.HealthRecords.Requests
+@using ZyphCare.Web.HealthRecords.Models
+
+<MudDialog>
+    <TitleContent>Create new health record</TitleContent>
+    <DialogContent>
+        <MudForm>
+            <MudTextField @bind-Value="_fileName" Label="File name"/>
+            <MudTextField @bind-Value="_description" Label="Description"/>
+            <MudSelect T="HealthRecordType" @bind-Value="_healthRecordType" Label="Type"/>
+            <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                <ActivatorContent>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload">
+                        Upload Files
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
+            <MudButton OnClick="Submit"></MudButton>
+        </MudForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+
+    private string _fileName;
+    private string _description;
+    private HealthRecordType _healthRecordType;
+    private IBrowserFile _file;
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = null!;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationState { get; set; } = null!;
+
+    private void UploadFiles(IBrowserFile? file)
+    {
+        if(file != null)
+            _file = file;
+    }
+
+    private async Task Submit()
+    {
+        var authenticationState = await AuthenticationState;
+        var authId = authenticationState.User.Identities.First().FindFirstValue("sub");
+
+        var fileContent = _file.OpenReadStream();
+        var streamPart = new StreamPart(fileContent, _fileName, _file.ContentType);
+        
+        var postHealthRecordRequest = new PostHealthRecordRequest
+            {
+                PatientId = authId,
+                FileName = _fileName,
+                Description = _description,
+                Type = _healthRecordType.ToString(),
+                File = streamPart
+            };
+
+        MudDialog.Close(postHealthRecordRequest);
+    }
+
+}
