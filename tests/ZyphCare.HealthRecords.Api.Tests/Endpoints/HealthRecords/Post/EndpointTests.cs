@@ -39,7 +39,6 @@ public class EndpointTests
 
         var request = new Request
             {
-                Name = "record1.pdf",
                 Type = HealthRecordType.Invoice,
                 File = fileMock
             };
@@ -49,13 +48,13 @@ public class EndpointTests
 
         // Assert
         A.CallTo(() => healthRecordBlobStorage.WriteAsync(
-            A<HealthRecord>.That.Matches(hr => hr.FileName == request.Name && hr.Type == request.Type),
+            A<HealthRecord>.That.Matches(hr => hr.Type == request.Type),
             A<Stream>._,
             A<CancellationToken>._))
             .MustHaveHappenedOnceExactly();
 
         A.CallTo(() => healthRecordEntityStore.SaveAsync(
-            A<HealthRecord>.That.Matches(hr => hr.FileName == request.Name && hr.Type == request.Type),
+            A<HealthRecord>.That.Matches(hr => hr.Type == request.Type),
             A<CancellationToken>._))
             .MustHaveHappenedOnceExactly();
 
@@ -83,7 +82,6 @@ public class EndpointTests
 
         var request = new Request
             {
-                Name = "record3.pdf",
                 Type = HealthRecordType.Invoice,
                 File = fileMock
             };
@@ -93,13 +91,13 @@ public class EndpointTests
 
         // Assert
         A.CallTo(() => healthRecordBlobStorage.WriteAsync(
-            A<HealthRecord>.That.Matches(hr => hr.FileName == request.Name && hr.Type == request.Type),
+            A<HealthRecord>.That.Matches(hr => hr.Type == request.Type),
             A<Stream>._,
             A<CancellationToken>._))
             .MustHaveHappenedOnceExactly();
 
         A.CallTo(() => healthRecordEntityStore.SaveAsync(
-            A<HealthRecord>.That.Matches(hr => hr.FileName == request.Name && hr.Type == request.Type),
+            A<HealthRecord>.That.Matches(hr => hr.Type == request.Type),
             A<CancellationToken>._))
             .MustHaveHappenedOnceExactly();
     }

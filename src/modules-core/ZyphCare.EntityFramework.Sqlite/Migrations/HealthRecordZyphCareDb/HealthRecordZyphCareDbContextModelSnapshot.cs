@@ -25,7 +25,13 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PatientId")

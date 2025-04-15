@@ -47,7 +47,7 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
                 Id = Guid.NewGuid().ToString(),
                 PatientId = request.PatientId,
                 Description = request.Description,
-                FileName = request.Name,
+                FileName = request.File.FileName,
                 Type = request.Type,
                 CreatedDate = DateTimeOffset.Now
             };
