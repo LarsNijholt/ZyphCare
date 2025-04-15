@@ -21,9 +21,20 @@ public interface IHealthRecordApi
     /// <summary>
     /// Creates a new health record based on the specified details.
     /// </summary>
-    /// <param name="request">The request object containing details of the health record to be created.</param>
+    /// <param name="patientId">The unique identifier of the patient associated with the health record.</param>
+    /// <param name="fileName">The name of the file associated with the health record.</param>
+    /// <param name="description">The description of the health record being posted.</param>
+    /// <param name="type">The type or category of the health record being posted.</param>
+    /// <param name="file">The file associated with the health record request, used for uploading health-related documents.</param>
     /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
     /// <returns>The newly created health record.</returns>
+    [Multipart]
     [Post("/health-records")]
-    Task<HealthRecord> PostAsync([Body] PostHealthRecordRequest request, CancellationToken cancellationToken = default);
+    Task<HealthRecord> PostAsync(
+        [AliasAs("patientId")] string patientId,
+        [AliasAs("fileName")] string fileName,
+        [AliasAs("description")] string? description,
+        [AliasAs("type")] string? type,
+        [AliasAs("file")] StreamPart? file,
+        CancellationToken cancellationToken = default);
 }
