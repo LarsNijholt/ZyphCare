@@ -130,13 +130,14 @@
     
     private async Task OnCreateNewHealthRecordClicked()
     {
-        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>();
-        var result = await dialog.Result;
+        var dialogOptions = new DialogOptions
+            {
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium
+            };
+        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>("Create new health record", dialogOptions);
 
-        if (result is { Canceled: false, Data: PostHealthRecordRequest postHealthRecordRequest })
-        {
-            await _healthRecordApi.PostAsync(postHealthRecordRequest);
-        }
+        
     }
 }
 
