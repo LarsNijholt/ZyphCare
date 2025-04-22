@@ -31,7 +31,7 @@ public class HealthRecord : Entity
     /// <summary>
     /// The date the health record was last modified.
     /// </summary>
-    public DateTimeOffset? ModifiedDate { get; set; }
+    public DateTimeOffset ModifiedDate { get; set; }
 
     /// <summary>
     /// Gets or sets the type of the health record, indicating its category or classification.

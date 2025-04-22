@@ -49,7 +49,8 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
                 Description = request.Description,
                 FileName = request.File.FileName,
                 Type = request.Type,
-                CreatedDate = DateTimeOffset.Now
+                CreatedDate = DateTimeOffset.Now,
+                ModifiedDate = DateTimeOffset.Now
             };
     }
 }

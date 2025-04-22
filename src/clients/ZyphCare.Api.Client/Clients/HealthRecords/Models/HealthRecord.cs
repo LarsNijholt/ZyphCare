@@ -33,5 +33,5 @@ public class HealthRecord
     /// <summary>
     /// Gets or sets the type of the health record, indicating its category or classification.
     /// </summary>
-    public string? Type { get; set; }
+    public int Type { get; set; }
 }

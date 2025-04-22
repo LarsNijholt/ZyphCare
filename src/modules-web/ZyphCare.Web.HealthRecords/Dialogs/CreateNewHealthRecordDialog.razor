@@ -99,7 +99,7 @@
         var fileContent = _file.OpenReadStream();
         var streamPart = new StreamPart(fileContent, _fileName, _file.ContentType);
 
-        await _healthRecordApi.PostAsync(authId, _fileName, _description, _healthRecordType.ToString(), streamPart).ConfigureAwait(false);
+        await _healthRecordApi.PostAsync(authId, _fileName, _description, ((int)_healthRecordType).ToString(), streamPart).ConfigureAwait(false);
 
         MudDialog.Close();
     }
