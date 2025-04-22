@@ -14,7 +14,8 @@
         ServerData="ServerReload"
         Dense="true"
         Hover="true"
-        Elevation="0"
+        Elevation="5"
+        Outlined="true"
         RowStyle="cursor: pointer;"
         MultiSelection="false"
         SelectOnRowClick="false"
@@ -35,7 +36,9 @@
                 Style="height: 36.5px;"/>
 
             <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" DropShadow="true">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnCreateNewHealthRecordClicked">Create new document</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnCreateNewHealthRecordClicked">
+                    Create new document
+                </MudButton>
                 <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown">
                     <MudTooltip Text="Import document" Inline="false" Delay="1000">
                         <MudMenuItem Icon="@Icons.Material.Filled.FileUpload">Import</MudMenuItem>
@@ -127,7 +130,7 @@
                 Items = healthRecordRows
             };
     }
-    
+
     private async Task OnCreateNewHealthRecordClicked()
     {
         var dialogOptions = new DialogOptions
@@ -135,9 +138,15 @@
                 FullWidth = true,
                 MaxWidth = MaxWidth.Medium
             };
-        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>("Create new health record", dialogOptions);
-
         
+        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>("Create new health record", dialogOptions);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false })
+        {
+            await _table.ReloadServerData();
+            StateHasChanged();
+        }
     }
 }
 
