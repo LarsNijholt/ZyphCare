@@ -73,7 +73,9 @@
             <MudTd DataLabel="">
                 <MudMenu Icon="@Icons.Material.Filled.MoreVert">
                     <MudMenuItem Icon="@Icons.Material.Outlined.Edit">Edit document</MudMenuItem>
-                    <MudMenuItem Icon="@Icons.Material.Outlined.Delete">Delete document</MudMenuItem>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Delete"
+                                 OnClick="@(() => OnDeleteHealthRecordClicked(context))">Delete document
+                    </MudMenuItem>
                 </MudMenu>
             </MudTd>
         </RowTemplate>
@@ -118,6 +120,7 @@
 
         var healthRecordRows = healthRecordResponse.Items.Select(healthRecord =>
             new HealthRecordRow(
+            healthRecord.Id,
             healthRecord.FileName,
             healthRecord.PatientName,
             healthRecord.ModifiedDate.ToString(),
@@ -138,7 +141,7 @@
                 FullWidth = true,
                 MaxWidth = MaxWidth.Medium
             };
-        
+
         var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>("Create new health record", dialogOptions);
         var result = await dialog.Result;
 
@@ -147,6 +150,12 @@
             await _table.ReloadServerData();
             StateHasChanged();
         }
+    }
+
+    private async Task OnDeleteHealthRecordClicked(HealthRecordRow healthRecordRow)
+    {
+        await _healthRecordApi.DeleteAsync(healthRecordRow.Id);
+        await _table.ReloadServerData();
     }
 }
 

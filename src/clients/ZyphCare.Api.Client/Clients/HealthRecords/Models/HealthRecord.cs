@@ -6,6 +6,11 @@ namespace ZyphCare.Api.Client.Clients.HealthRecords.Models;
 public class HealthRecord
 {
     /// <summary>
+    /// Gets or sets the unique identifier for the health record.
+    /// </summary>
+    public string Id { get; set; } = default!;
+    
+    /// <summary>
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }

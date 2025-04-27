@@ -37,4 +37,13 @@ public interface IHealthRecordApi
         [AliasAs("type")] string? type,
         [AliasAs("file")] StreamPart? file,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Deletes a health record specified by its unique identifier.
+    /// </summary>
+    /// <param name="id">The unique identifier of the health record to delete.</param>
+    /// <param name="cancellationToken">A token to monitor for cancellation requests during the delete operation.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    [Delete("/health-records/{id}")]
+    Task DeleteAsync(string id, CancellationToken cancellationToken = default);
 }
