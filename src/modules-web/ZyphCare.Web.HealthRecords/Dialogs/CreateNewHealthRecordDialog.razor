@@ -32,6 +32,10 @@
                     Label="Type"
                     FullWidth="true"
                     Variant="Variant.Outlined">
+                    @foreach (var item in Enum.GetValues<HealthRecordType>())
+                    {
+                        <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>   
+                    }
                 </MudSelect>
 
                 <MudFileUpload

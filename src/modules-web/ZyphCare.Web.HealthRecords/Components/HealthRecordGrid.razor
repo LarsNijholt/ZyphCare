@@ -69,7 +69,7 @@
             <MudTd DataLabel="Patient">@context.Patient</MudTd>
             <MudTd DataLabel="LastModified">@context.LastModified</MudTd>
             <MudTd DataLabel="CreatedDate">@context.CreatedDate</MudTd>
-            <MudTd DataLabel="Type">@context.Type</MudTd>
+            <MudTd DataLabel="Type">@((HealthRecordType)context.Type)</MudTd>
             <MudTd DataLabel="">
                 <MudMenu Icon="@Icons.Material.Filled.MoreVert">
                     <MudMenuItem Icon="@Icons.Material.Outlined.Edit">Edit document</MudMenuItem>

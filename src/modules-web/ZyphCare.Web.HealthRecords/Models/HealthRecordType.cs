@@ -8,15 +8,15 @@ public enum HealthRecordType
     /// <summary>
     /// Represents a health record type specifically for invoices related to healthcare services.
     /// </summary>
-    Invoice,
+    Invoice = 0,
 
     /// <summary>
     /// Represents a health record type specifically for laboratory test results, detailing medical test outcomes and analyses.
     /// </summary>
-    LabResult,
+    LabResult = 1,
 
     /// <summary>
     /// Represents a health record type focused on consultations, including notes and discussions between patients and healthcare providers.
     /// </summary>
-    Consultation
+    Consultation = 2
 }
