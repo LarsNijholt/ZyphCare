@@ -1,0 +1,170 @@
+@using MudBlazor;
+@using ZyphCare.Api.Client.Clients.HealthRecords.Contracts
+@using ZyphCare.Api.Client.Clients.HealthRecords.Requests
+@using ZyphCare.Web.Core.Contracts
+@using ZyphCare.Web.HealthRecords.Dialogs
+@using ZyphCare.Web.HealthRecords.Models
+
+<MudContainer MaxWidth="MaxWidth.False">
+    <MudText Typo="Typo.h5" Color="Color.Primary" Class="my-6">Health Records</MudText>
+
+    <MudTable
+        @ref="_table"
+        T="HealthRecordRow"
+        ServerData="ServerReload"
+        Dense="true"
+        Hover="true"
+        Elevation="5"
+        Outlined="true"
+        RowStyle="cursor: pointer;"
+        MultiSelection="false"
+        SelectOnRowClick="false"
+        Class="health-record-table"
+        @bind-SelectedItems="_selectedRows">
+        <ToolBarContent>
+            <MudTextField
+                T="string"
+                Text="@SearchTerm"
+                Placeholder="Search..."
+                Variant="Variant.Outlined"
+                AdornmentIcon="@Icons.Material.Outlined.Search"
+                Adornment="Adornment.End"
+                Clearable="true"
+                DebounceInterval="1500"
+                Immediate="true"
+                Class="d-flex flex-row justify-end align-end gap-3 flex-wrap pl-2 pr-6 py-6 mt-0"
+                Style="height: 36.5px;"/>
+
+            <MudButtonGroup Color="Color.Primary" Variant="Variant.Filled" DropShadow="true">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnCreateNewHealthRecordClicked">
+                    Create new document
+                </MudButton>
+                <MudMenu Icon="@Icons.Material.Filled.ArrowDropDown">
+                    <MudTooltip Text="Import document" Inline="false" Delay="1000">
+                        <MudMenuItem Icon="@Icons.Material.Filled.FileUpload">Import</MudMenuItem>
+                    </MudTooltip>
+                </MudMenu>
+            </MudButtonGroup>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <MudTableSortLabel SortLabel="FileName" T="HealthRecordRow">Name</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortLabel="Patient" T="HealthRecordRow">Patient</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortLabel="LastModified" T="HealthRecordRow">Last Modified</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortLabel="CreatedDate" T="HealthRecordRow">Created Date</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortLabel="Type" T="HealthRecordRow">Type</MudTableSortLabel>
+            </MudTh>
+            <MudTh></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="FileName">@context.FileName</MudTd>
+            <MudTd DataLabel="Patient">@context.Patient</MudTd>
+            <MudTd DataLabel="LastModified">@context.LastModified</MudTd>
+            <MudTd DataLabel="CreatedDate">@context.CreatedDate</MudTd>
+            <MudTd DataLabel="Type">@((HealthRecordType)context.Type)</MudTd>
+            <MudTd DataLabel="">
+                <MudMenu Icon="@Icons.Material.Filled.MoreVert">
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Edit">Edit document</MudMenuItem>
+                    <MudMenuItem Icon="@Icons.Material.Outlined.Delete"
+                                 OnClick="@(() => OnDeleteHealthRecordClicked(context))">Delete document
+                    </MudMenuItem>
+                </MudMenu>
+            </MudTd>
+        </RowTemplate>
+        <NoRecordsContent>
+            <MudText>No documents found</MudText>
+        </NoRecordsContent>
+        <LoadingContent>
+            <MudText>Loading...</MudText>
+        </LoadingContent>
+        <PagerContent>
+            <MudTablePager RowsPerPageString="Rows Per Page"/>
+        </PagerContent>
+    </MudTable>
+</MudContainer>
+
+@code {
+    private MudTable<HealthRecordRow> _table = null!;
+    private HashSet<HealthRecordRow> _selectedRows = [];
+    private IHealthRecordApi _healthRecordApi = default!;
+
+    private string SearchTerm { get; set; } = string.Empty;
+
+    [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = default!;
+    [Inject] private IDialogService DialogService { get; set; } = default!;
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
+    {
+        _healthRecordApi = await ApiClientProvider.GetApiAsync<IHealthRecordApi>();
+    }
+
+    private async Task<TableData<HealthRecordRow>> ServerReload(TableState state, CancellationToken cancellationToken)
+    {
+        var request = new ListHealthRecordRequest
+            {
+                Page = state.Page,
+                PageSize = state.PageSize
+            };
+
+        var healthRecordResponse = await _healthRecordApi.ListAsync(request, cancellationToken);
+        var totalCount = healthRecordResponse.TotalCount;
+
+        var healthRecordRows = healthRecordResponse.Items.Select(healthRecord =>
+            new HealthRecordRow(
+            healthRecord.Id,
+            healthRecord.FileName,
+            healthRecord.PatientName,
+            healthRecord.ModifiedDate.ToString(),
+            healthRecord.CreatedDate.ToString(),
+            healthRecord.Type)).ToList();
+
+        return new TableData<HealthRecordRow>
+            {
+                TotalItems = (int)totalCount,
+                Items = healthRecordRows
+            };
+    }
+
+    private async Task OnCreateNewHealthRecordClicked()
+    {
+        var dialogOptions = new DialogOptions
+            {
+                FullWidth = true,
+                MaxWidth = MaxWidth.Medium
+            };
+
+        var dialog = await DialogService.ShowAsync<CreateNewHealthRecordDialog>("Create new health record", dialogOptions);
+        var result = await dialog.Result;
+
+        if (result is { Canceled: false })
+        {
+            await _table.ReloadServerData();
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnDeleteHealthRecordClicked(HealthRecordRow healthRecordRow)
+    {
+        await _healthRecordApi.DeleteAsync(healthRecordRow.Id);
+        await _table.ReloadServerData();
+    }
+}
+
+<style>
+    .health-record-table .mud-table-cell .mud-checkbox {
+        margin: 0;
+    }
+
+    .health-record-table .mud-table-toolbar {
+        margin-bottom: 12px;
+    }
+</style>

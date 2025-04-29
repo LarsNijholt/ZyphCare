@@ -1,0 +1,110 @@
+@using Microsoft.AspNet.Identity
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using MudBlazor;
+@using Refit
+@using ZyphCare.Api.Client.Clients.HealthRecords.Contracts
+@using ZyphCare.Web.Core.Contracts
+@using ZyphCare.Web.HealthRecords.Models
+
+<MudDialog MaxWidth="MaxWidth.Small">
+    <TitleContent>Create New Health Record</TitleContent>
+    <DialogContent>
+        <MudForm>
+            <MudStack Spacing="3">
+                <MudTextField
+                    @bind-Value="_fileName"
+                    Label="File Name"
+                    FullWidth="true"
+                    Placeholder="Enter file name"
+                    Variant="Variant.Outlined" />
+
+                <MudTextField
+                    @bind-Value="_description"
+                    Label="Description"
+                    FullWidth="true"
+                    Placeholder="Enter description"
+                    Variant="Variant.Outlined" />
+
+                <MudSelect
+                    T="HealthRecordType"
+                    @bind-Value="_healthRecordType"
+                    Label="Type"
+                    FullWidth="true"
+                    Variant="Variant.Outlined">
+                    @foreach (var item in Enum.GetValues<HealthRecordType>())
+                    {
+                        <MudSelectItem Value="@item">@item.ToString()</MudSelectItem>   
+                    }
+                </MudSelect>
+
+                <MudFileUpload
+                    T="IBrowserFile"
+                    FilesChanged="UploadFiles">
+                    <ActivatorContent>
+                        <MudButton
+                            Variant="Variant.Filled"
+                            Color="Color.Primary"
+                            StartIcon="@Icons.Material.Filled.CloudUpload"
+                            FullWidth="true"
+                            Size="Size.Small">
+                            Upload Files
+                        </MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </MudStack>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton
+            OnClick="Submit"
+            Color="Color.Primary"
+            Variant="Variant.Filled"
+            Size="Size.Medium"
+            FullWidth="true">
+            Submit
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+
+@code {
+    private string _fileName = string.Empty;
+    private string _description = string.Empty;
+    private HealthRecordType _healthRecordType;
+    private IBrowserFile _file = null!;
+    private IHealthRecordApi _healthRecordApi = null!;
+
+    [Inject] private IBackendApiClientProvider ApiClientProvider { get; set; } = null!;
+
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; } = null!;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationState { get; set; } = null!;
+
+    /// <inheritdoc />
+    protected override async Task OnInitializedAsync()
+    {
+        _healthRecordApi = await ApiClientProvider.GetApiAsync<IHealthRecordApi>();
+    }
+
+    private void UploadFiles(IBrowserFile? file)
+    {
+        if(file != null)
+            _file = file;
+    }
+
+    private async Task Submit()
+    {
+        var authenticationState = await AuthenticationState;
+        var authId = authenticationState.User.Identities.First().FindFirstValue("sub");
+
+        var fileContent = _file.OpenReadStream();
+        var streamPart = new StreamPart(fileContent, _fileName, _file.ContentType);
+
+        await _healthRecordApi.PostAsync(authId, _fileName, _description, ((int)_healthRecordType).ToString(), streamPart);
+
+        MudDialog.Close();
+    }
+}

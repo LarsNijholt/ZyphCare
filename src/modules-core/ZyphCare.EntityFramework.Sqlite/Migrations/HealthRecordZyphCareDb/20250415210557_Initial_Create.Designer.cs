@@ -10,7 +10,7 @@ using ZyphCare.EntityFramework.Units.HealthRecords;
 namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
 {
     [DbContext(typeof(HealthRecordZyphCareDbContext))]
-    [Migration("20250216144825_Initial_Create")]
+    [Migration("20250415210557_Initial_Create")]
     partial class Initial_Create
     {
         /// <inheritdoc />
@@ -28,7 +28,13 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("FileName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ModifiedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PatientId")

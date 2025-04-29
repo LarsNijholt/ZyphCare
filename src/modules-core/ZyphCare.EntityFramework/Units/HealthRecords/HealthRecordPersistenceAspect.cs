@@ -5,6 +5,7 @@ using ZyphCare.EntityFramework.Common;
 using ZyphCare.EntityFramework.Common.Contracts;
 using ZyphCare.EntityFramework.Handlers;
 using ZyphCare.EntityFramework.Units.Users;
+using ZyphCare.HealthRecords.Aspects;
 using ZyphCare.HealthRecords.Entities;
 using ZyphCare.Users.Aspects;
 using ZyphCare.Users.Contracts;
@@ -15,14 +16,16 @@ public class HealthRecordPersistenceAspect(IUnit unit) : PersistenceAspectBase<H
 {
     public Func<IServiceProvider, IDbExceptionHandler<HealthRecordZyphCareDbContext>> DbExceptionHandler { get; set; } = _ => new RethrowDbExceptionHandler();
 
+    /// <inheritdoc />
     public override void Configure()
     {
-        Unit.Configure<UserAspect>(aspect =>
+        Unit.Configure<HealthRecordAspect>(aspect =>
         {
-            aspect.UserEntityStore = new Func<IServiceProvider, EfCoreUserStore>(sp => ServiceProviderServiceExtensions.GetRequiredService<EfCoreUserStore>(sp));
+            aspect.HealthRecordEntityStore = sp => sp.GetRequiredService<EfCoreHealthRecordStore>();
         });
     }
 
+    /// <inheritdoc />
     public override void Apply()
     {
         base.Apply();

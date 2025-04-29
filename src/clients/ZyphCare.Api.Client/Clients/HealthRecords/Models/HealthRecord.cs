@@ -1,22 +1,24 @@
-using ZyphCare.EntityFramework.Common.Entities;
-using ZyphCare.HealthRecords.Models;
-
-namespace ZyphCare.HealthRecords.Entities;
+namespace ZyphCare.Api.Client.Clients.HealthRecords.Models;
 
 /// <summary>
-/// Represents a health record entity in the system that manages health-related information.
+/// Model representing a health record.
 /// </summary>
-public class HealthRecord : Entity
+public class HealthRecord
 {
     /// <summary>
-    /// Gets or sets the unique identifier associated with the patient.
+    /// Gets or sets the unique identifier for the health record.
     /// </summary>
-    public string PatientId { get; set; }
+    public string Id { get; set; } = default!;
     
     /// <summary>
     /// Gets or sets the name of the file associated with the health record.
     /// </summary>
     public string? FileName { get; set; }
+
+    /// <summary>
+    /// The name of the patient.
+    /// </summary>
+    public string PatientName { get; set; } = default!;
     
     /// <summary>
     /// A short description about what the health record is about.
@@ -31,10 +33,10 @@ public class HealthRecord : Entity
     /// <summary>
     /// The date the health record was last modified.
     /// </summary>
-    public DateTimeOffset ModifiedDate { get; set; }
+    public DateTimeOffset? ModifiedDate { get; set; }
 
     /// <summary>
     /// Gets or sets the type of the health record, indicating its category or classification.
     /// </summary>
-    public HealthRecordType Type { get; set; }
+    public int Type { get; set; }
 }

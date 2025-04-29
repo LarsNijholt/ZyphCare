@@ -9,9 +9,14 @@ namespace ZyphCare.HealthRecords.Api.Endpoints.HealthRecords.Post;
 public class Request
 {
     /// <summary>
-    /// Gets or sets the name provided in the health record request, which is commonly used to label or identify the record.
+    /// Gets or sets a brief description or summary of the health record, which provides additional context or details about its content.
     /// </summary>
-    public string? Name { get; set; }
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Gets or sets the unique identifier for the patient associated with the health record.
+    /// </summary>
+    public string PatientId { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the type of the health record, which indicates the classification or category of the record, such as invoice, lab result, or consultation.

@@ -1,14 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components" />
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
         <PackageReference Include="Microsoft.Extensions.Options"/>
         <PackageReference Include="Microsoft.AspNetCore"/>
+        <PackageReference Include="MudBlazor" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\clients\ZyphCare.Api.Client\ZyphCare.Api.Client.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Components\" />
     </ItemGroup>
 
 </Project>

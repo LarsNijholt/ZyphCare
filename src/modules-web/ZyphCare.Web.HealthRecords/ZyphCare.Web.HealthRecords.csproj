@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\common-web\ZyphCare.Web.Core\ZyphCare.Web.Core.csproj" />
+      <ProjectReference Include="..\..\common-web\ZyphCare.Web.Identity\ZyphCare.Web.Identity.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNet.Identity.Core" />
+      <PackageReference Include="MudBlazor" />
+    </ItemGroup>
+
+</Project>

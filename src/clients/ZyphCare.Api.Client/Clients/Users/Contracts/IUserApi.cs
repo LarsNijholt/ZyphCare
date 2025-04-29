@@ -1,10 +1,9 @@
 using Refit;
+using ZyphCare.Api.Client.Clients.Users.Models;
+using ZyphCare.Api.Client.Clients.Users.Requests.Users;
 using ZyphCare.Api.Client.Shared.Models;
-using ZyphCare.Api.Client.Users.Models;
-using ZyphCare.Api.Client.Users.Requests;
-using ZyphCare.Api.Client.Users.Requests.Users;
 
-namespace ZyphCare.Api.Client.Users.Contracts;
+namespace ZyphCare.Api.Client.Clients.Users.Contracts;
 
 /// <summary>
 /// Provides methods to interact with the user API for retrieving user data.

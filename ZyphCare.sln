@@ -4,7 +4,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bundles", "bundles", "{299D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-core", "modules-core", "{F4CAE397-0E79-4F73-802B-08A756C4828B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-studio", "modules-studio", "{86E5194D-0D55-47D3-958F-F41E983BFC41}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-web", "modules-web", "{86E5194D-0D55-47D3-958F-F41E983BFC41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web", "src\bundles\ZyphCare.Web\ZyphCare.Web.csproj", "{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}"
 EndProject
@@ -63,7 +63,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Api.Client", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web.Identity", "src\common-web\ZyphCare.Web.Identity\ZyphCare.Web.Identity.csproj", "{FBFA932F-91A4-4997-A336-810560A8576C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Studio.Dashboard", "src\modules-web\ZyphCare.Studio.Dashboard\ZyphCare.Studio.Dashboard.csproj", "{92F03A01-691E-4983-83AE-FB7FED833EE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web.Dashboard", "src\modules-web\ZyphCare.Web.Dashboard\ZyphCare.Web.Dashboard.csproj", "{92F03A01-691E-4983-83AE-FB7FED833EE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyphcare.EntityFrameworkCore.Tests", "tests\Zyphcare.EntityFrameworkCore.Tests\Zyphcare.EntityFrameworkCore.Tests.csproj", "{DCDAD875-46D6-4298-90E5-63143E6BB963}"
 EndProject
@@ -74,6 +74,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.HealthRecords.Api", "src\modules-core\ZyphCare.HealthRecords.Api\ZyphCare.HealthRecords.Api.csproj", "{59BE93F6-F329-4846-A96E-AE89A3878CDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.HealthRecords.Api.Tests", "tests\ZyphCare.HealthRecords.Api.Tests\ZyphCare.HealthRecords.Api.Tests.csproj", "{16DF6F9A-50EC-47E9-8400-1B903C024981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyphCare.Web.HealthRecords", "src\modules-web\ZyphCare.Web.HealthRecords\ZyphCare.Web.HealthRecords.csproj", "{3997D6FD-D45F-49D5-91C5-B429CD2906CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +112,7 @@ Global
 		{C7A3AB6A-5B94-47CD-BCF3-F927C311278C} = {69A1B7E6-E6CD-4C6B-A8DC-AB236B9982FD}
 		{59BE93F6-F329-4846-A96E-AE89A3878CDF} = {69A1B7E6-E6CD-4C6B-A8DC-AB236B9982FD}
 		{16DF6F9A-50EC-47E9-8400-1B903C024981} = {00F5577D-F614-49C1-8849-358479E99D60}
+		{3997D6FD-D45F-49D5-91C5-B429CD2906CD} = {86E5194D-0D55-47D3-958F-F41E983BFC41}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5F1832FB-4626-4C49-8CD7-D32621F4AAE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -184,5 +187,9 @@ Global
 		{16DF6F9A-50EC-47E9-8400-1B903C024981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DF6F9A-50EC-47E9-8400-1B903C024981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DF6F9A-50EC-47E9-8400-1B903C024981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3997D6FD-D45F-49D5-91C5-B429CD2906CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3997D6FD-D45F-49D5-91C5-B429CD2906CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3997D6FD-D45F-49D5-91C5-B429CD2906CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3997D6FD-D45F-49D5-91C5-B429CD2906CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

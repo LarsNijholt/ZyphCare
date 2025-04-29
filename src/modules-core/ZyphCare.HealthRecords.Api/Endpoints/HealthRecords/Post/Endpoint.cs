@@ -45,9 +45,12 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
         return new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
-                FileName = request.Name,
+                PatientId = request.PatientId,
+                Description = request.Description,
+                FileName = request.File.FileName,
                 Type = request.Type,
-                CreatedDate = DateTimeOffset.Now
+                CreatedDate = DateTimeOffset.Now,
+                ModifiedDate = DateTimeOffset.Now
             };
     }
 }

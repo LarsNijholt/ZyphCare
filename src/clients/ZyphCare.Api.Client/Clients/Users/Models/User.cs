@@ -1,4 +1,4 @@
-namespace ZyphCare.Api.Client.Users.Models;
+namespace ZyphCare.Api.Client.Clients.Users.Models;
 
 /// <summary>
 /// Represents a user entity with identification, authentication, and role information.
