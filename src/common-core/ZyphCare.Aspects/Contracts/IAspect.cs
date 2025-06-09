@@ -28,5 +28,4 @@ public interface IAspect
     /// by derived types to provide custom logic for applying the aspect.
     /// </summary>
     void Apply();
-
 }
