@@ -32,6 +32,7 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ModifiedDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PatientId")
@@ -40,6 +41,10 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
 
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("VersionId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

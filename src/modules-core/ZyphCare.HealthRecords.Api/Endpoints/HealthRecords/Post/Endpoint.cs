@@ -45,6 +45,7 @@ public class Endpoint : ZyphCareEndpoint<Request, Response, Mapper>
         return new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
+                VersionId = Guid.NewGuid().ToString(),
                 PatientId = request.PatientId,
                 Description = request.Description,
                 FileName = request.File.FileName,

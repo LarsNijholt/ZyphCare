@@ -19,8 +19,9 @@ namespace ZyphCare.EntityFramework.Sqlite.Migrations.HealthRecordZyphCareDb
                     FileName = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedDate = table.Column<string>(type: "TEXT", nullable: false),
-                    ModifiedDate = table.Column<string>(type: "TEXT", nullable: true),
-                    Type = table.Column<int>(type: "INTEGER", nullable: false)
+                    ModifiedDate = table.Column<string>(type: "TEXT", nullable: false),
+                    Type = table.Column<int>(type: "INTEGER", nullable: false),
+                    VersionId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
