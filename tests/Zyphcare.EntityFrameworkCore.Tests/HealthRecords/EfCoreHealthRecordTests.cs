@@ -36,6 +36,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         var healthRecord = new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
+                VersionId = Guid.NewGuid().ToString(),
                 Type = HealthRecordType.LabResult,
                 FileName = "test-lab-result",
                 CreatedDate = DateTimeOffset.Now,
@@ -88,6 +89,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         var healthRecord = new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
+                VersionId = Guid.NewGuid().ToString(),
                 Type = HealthRecordType.LabResult,
                 FileName = "test-lab-result",
                 CreatedDate = DateTimeOffset.Now,
@@ -115,6 +117,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         var healthRecord = new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
+                VersionId = Guid.NewGuid().ToString(),
                 Type = HealthRecordType.LabResult,
                 FileName = "test-lab-result",
                 CreatedDate = DateTimeOffset.Now,
@@ -159,6 +162,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
                 new HealthRecord
                     {
                         Id = Guid.NewGuid().ToString(),
+                        VersionId = Guid.NewGuid().ToString(),
                         Type = HealthRecordType.LabResult,
                         FileName = "test-lab-result",
                         CreatedDate = DateTimeOffset.Now,
@@ -169,6 +173,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
                 new HealthRecord
                     {
                         Id = Guid.NewGuid().ToString(),
+                        VersionId = Guid.NewGuid().ToString(),
                         Type = HealthRecordType.Consultation,
                         FileName = "test-consult-1",
                         Description = "test-description",
@@ -179,6 +184,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
                 new HealthRecord
                     {
                         Id = Guid.NewGuid().ToString(),
+                        VersionId = Guid.NewGuid().ToString(),
                         Type = HealthRecordType.Consultation,
                         FileName = "test-consult-2",
                         CreatedDate = DateTimeOffset.Now,
@@ -303,6 +309,7 @@ public sealed class EfCoreHealthRecordTests : IDisposable
         var healthRecord = new HealthRecord
             {
                 Id = Guid.NewGuid().ToString(),
+                VersionId = Guid.NewGuid().ToString(),
                 PatientId = "patient-3",
                 Type = HealthRecordType.Invoice,
                 Description = "Flu shot",
