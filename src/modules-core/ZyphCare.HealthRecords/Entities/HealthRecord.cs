@@ -6,7 +6,7 @@ namespace ZyphCare.HealthRecords.Entities;
 /// <summary>
 /// Represents a health record entity in the system that manages health-related information.
 /// </summary>
-public class HealthRecord : Entity
+public class HealthRecord : VersionedEntity
 {
     /// <summary>
     /// Gets or sets the unique identifier associated with the patient.

@@ -18,4 +18,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\HealthRecordZyphCareDb\" />
+    </ItemGroup>
+
 </Project>
